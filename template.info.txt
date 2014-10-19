@@ -1,0 +1,7 @@
+base     dokuhub
+author   S C Yoo
+email    dryoo@live.com
+date     2014-10-30
+name     DokuHub template
+desc     The DokuWiki template using Twitter Bootstrap theme insipred by github.com
+url      https://github.com/dryoo/dokuhub

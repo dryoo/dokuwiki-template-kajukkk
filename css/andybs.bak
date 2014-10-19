@@ -1,0 +1,409 @@
+
+body { margin-top: 51px; max-width: 980px; margin-left:auto; margin-right:auto;
+    font-family: __font_family__,"Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: __font_size__;
+}
+/* body & design  */
+.container-fluid {max-width: 980px;}
+.navbar  .dropdown-toggle {height:34px;}
+.dokuwiki  .insitu-footnote { background-color:yellow; padding:5px; border-radius:__border_radius__;}
+
+
+/*############## contents  general elements #####################*/
+.dokuwiki .contents 
+{
+    a.wikilink1 {color:__link__;text-decoration:none;}
+    a.wikilink1:hover,a.wikilink1:active,a.wikilink1:focus {text-decoration: underline;}
+    a.wikilink2 { color:__missing__; border-bottom: 1px dashed; }
+    a.wikilink2:hover{ color: #a22;}
+    .search_hit { background-color: #FF9;} 
+    margin:0 0.5em;
+    .breadcrumb { margin-bottom: 0;}
+
+    img.media, img.mediacenter, img.medialeft, img.mediaright { .img-responsive; .img-rounded; margin-bottom:4px; }
+    img.media {display:inline;}
+    img.medialeft 	{ margin-right: 0.5em;}
+    img.mediaright 	{ margin-left:  0.5em;}
+
+    .btn_secedit input.button{  .btn-sm}
+
+    #tool__bar {.btn-group;}
+    
+    .editBox textarea.edit {width:100%;}
+    #size__ctl {float: right;}
+    .editButtons {
+        margin:1em 0;
+      /*  #edbtn__save {.btn-primary;}*/
+ /*       #edbtn__preview {.btn-success;}
+*/    }
+    .summary { .well; .well-sm; .bg-warning;
+        .nowrap {margin-bottom:0;} 
+    }
+    .dokuwiki del { color:#7f7f7f;}
+    .dokuwiki .section_highlight { 
+        background-color: rgba(50,122,200,0.1);!important;
+        border-radius: __border_radius__;
+    }
+
+}
+
+
+#dw__toc { margin:0.5em; .well; .well-sm; max-width:300px; float:right;
+    h3 {margin-top: 0;}
+    ul {list-style:none;margin:0;padding:0;}
+    li {  padding-left: 1em; 
+    text-indent: -.7em;}
+}
+
+#dw__toc {position:fixed;top:60px;}
+#dw__toc  div{display:none;  }
+#dw__toc:hover div {display:block}
+
+/******************* Top navbar ***********************/
+.navbar {font-size:20px;background-color: #F5F5F5;border-bottom: 1px solid #E5E5E5;}
+.navbar-brand { padding:10px;
+	img.logo-image { width:28px; height:28px; .img-circle;}
+	 
+}
+
+#bs-navbar-collapse-main {font-size:14px;
+  .nav  li  a {padding-left:10px;padding-right:10px;}
+}
+
+#nav-bottom {margin-bottom:0;}
+
+#qsearch {
+    margin:6px 0; padding:0;
+    .button {display:none; }
+    form {margin:0;padding:4px 0;}
+
+    #qsearch__in  { .form-control; background: no-repeat center left url(images/search-icon-hi.png);  height:28px; padding-left: 28px;border: 1px solid #ccc;
+		border-radius: 3px;
+		outline: none;
+		box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
+	}
+    #qsearch__in:focus  { border-color: #51a7e8;
+		box-shadow: inset 0 1px 2px rgba(0,0,0,0.075),0 0 5px rgba(81,167,232,0.5);
+	}
+      
+    #qsearch__out { 
+         font-size:14px;
+         max-width:300px; max-height:700px; overflow-y:auto;
+         padding: 9px;
+         margin-bottom: 10px;
+         border: 1px solid #e3e3e3;
+         border-radius: 4px;
+         display:none;
+         ul {PADDING:0; }
+     }
+ }
+
+.visible-xs > .navbar-form { margin:0; }
+ 
+
+
+c
+.test {border:1px dashed red;}
+
+
+/* iconfig__manager fix */
+#config__manager  {
+    td.label {width:30%;color:#333; white-space:normal; }
+    td.value {width:70%;}
+    table {width:100%;}
+    label {font-weight:normal;}
+    td .input, td .value, 
+    tr.default .input,
+    tr.default input,
+    tr.default textarea,
+    tr.default select,
+    .selectiondefault {            background-color: @ini_background_alt;}
+    .inline { display:inline; }
+}
+
+/* bootstrap hover fix */
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;    
+}
+
+input.edit { .form-control;}
+.dokuwiki .footer {  background-color:#e4e4e4;}
+
+.alert-notify {.alert-warning;}
+.alert-error {.alert-danger;}
+
+.tabspage  ul { .navbar-nav; list-style-type: none; float:left; margin:10px;padding:0;      li {float:left; font-size: 13px;padding: 4px 8px;
+
+line-height: 20px; a {color: #333;font-weight: bold;} 
+a:hover{color: #4183c4;text-decoration: none;}
+}
+}
+
+
+/******************* plugins ***********************/
+
+#plugin__backlinks {
+	ul li { display:inline-block; overflow: hidden; text-overflow:ellipsis; white-space:nowrap;width:10em;margin-right:15px;}
+	ul li div {.label; .label-default; ;background-color: #eee;}
+	 
+}
+
+
+/**
+ * This file provides styles for the media manager popup
+ * (mediamanager.php).
+ */
+
+/*____________ structure ____________*/
+
+html.popup {
+    overflow: auto;
+}
+
+#media__manager {
+    height: 100%;
+    overflow: hidden;
+}
+
+#mediamgr__aside {
+    width: 30%;
+    height: 100%;
+    overflow: auto;
+    position: absolute;
+    left: 0;
+    border-right: 1px solid @ini_border;
+}
+[dir=rtl] #mediamgr__aside {
+    left: auto;
+    right: 0;
+    border-right-width: 0;
+    border-left: 1px solid @ini_border;
+}
+#mediamgr__aside .pad {
+    padding: .5em;
+}
+
+#mediamgr__content {
+    width: 69.7%;
+    height: 100%;
+    overflow: auto;
+    position: absolute;
+    right: 0;
+}
+[dir=rtl] #mediamgr__content {
+    right: auto;
+    left: 0;
+}
+#mediamgr__content .pad {
+    padding: .5em;
+}
+
+#media__manager h1,
+#media__manager h2 {
+    font-size: 1.5em;
+    margin-bottom: .5em;
+    padding-bottom: .2em;
+    border-bottom: 1px solid @ini_border;
+}
+
+/* left side
+********************************************************************/
+
+/*____________ options ____________*/
+
+#media__opts {
+    margin-bottom: .5em;
+}
+
+#media__opts input {
+    margin-right: .3em;
+}
+[dir=rtl] #media__opts input {
+    margin-right: 0;
+    margin-left: .3em;
+}
+#media__opts label {
+}
+
+/*____________ tree ____________*/
+
+#media__tree ul {
+    padding-left: .2em;
+}
+[dir=rtl] #media__tree ul {
+    padding-left: 0;
+    padding-right: .2em;
+}
+#media__tree ul li {
+    clear: left;
+    list-style-type: none;
+    list-style-image: none;
+    margin-left: 0;
+}
+[dir=rtl] #media__tree ul li {
+    clear: right;
+    margin-right: 0;
+}
+#media__tree ul li img {
+    float: left;
+    padding: .5em .3em 0 0;
+}
+[dir=rtl] #media__tree ul li img {
+    float: right;
+    padding: .5em 0 0 .3em;
+}
+#media__tree ul li div.li {
+    display: inline;
+}
+#media__tree ul li li {
+    margin-left: 1.5em;
+}
+[dir=rtl] #media__tree ul li li {
+    margin-left: 0;
+    margin-right: 1.5em;
+}
+
+/* right side
+********************************************************************/
+
+/*____________ upload form ____________*/
+
+/* upload info */
+#media__content div.upload {
+    font-size: .9em;
+    margin-bottom: .5em;
+}
+
+#mediamanager__uploader {
+    margin-bottom: 1em;
+}
+#mediamanager__uploader p {
+    margin-bottom: .5em;
+}
+
+/*____________ file list ____________*/
+
+#media__content img.load {
+    margin: 1em auto;
+}
+
+#media__content .odd,
+#media__content .even {
+    padding: .5em;
+}
+#media__content .odd {
+    background-color: @ini_background_alt;
+}
+#media__content .even {
+}
+/* highlight newly uploaded or edited file */
+#media__content #scroll__here {
+    border: 1px dashed @ini_border;
+}
+
+/* link which inserts media file */
+#media__content a.mediafile {
+    margin-right: 1.5em;
+    font-weight: bold;
+    cursor: pointer;
+}
+[dir=rtl] #media__content a.mediafile {
+    margin-right: 0;
+    margin-left: 1.5em;
+}
+#media__content span.info {
+}
+#media__content img.btn {
+    vertical-align: text-bottom;
+}
+
+/* info how to insert media, if JS disabled */
+#media__content div.example {
+    color: @ini_text_neu;
+    margin-left: 1em;
+}
+
+#media__content div.detail {
+    padding: .2em 0;
+}
+#media__content div.detail div.thumb {
+    float: left;
+    margin: 0 .5em 0 18px;
+}
+[dir=rtl] #media__content div.detail div.thumb {
+    float: right;
+    margin: 0 18px 0 .5em;
+}
+#media__content div.detail div.thumb a {
+    display: block;
+    cursor: pointer;
+}
+#media__content div.detail p {
+    margin-bottom: 0;
+}
+
+
+/*____________ media search ____________*/
+
+#dw__mediasearch {
+}
+#dw__mediasearch p {
+}
+#dw__mediasearch label {
+}
+#dw__mediasearch label span {
+}
+#dw__mediasearch input.edit {
+}
+#dw__mediasearch input.button {
+}
+
+
+/* meta edit form
+********************************************************************/
+
+#media__content form.meta {
+}
+
+#media__content form.meta div.metafield {
+    clear: left;
+    margin-bottom: .5em;
+    overflow: hidden;
+}
+[dir=rtl] #media__content form.meta div.metafield {
+    clear: right;
+}
+
+#media__content form.meta label {
+    display: block;
+    width: 25%;
+    float: left;
+    font-weight: bold;
+    clear: left;
+}
+[dir=rtl] #media__content form.meta label {
+    float: right;
+    clear: right;
+}
+#media__content form.meta .edit {
+    float: left;
+    width: 70%;
+    margin: 0;
+}
+[dir=rtl] #media__content form.meta .edit {
+    float: right;
+}
+#media__content form.meta textarea.edit {
+    /* needed because of IE8 hack in _edit.css for textarea.edit: */
+    max-width: 70%;
+    min-width: 70%;
+}
+
+#media__content form.meta div.buttons {
+    clear: left;
+    margin: .2em 0 0 25%;
+}
+[dir=rtl] #media__content form.meta div.buttons {
+    clear: right;
+    margin: .2em 25% 0 0;
+}
