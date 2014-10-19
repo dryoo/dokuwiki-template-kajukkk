@@ -3,6 +3,8 @@ DokuHub
 
 Bootstrap template for dokuwiki.
 
+http://m.openwiki.kr
+
 yet completed.
 
 
