@@ -1,4 +1,4 @@
-dokustrap
+DokuHub
 =========
 
 Bootstrap template for dokuwiki.
