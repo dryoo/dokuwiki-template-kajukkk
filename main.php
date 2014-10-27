@@ -9,6 +9,7 @@ Related plugins
 References
 ----------
   * https://www.dokuwiki.org/devel:localization#template_localization
+  * http://getbootstrap.com/
   
 */
 
@@ -75,8 +76,8 @@ header('X-UA-Compatible: IE=edge,chrome=1');
           <ul class="nav navbar-nav navbar-right hidden-xs">
           <!-- Button trigger modal -->
           	<li>
-			<a href="#" class="" data-toggle="modal" data-target="#myModal" title="Add new page"><span class="glyphicon glyphicon-plus"></span>
- 			</a></li>
+			<a href="#" class="bstooltip" data-target="#myModal"  data-toggle="modal" data-toggle="tooltip"   title="Add new page"><span class="glyphicon glyphicon-plus"></span></a>
+            </li>
 
 
             <li class="dropdown  ">
@@ -99,7 +100,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
                </ul>
             </li>   
             <?php if ($INFO['userinfo']!=null) {?>
-            <li class="dropdown visible-lg">
+            <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <?php /* Avatar plugin support */  if(!plugin_isdisabled('avatar')) {
                 $avatar =& plugin_load('helper', 'avatar');
@@ -111,7 +112,9 @@ header('X-UA-Compatible: IE=edge,chrome=1');
               </a>
 
               <ul class="dropdown-menu">
-                 <?php tpl_bs_actionlink("login","user","li");?>
+                  <li> <?php echo userlink() ?></li>
+                  <li class="divider"></li>
+                  <?php tpl_bs_actionlink("login","log-out","li");?>
                   <?php tpl_bs_actionlink("profile","edit","li");?>
                 <!--<li class="divider"></li>
                 <li><a href="#">Separated link</a></li> -->
@@ -156,10 +159,11 @@ header('X-UA-Compatible: IE=edge,chrome=1');
     <?php tpl_bs_actionlink("edit","pencil","","btn btn-default pull-right");?>
 
     <div id="dokuwiki__content">
+        <?php tpl_includeFile('pageheader.html') ?>
         <!-- wikipage start -->
         <?php tpl_content(false) ?>
         <!-- wikipage stop -->
-                    
+        <?php tpl_includeFile('pagefooter.html') ?> 
 		<div class="clearer"></div>
 		<!-- Usage as a class -->
         <?php /*Backlinks 참조문서 출력*/  if  ((ft_backlinks($ID)!=null) &&($INFO['namespace']!="") && (strrchr(':'.$INFO['id'],":")!=":home") &&  (($ACT=='edit') or ($ACT=='preview') or ($ACT="show") ) ) print $lang['btn_backlink'].p_render('xhtml',p_get_instructions('{{backlinks>.}}'),$info);?>
@@ -175,64 +179,67 @@ header('X-UA-Compatible: IE=edge,chrome=1');
           <option disabled value="dark">Mobile Dark</option>
         </select><span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span>
         </form> 
- 
+ <div class="tooltip top" >
+   <div class="tooltip-arrow"></div>
+   <div class="tooltip-inner">
+     Some tooltip text!
+   </div>
+ </div>
        
 	</div></div><!-- /.dokuwiki -->
 
 
-<!-- Modal -->
+<!-- NEW page Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog  modal-sm">
+  <div class="modal-dialog ">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header ">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="myModalLabel"><?php echo tpl_getLang('createnewpage')?></h4>
       </div>
       <div class="modal-body">
         <form class="uk-form-horizontal">
           <input type="text" hidden name="do" value="edit">
-          <label class="label-control"><?php echo tpl_getLang('pagename')?></label>
-          <input class="form-control" name="id" type="text" required placeholder="<?php echo tpl_getLang('pagename')?>"> 
-                    <br>
-                <label class="label-control"><?php echo $lang['namespaces'] ?></label>
+          <label class="label-control"><?php echo tpl_getLang('pagename')?></label><br>
+          새 페이지의 이름을 입력하세요.
+          <input class="form-control" id="newpageid" name="id" type="text" required placeholder="<?php echo tpl_getLang('pagename')?>">      <br>
+          <label class="label-control"><?php echo $lang['namespaces'] ?></label><br>
+          <code>이름공간:페이지이름</code> 형식으로 입력함으로써 새 페이지가 특정한 이름공간에 위치하도록 할 수 있습니다. 아니면, 아래의 단추에서 고르세요. 
           <div class="radio">
-
             <label>
-              <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-              현재 이름공간에 만듭니다.
+              <input type="radio"  name="optionsRadios"  onclick="jQuery('#newpageid').val('');" >
+              최상위에 만듭니다. 
             </label>
           </div>
           <div class="radio">
             <label>
-              <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-              Option two can be something else and selecting it will deselect option one
+              <input type="radio" name="optionsRadios"   <?php echo ($INFO['namespace']=="")?"disabled":""?>   onclick="jQuery('#newpageid').val('<?php echo $INFO['namespace']?>:');" >
+              현재 이름공간(<?php echo ($INFO['namespace']=="")?"최상위":$INFO['namespace']?>)에 만듭니다.
             </label>
           </div>
-          <div class="radio">
-            <label>
-              <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
-              Option two can be something else and selecting it will deselect option one
-            </label>
+          <div class="btn-group pull-right ">
+            <input type="submit" class="btn btn-primary " value="<?php echo $lang['btn_create'] ?>">
+            <button type="button" class="btn btn-warning" data-dismiss="modal"><?php echo $lang['btn_cancel']?></button>
           </div>
-          <input type="submit" class="btn btn-primary" value="<?php echo $lang['btn_create'] ?>">
-          <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $lang['btn_cancel']?></button>
+          <div class="clearfix"></div>
         </form>
       </div>
 
     </div>
   </div>
-</div> <!-- Modal -->
+</div> <!--NEW page  Modal -->
 
  
 <script>
 jQuery(".dokuwiki .mode_show table").addClass( "table" );
 jQuery(".dokuwiki .contents a[title]").tooltip();
+jQuery(".dokuwiki .bstooltip").tooltip();
 //jQuery("input").addClass( "form-control" );
 jQuery(".dokuwiki .contents input.button").addClass( "btn btn-default" );
 jQuery(".dokuwiki  .toolbutton").addClass( "btn btn-default" );
 jQuery(".dokuwiki .contents .secedit input.button").addClass( "btn-sm" );
 <?php 
-  if ($ACT=="edit") { echo 'jQuery(".dokuwiki .contents .toolbutton").addClass( "btn btn-default" );';}
+ // if ($ACT=="edit") { echo 'jQuery(".dokuwiki .contents .toolbutton").addClass( "btn btn-default" );';}
 ?>
 </script>
 
