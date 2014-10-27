@@ -3,6 +3,7 @@
 
 
 
+$meta['google_analytics']        = array('');
 $meta['navbar-inverse']        = array('onoff');
 
 

@@ -7,6 +7,14 @@ body { margin-top: 51px; max-width: 980px; margin-left:auto; margin-right:auto;
 .navbar  .dropdown-toggle {height:34px;}
 .dokuwiki  .insitu-footnote { background-color:yellow; padding:5px; border-radius:6px;}
 
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../dokuhub/fonts/glyphicons-halflings-regular.eot');
+  src: url('../dokuhub/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), 
+    url('../dokuhub/fonts/glyphicons-halflings-regular.woff') format('woff'), 
+    url('../dokuhub/fonts/glyphicons-halflings-regular.ttf') format('truetype'), 
+    url('../dokuhub/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
 
 /*############## contents  general elements #####################*/
 .dokuwiki .contents 
@@ -16,8 +24,9 @@ body { margin-top: 51px; max-width: 980px; margin-left:auto; margin-right:auto;
     a.wikilink2 { color:#aaa; border-bottom: 1px dashed; }
     a.wikilink2:hover{ color: #a22;}
 
-
- 
+    a.urlextern { background-repeat: no-repeat; padding-left:18px;background-position: 0 center;
+    background-image: url(images/external-link.png);}
+    
     .search_hit { background-color: #FF9;} 
     margin:0 0.5em;
     .breadcrumb { margin-bottom: 0;}
@@ -27,15 +36,15 @@ body { margin-top: 51px; max-width: 980px; margin-left:auto; margin-right:auto;
     img.medialeft 	{ margin-right: 0.5em;}
     img.mediaright 	{ margin-left:  0.5em;}
     
-     h2,h3,h4 { margin-top:-40px; padding-top:60px;} /* anchor 위치 문제 해결 */
 
     
     .editBox textarea.edit {width:100%;}
+    .editBox .toolbutton {.btn; .btn-default; .btn-xs}
 
     .editButtons {
         margin:1em 0;
-      /*  #edbtn__save {.btn-primary;}*/
- /*       #edbtn__preview {.btn-success;}
+    /*    #edbtn__save { .btn-primary;}
+      #edbtn__preview {.btn-success;}
 */    }
     .summary { 
         .well; .well-sm; .bg-warning;
@@ -55,39 +64,22 @@ body { margin-top: 51px; max-width: 980px; margin-left:auto; margin-right:auto;
     #tool__bar {.btn-group;}
     
     
-  /******************* TOC ***********************/  
-#dw__toc  { 
-     
-    border:1px solid #e5e5e5;
-    padding: 0.5em; 
-    border-radius:7px;
-    margin:1em 0.5em;   max-width:300px; float:right;
-    h3 { padding-top:0; margin: 0; font-size:18px; line-height:20px;vertical-align:middle;text-align: center  }
-    ul {list-style:square; margin:0 0 0 1em;padding:0;color:#aaa;}
-    li  { padding-left: 0.7em;     text-indent: -1em;}
+  /******************* breadcrumb ***********************/  
+.dokuwiki .breadcrumb { 
+    background-color: transparent; border-bottom: 1px solid #e5e5e5;
+    color: #e5e5e5;
+    span {margin-right:5px;}
 }
-
-.toc_docked { margin:0!important; padding:0!important;right:15px;
-     border:none!important;
-     border-radius:0!important;
-    background: no-repeat   right top url(images/icon-bookmark.png);
-} 
-.toc_docked h3 { margin:0; padding:0px; width:44px; height:48px; overflow:hidden; font-size:12px!important;   }
-.toc_docked div{display:none;}
-.toc_docked:hover h3 ,.toc_docked:active h3 {color:#333; width:auto; height:auto;}
-.toc_docked:hover div,.toc_docked:active div {display:block;}
-.toc_docked:hover,.toc_docked:active  {background-color:#F5F5F5; padding:0.5em!important;     border:1px solid #e5e5e5!important;
-    border-top-left-radius:0em!important;
-    border-top-right-radius:0em!important;
-    border-bottom-left-radius:1em!important;
-    border-bottom-right-radius:1em!important;}
-
 /******************* Top navbar ***********************/
-.dokuwiki .navbar {font-size:20px;background-color: #F5F5F5;border-bottom: 1px solid #E5E5E5;}
+.dokuwiki .navbar {
+    font-size:20px;background-color: #F5F5F5;border-bottom: 1px solid #E5E5E5; min-height: 48px;
+    .navbar-toggle {margin-top:7px; margin-bottom:7px;}
+    .avatar {margin-top:-4px;}
+}
 .dokuwiki .navbar-brand { 
+    height:48px;
     padding:10px;
 	img { width:28px; height:28px; .img-circle;}
-	 
 }
 
 #bs-navbar-collapse-main {
@@ -130,25 +122,25 @@ body { margin-top: 51px; max-width: 980px; margin-left:auto; margin-right:auto;
 
 .visible-xs > .navbar-form { margin:0; }
  
-
+ /* anchor location fix 위치 문제 해결 */
+.dokuwiki .mode_show {
+     h2, h3, h4, h5 { margin-top:-40px; padding-top:60px;} 
+     }
 
 
 .test {border:1px dashed red;}
 
 
+
+     
 /* iconfig__manager fix */
 #config__manager  {
-    td.label {width:30%;color:#333; white-space:normal; }
-    td.value {width:70%;}
-    table {width:100%;}
-    label {font-weight:normal;}
-    td .input, td .value, 
-    tr.default .input,
-    tr.default input,
-    tr.default textarea,
-    tr.default select,
-    .selectiondefault {            background-color: @ini_background_alt;}
-    .inline { display:inline; }
+    .label {display:block; color:#333;    line-height:1;
+    white-space:normal;}
+    label {line-height:130%;font-weight:normal;}
+     tr.default .input, tr.default input,  tr.default textarea, tr.default select, 
+    .selectiondefault { background-color: #E4E4E4;}
+    td.value .checkbox {margin-right:1em;}
 }
 
 /* bootstrap hover fix */

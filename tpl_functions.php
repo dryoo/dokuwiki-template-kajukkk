@@ -77,4 +77,30 @@
      unset($GLOBALS['MSG']);
  }
  
+
+
+   function tpl_bs_breadcrumbs($tag='li') {
+       global $lang;
+       global $conf;
+ 
+     //check if enabled
+     if(!$conf['breadcrumbs']) return false;
+ 
+     $crumbs = breadcrumbs(); //setup crumb trace
+  
+     $last = count($crumbs);
+
+     if ($last==1) return false;
+     $i    = 0;
+     print '<ol class="breadcrumb text-capitalize hidden-xs">';
+     print '<span class="glyphicon glyphicon-book"></span>';
+     foreach($crumbs as $id => $name) {
+         $i++;
+         print '<'.$tag.'>';
+         tpl_link(wl($id), hsc($name), '  title="'.$id.'"');
+         print '</'.$tag.'>';
+       }
+     print '</ol>';
+     return true;
+ }
 ?>

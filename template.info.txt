@@ -1,5 +1,5 @@
 base     dokuhub
-author   S C Yoo
+author   S.C. Yoo
 email    dryoo@live.com
 date     2014-10-30
 name     DokuHub template
