@@ -26,15 +26,16 @@ header('X-UA-Compatible: IE=edge,chrome=1');
     <title><?php tpl_pagetitle() ?> [<?php echo strip_tags($conf['title']) ?>]</title>
     <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
     <?php tpl_metaheaders() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
     <?php tpl_includeFile('meta.html') ?>
     <?php echo tpl_getConf('google_analytics') ?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <script src="./js/html5shiv.js"></script>
+      <script src="./js/respond.min.js"></script>
     <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#sidetoc">
@@ -60,7 +61,11 @@ header('X-UA-Compatible: IE=edge,chrome=1');
               ?>
 
             <div id="qsearch" class="navbar-form  navbar-left hidden-xs" role="search">
-            	<?php tpl_searchform(true,false); ?>
+            <?php if (!plugin_isdisabled('searchformgoto')) {
+                $searchformgoto = &plugin_load('helper','searchformgoto');
+                $searchformgoto->gotoform();
+                } else { tpl_searchform(); }
+            ?>
           	</div>
                
 			<?php if (tpl_getConf('tabsPage')): /*  tab menu */?>
@@ -130,7 +135,11 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
            </ul>
              <div   id="qsearch" class="navbar-form visible-xs"  role="search">
-            <?php tpl_searchform(true,false); ?>
+            <?php if (!plugin_isdisabled('searchformgoto')) {
+                $searchformgoto = &plugin_load('helper','searchformgoto');
+                $searchformgoto->gotoform();
+                } else { tpl_searchform(); }
+            ?>
         </div>
            <ul class="nav navbar-nav navbar-right visible-xs">       
                  <?php tpl_bs_actionlink("login","user","li");?>                       
@@ -200,21 +209,22 @@ header('X-UA-Compatible: IE=edge,chrome=1');
       <div class="modal-body">
         <form class="uk-form-horizontal">
           <input type="text" hidden name="do" value="edit">
-          <label class="label-control"><?php echo tpl_getLang('pagename')?></label><br>
-          새 페이지의 이름을 입력하세요.
+          <label class="label-control text-capitalize"><?php echo tpl_getLang('pagename')?></label><br>
           <input class="form-control" id="newpageid" name="id" type="text" required placeholder="<?php echo tpl_getLang('pagename')?>">      <br>
-          <label class="label-control"><?php echo $lang['namespaces'] ?></label><br>
-          <code>이름공간:페이지이름</code> 형식으로 입력함으로써 새 페이지가 특정한 이름공간에 위치하도록 할 수 있습니다. 아니면, 아래의 단추에서 고르세요. 
+          <label class="label-control text-capitalize"> <?php echo tpl_getLang('namespace') ?></label><br>
+          <?php echo tpl_getLang('namespacedesc') ?>
+         <!-- <code>이름공간:페이지이름</code> 형식으로 입력함으로써 새 페이지가 특정한 이름공간에 위치하도록 할 수 있습니다. 아니면, 아래의 단추에서 고르세요. -->
           <div class="radio">
             <label>
-              <input type="radio"  name="optionsRadios"  onclick="jQuery('#newpageid').val('');" >
-              최상위에 만듭니다. 
+              <input type="radio"  name="optionsRadios"   <?php echo ($INFO['namespace']=="")?"checked":""?> onclick="jQuery('#newpageid').val('');" >
+              <?php echo tpl_getLang('namespacedesc1') ?>
             </label>
           </div>
           <div class="radio">
             <label>
               <input type="radio" name="optionsRadios"   <?php echo ($INFO['namespace']=="")?"disabled":""?>   onclick="jQuery('#newpageid').val('<?php echo $INFO['namespace']?>:');" >
-              현재 이름공간(<?php echo ($INFO['namespace']=="")?"최상위":$INFO['namespace']?>)에 만듭니다.
+              
+              <?php printf (tpl_getLang('namespacedesc2'),$INFO['namespace'] ) ?>
             </label>
           </div>
           <div class="btn-group pull-right ">
@@ -232,8 +242,8 @@ header('X-UA-Compatible: IE=edge,chrome=1');
  
 <script>
 jQuery(".dokuwiki .mode_show table").addClass( "table" );
-jQuery(".dokuwiki .contents a[title]").tooltip();
-jQuery(".dokuwiki .bstooltip").tooltip();
+//jQuery(".dokuwiki .contents a[title]").tooltip();
+//jQuery(".dokuwiki .bstooltip").tooltip();
 //jQuery("input").addClass( "form-control" );
 jQuery(".dokuwiki .contents input.button").addClass( "btn btn-default" );
 jQuery(".dokuwiki  .toolbutton").addClass( "btn btn-default" );
