@@ -259,9 +259,9 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
          </div>                  
 
         <div class="content">
-            <?php tpl_include_page($conf['sidebar'], 1, 1) ?>
-            <?php tpl_includeFile('sidebarheader.html') ?>
-            <?php tpl_include_page(tpl_getConf('lsb')) ?>
+            <?php tpl_includeFile('sidebarheader.html') ?>        
+            <?php tpl_include_page($conf['sidebar'], 1, 1) /* Default Sidebar*/?>
+            <?php tpl_include_page(tpl_getConf('lsb')) /* Bottom Sidebar */ ?>
             <?php tpl_includeFile('sidebarfooter.html') ?>
         </div>
     </div><!-- /aside -->

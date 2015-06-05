@@ -30,11 +30,7 @@ if (!defined('DOKU_INC')) die();
         <a href="http://openwiki.kr/tech/nginx" title="Powered by Nginx" <?php echo $target?>><img
             src="<?php echo tpl_basedir(); ?>images/button-nginx.png" width="80" height="15" alt="Powered by NginX" /></a>
 
-        <span style=" " > <script id="_wauo6e">var _wau = _wau || []; _wau.push(["small", "vdt2qm5pgbx0", "o6e"]);
-(function() {var s=document.createElement("script"); s.async=true;
-s.src="http://widgets.amung.us/small.js";
-document.getElementsByTagName("head")[0].appendChild(s);
-})();</script></span>
+        <span  ><?php echo tpl_getConf('whosamungus')?></span>
 
     </div>
 </div></div><!-- /footer -->
