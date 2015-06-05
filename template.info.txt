@@ -1,7 +1,7 @@
-base     dokuhub
+base     kajukkk
 author   S.C. Yoo
 email    dryoo@live.com
-date     2014-10-30
-name     DokuHub template
-desc     The DokuWiki template using Twitter Bootstrap theme insipred by github.com
-url      https://github.com/dryoo/dokuhub
+date     2015-07-01
+name     Kajukkk template
+desc     Another DokuWiki responsive template using Twitter Bootstrap & font awesome. Support for togglable dark theme to save energy of mobile phone. Supports various plugins like disqus, shoturl, avatar and searchformgoto. 
+url      https://github.com/dryoo/kajukkk

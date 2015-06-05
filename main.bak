@@ -1,0 +1,316 @@
+<?php error_reporting(E_ERROR );
+$pagestart=microtime(get_as_float);
+/*
+
+
+Related plugins
+---------------  
+  * https://www.dokuwiki.org/plugin:avatar
+
+References
+----------
+  * https://www.dokuwiki.org/devel:localization#template_localization
+  * http://getbootstrap.com/
+  * http://www.torrentreactor.net/
+  
+*/
+
+if (!defined('DOKU_INC')) die(); /* must be run from within DokuWiki */
+@require_once(dirname(__FILE__).'/tpl_functions.php'); /* include hook for template functions */
+
+header('X-UA-Compatible: IE=edge,chrome=1');
+
+// 애드센스처리
+if (($ACT=="show")||($ACT=="showtag")) $noadsense=false; else $noadsense=true; 
+if (p_get_metadata($ID,"adult")) $noadsense=true;
+?>
+<!DOCTYPE html>
+<!--[if lt IE 9]>  <html class="ie"> <![endif]-->
+<!--[if gte IE 9]>  <html> <![endif]-->
+<!--[if !IE]><!-->        
+<html lang="<?php echo $conf['lang'] ?>" dir="<?php echo $lang['direction'] ?>" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title><?php tpl_pagetitle() ?> [<?php echo strip_tags($conf['title']) ?>]</title>
+    <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+    <?php tpl_metaheaders() ?>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
+    <?php tpl_includeFile('meta.html') ?>
+    <?php echo tpl_getConf('google_analytics') ?>
+    
+    <script>
+    function tpl_toggleLight() {
+     if (DokuCookie.getValue('dark')==1)
+     {
+          DokuCookie.setValue('dark','0');
+        jQuery('.dokuwiki').toggleClass('dark');
+        return false;
+     }
+     else
+     {
+        DokuCookie.setValue('dark','1');
+        jQuery('.dokuwiki').toggleClass('dark');
+        return false;
+      }
+    }
+    </script>
+    
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- <script src="<?php echo tpl_getMediaFile(array("js/respond.min.js")); ?>" type="text/javascript"></script>
+-->
+    <!--[if lt IE 9]>
+      <script src="<?php echo tpl_getMediaFile(array("js/html5shiv.js")); ?>" type="text/javascript"></script>
+          <![endif]-->
+<script>window.scrollback = {"room":"openwiki","form":"toast","minimize":true};(function(d,s,h,e){e=d.createElement(s);e.async=1;e.src=(location.protocol === "https:" ? "https:" : "http:") + "//scrollback.io/client.min.js";d.getElementsByTagName(s)[0].parentNode.appendChild(e);}(document,"script"));</script>
+</head>
+
+<body class="" >
+<div class="dokuwiki <?php echo (get_doku_pref('dark', 0)==1)?'dark':''?>">
+    <div id="dokuwiki__top" class="mode_<?php echo $ACT ?> <?php echo ($showSidebar) ? 'showSidebar' : '';
+        ?> <?php echo ($hasSidebar) ? 'hasSidebar' : ''; ?>"  >
+
+       <?php tpl_flush(); ?>
+       <div>
+       	<?php include('cssmenu.php') ?> 
+        </div>
+    <div class="core">
+  
+     
+			<?php if (!plugin_isdisabled('searchformgoto')) {
+				$searchformgoto = &plugin_load('helper','searchformgoto');
+				$searchformgoto->gotoform();
+				} else { tpl_searchform(); }
+			?>         
+            <?php ds_html_msgarea(); /* occasional error and info messages */ ?>       
+                    
+           
+            <?php if  (!$noadsense) tpl_includeFile('adsense.html') ?>
+            
+        <div id="dokuwiki__content">
+              <?php tpl_bs_breadcrumbs() ?>
+            <?php if  ($ACT=="show"): ?>
+                
+            <div class="page-header">
+             
+            <h1><?php tpl_pagetitle() ?> <small>
+                <a href="<?php echo DOKU_URL.tpl_ID()?>" style="font-size:16px;color:rgba(111,111,111,0.5)"><?php echo tpl_ID(hsc($ID)) ?></a> 
+                 </small>
+            </h1>
+            </div>
+            <?php endif?>
+            <?php //  if  ($ACT=="edit") tpl_link(DOKU_URL.tpl_ID(), tpl_ID(hsc($ID))) ?>
+<?php tpl_bs_actionlink("edit","pencil","","btn btn-primary pull-right");?>      
+            <!-- wikipage start -->
+            <?php tpl_content(true) ?>
+            <!-- wikipage stop -->
+            <div class="clearer"></div>
+            <!-- Usage as a class -->
+            <?php /*Backlinks 참조문서 출력*/  if  ((ft_backlinks($ID)!=null) &&($INFO['namespace']!="") && (strrchr(':'.$INFO['id'],":")!=":home") &&  (($ACT=='edit') or ($ACT=='preview') or ($ACT="show") ) ) print $lang['btn_backlink'].p_render('xhtml',p_get_instructions('{{backlinks>.}}'),$info);?>
+            <?php /*미니문법설명*/ if  (($ACT=='edit')or ($ACT=='preview') ) print p_render('xhtml',p_get_instructions('
+^  **초미니 문법 설명**  (혹은 [[:syntax]]참조하세요)  ||||
+^강조| %%**굵게**%%| %%//기울임//%% | %%__밑줄__%%|
+^제목| ======제목1단계|=====제목2단계|====제목3단계 (뒤는 자동)|
+^목록| _*_  공백과 총알 한개 (점목록)|_-_ 공백과 빼기 (번호목록)||
+^연결| %%[[두개의 대괄호로 연결]]%%| %%URL%% 혹은 %%[[URL]]%%| %%[[URL|표시될 이름]]%%|
+^표| %%|셀 내용1|셀 내용2|%% | %%^제목내용1^제목내용2^%% |테이블 끝에 공백이 오면 안됩니다|
+'),$info);?>
+
+            <div class="docInfo"><?php tpl_pageinfo() ?></div>
+        
+            <?php if  (!$noadsense) tpl_includeFile('adsense.html') ?>
+        
+            <?php  if ($ACT=='show') {  
+            /* *************디스커즈 디스커즈************* */?>
+            <div id="disqus_thread" style=""></div>
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                var disqus_shortname = 'vln'; // required: replace example with your forum shortname
+                var disqus_url = '<?php echo DOKU_URL.str_replace(":","/",$ID)?>';
+                var disqus_identifier =' <?php echo DOKU_URL.str_replace(":","/",$ID)?>';
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            <?php /***************디스커즈 디스커즈******************/ } ?>
+
+            <?php tpl_includeFile('pagefooter.html') ?> 
+            <?php include('tpl_footer.php') ?> 
+            
+            <div style="float:right">
+
+
+    <?php if ($INFO['ismobile']) :?>
+         <a href="#" class="btn-circle btn-danger slideTextUp" data-target="#myModal"  data-toggle="modal" data-toggle="tooltip"   title="Add new page"><div><i class="fa fa-plus"></i></div><div>새문서</div></a>
+
+         <?php tpl_button_a('login','unlock-alt','','btn-warning btn-circle slideTextUp');?>    
+         <?php tpl_button_a('history','history','','btn-primary btn-circle slideTextUp','이력');?>
+         <?php tpl_button_a('media','image','','btn-primary btn-circle slideTextUp');?>
+         <?php  if(!plugin_isdisabled('randompage')) {?>
+            <a href="?do=randompage" class="btn-circle btn-danger slideTextUp" title="Random page"><div><i class="fa fa-random"></i></div><div>랜덤페이</div></a>      
+         <?php    }?>
+         <?php tpl_button_a('edit','pencil','','btn-success btn-circle slideTextUp');?>         
+           <?php tpl_button_a('admin','cog','','btn-default btn-circle slideTextUp');?>           
+         <?php tpl_button_a('backlink','link','','btn-primary btn-circle slideTextUp');?>
+       
+         <?php tpl_button_a('subscribe','envelope','','btn-primary btn-circle slideTextUp');?>
+         <?php tpl_button_a('recent','spinner','','btn-primary btn-circle slideTextUp');?>
+     <?php endif; ?>
+           <a href="#" class="btn-circle btn-danger slideTextUp" onclick="tpl_toggleLight();return false;" title="Random page"><div><i class="fa fa-lightbulb-o"></i></div><div>절약모드</div></a>   
+        
+            <?php tpl_button_a('top','eject','','btn-primary btn-circle slideTextUp');?>      </div>
+ 
+        </div>
+  
+
+        <?php tpl_flush(); ?>
+
+    
+    
+    
+    </div> <!--core -->
+
+    <?php //if($showSidebar): ?>
+    <!-- ********** lsb ********** -->
+    <div id="dokuwiki__aside" class="lsb ">
+        <div class="sidebar-toggle"><i class="fa fa-forward"></i></div>
+        <?php tpl_logo();?>
+        <?php tpl_title();?>
+        <div class="tools">
+         <?php tpl_flush() ?>
+          
+         <a href="#" class="btn-circle btn-danger slideTextUp" data-target="#myModal"  data-toggle="modal" data-toggle="tooltip"   title="Add new page"><div><i class="fa fa-plus"></i></div><div>새문서</div></a>
+
+         <?php tpl_button_a('login','unlock-alt','','btn-warning btn-circle slideTextUp');?>    
+         <?php tpl_button_a('history','history','','btn-primary btn-circle slideTextUp','이력');?>
+         <?php tpl_button_a('media','image','','btn-primary btn-circle slideTextUp');?>
+         <?php  if(!plugin_isdisabled('randompage')) {?>
+            <a href="?do=randompage" class="btn-circle btn-danger slideTextUp" title="Random page"><div><i class="fa fa-random"></i></div><div>랜덤페이</div></a>      
+         <?php    }?>
+         <?php tpl_button_a('edit','pencil','','btn-success btn-circle slideTextUp');?>         
+           <?php tpl_button_a('admin','cog','','btn-default btn-circle slideTextUp');?>           
+         <?php tpl_button_a('backlink','link','','btn-primary btn-circle slideTextUp');?>
+       
+         <?php tpl_button_a('subscribe','envelope','','btn-primary btn-circle slideTextUp');?>
+         <?php tpl_button_a('recent','spinner','','btn-primary btn-circle slideTextUp');?>
+
+         <!--<div class="btn-circle btn-success"><i class="fa fa-th"></i></div>  rgba(79, 26, 203, 0.8) -->
+         </div>                  
+
+        <div class="content">
+            <?php tpl_include_page(tpl_getConf('lsb')) ?>
+           
+                        <?php include('sidebarheader.php') ?> 
+                        <?php tpl_include_page($conf['sidebar'], 1, 1) ?>
+                        <?php tpl_includeFile('sidebarfooter.html') ?>
+            <div id="recentcomments" class="level2" style="">
+                <h3>최근 댓글</h3>
+                <script type="text/javascript" src="http://vln.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=24&excerpt_length=30"></script>
+                <small>Powered by <a href="http://openwiki.kr/tech/disqus">Disqus</a></small>
+            </div>
+        </div>
+        <div class="tools">
+            
+        </div>
+    </div><!-- /aside -->
+    <?php //endif; ?>
+
+
+       
+	</div></div><!-- /.dokuwiki -->
+
+
+<!-- NEW page Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header ">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"><?php echo tpl_getLang('createnewpage')?></h4>
+      </div>
+      <div class="modal-body">
+        <form class="uk-form-horizontal">
+          <input type="text" hidden name="do" value="edit">
+          <label class="label-control text-capitalize"><?php echo tpl_getLang('pagename')?></label><br>
+          <input class="form-control" id="newpageid" name="id" type="text" required placeholder="<?php echo tpl_getLang('pagename')?>">      <br>
+          <label class="label-control text-capitalize"> <?php echo tpl_getLang('namespace') ?></label><br>
+          <?php echo tpl_getLang('namespacedesc') ?>
+         <!-- <code>이름공간:페이지이름</code> 형식으로 입력함으로써 새 페이지가 특정한 이름공간에 위치하도록 할 수 있습니다. 아니면, 아래의 단추에서 고르세요. -->
+          <div class="radio">
+            <label>
+              <input type="radio"  name="optionsRadios"   <?php echo ($INFO['namespace']=="")?"checked":""?> onclick="jQuery('#newpageid').val('');" >
+              <?php echo tpl_getLang('namespacedesc1') ?>
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="optionsRadios"   <?php echo ($INFO['namespace']=="")?"disabled":""?>   onclick="jQuery('#newpageid').val('<?php echo $INFO['namespace']?>:');" >
+              
+              <?php printf (tpl_getLang('namespacedesc2'),$INFO['namespace'] ) ?>
+            </label>
+          </div>
+ 
+          <div class="btn-group pull-right ">
+            <input type="submit" class="btn btn-primary " value="<?php echo $lang['btn_create'] ?>">
+            <button type="button" class="btn btn-warning" data-dismiss="modal"><?php echo $lang['btn_cancel']?></button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <form class="uk-form-horizontal" action="<?php echo  tpl_basedir()?>newpage.php">
+           <input type="text" hidden name="save" value="edit">
+           <input class="form-control" id="newpageid" name="t" type="text" required placeholder="엔하위키미러 문서이름"> 
+          
+            <input type="submit" class="btn btn-primary " value="<?php echo $lang['btn_create'] ?>">
+        
+        
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div> <!--NEW page  Modal -->
+
+ 
+<script>
+jQuery(".dokuwiki  table").addClass( "table" );
+jQuery(document).ready(function()
+{
+
+    <?php if ($ACT=="edit"): /* 편툴바 조작 */?>
+    jQuery("#tool__bar").addClass( "btn-group" );
+    jQuery(".dokuwiki .toolbutton").addClass( "btn btn-default btn-sm" );
+    jQuery(".dokuwiki .editButtons input.button").addClass( "btn btn-default" );
+
+    jQuery("#edbtn__save").addClass( "btn-primary");
+    jQuery("#edbtn__preview").addClass( "btn-success");
+    <?php endif ?>
+    jQuery("#plugin__backlinks ul li div a").addClass( "btn btn-info" );
+ 
+    jQuery(".dokuwiki .secedit input.button").addClass("btn btn-info btn-sm");
+    jQuery(this).scroll(function () { 
+    	jQuery(".lsb").scrollTop(jQuery(this).scrollTop());   	
+    });
+   /* jQuery("body").css("background","url(http://openwiki.kr/_media/game/f3/background.jpg) center center no-repeat");
+    jQuery("body").css("background-attachment","fixed"); */
+}); 
+</script>
+
+<!-- Customized JavaScript http://getbootstrap.com/customize/?id=90ce7163ed2f17233228 
+ <script src="<?php echo tpl_getMediaFile(array("js/bootstrap.min.js")); ?>">
+  </script> -->
+
+ 
+<div class="no"><?php tpl_indexerWebBug() /* provide DokuWiki housekeeping, required in all templates */ ?></div>
+<div id="screen__mode" class="no"></div><?php /* helper to detect CSS media query in script.js */ ?>
+
+<?php printf("<small>%.3f seconds in processing this page.</small>",(microtime(get_as_float)-$pagestart));?>
+</body>
+</html>

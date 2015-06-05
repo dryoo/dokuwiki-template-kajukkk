@@ -1,29 +1,143 @@
 
+@color-cyan: #39cfcf;
+@color-blue: #3B8DBD;
+.test {border:1px solid red;}
 /* body & design  */
-body { margin-top: 51px; max-width: 980px; margin-left:auto; margin-right:auto;
-    font-family: "나눔고딕","맑은 고딕","Helvetica Neue", Helvetica, Arial, sans-serif;
+body { 
+    position:static;
+    
 }
 .container-fluid {max-width: 980px;}
 .navbar  .dropdown-toggle {height:34px;}
-.dokuwiki  .insitu-footnote { background-color:yellow; padding:5px; border-radius:6px;}
+.dokuwiki  .insitu-footnote { background-color:rgba(199, 250, 250,0.9); padding:5px; border-radius:6px;
+border:1px solid rgb(99, 150, 150,0.3)}
+
+.home-icon {float:left;width:44px;height:44px;background-color:#d9534f;text-align:center;line-height:44px;
+   a {color:white;}
+}
+
+ /* column control  */
+.lsb {
+    width:250px;
+    position: fixed; bottom:0; top:0;
+    overflow-y:hidden; overflow-x:hidden;
+    box-shadow: 0 0 10px rgba(34, 34, 34, 0.5) inset;
+}
+.lsb::-webkit-scrollbar, .rsb::-webkit-scrollbar {
+    display: none;
+}
 
 
-  
+
+.lsb {
+    background-color: lighten(@color-blue,30%);
+    background-color: rgba(34, 34, 34, 0.5);
+    background-color: rgba(134, 134, 134, 0.5);
+    background-color: #35373c;
+    color:#aaa;
+    right:0;    
+    
+    h1,h2,h3,h4,h5 {color:#00b8be;}
+    
+    a {transition: color .2s linear; }
+    li {position: relative;}
+    div.li:hover a:after {
+          content: '';
+          position: absolute;
+          height: 20px;
+          width: 3px;
+          background: #00B8BE;
+          left:-2px;
+          top: 0;
+    }
+}
+.license img {float:right }
+
+.core {
+   /* background-color: #bdc3c7; */
+        background-color:#f7f7f7;
+        min-height:1200px;
+}
+
+.dokuwiki .lsb .title {text-align:center;  }
+
+.rsb {
+    background-color: lighten(@color-cyan,30%);
+    float:right;
+    right:0;
+}
+
+.lsb .tools {margin:3px;}
+.rsb .sidebar-toggle {background-color:#82B965;}
+.lsb .content, .rsb .content {width:100%; padding: 5px;
+    border-top:1px solid rgba(120,120,120,0.1);
+    border-bottom:1px solid rgba(120,120,120,0.1);
+}
+
+ 
+/* Smartphones (portrait) ----------- */
+@media (max-width: 480px) { 
+    .lsb {display: none;}
+    .rsb {display: none;}
+}
+ 
+/* both collapse  ----------- */
+@media (min-width: 481px) and (max-width: 800px) {
+
+    .lsb {width:50px;}
+    .lsb .content { display:none;}
+    .core { margin-right:50px; }
+}
+
+/* 왼쪽만 ----------- */
+@media (min-width: 801px) and (max-width: 1110px) {
+    .lsb {width:250px;}
+    .lsb .sidebar-toggle {display:none;}
+    .core { margin-right:250px; }
+}
+
+/* 양측  ----------- */
+@media (min-width: 1111px) {
+
+    .lsb .sidebar-toggle {display:none;}
+   .core { margin-right:250px;}
+}
+
+/* iPhone 4 ----------- */
+@media only screen and (-webkit-min-pixel-ratio : 1.5), only screen and (min-pixel-ratio : 1.5) {
+/* Styles */
+}
+
+.test {border: 1px dashed red;}
+
+.lsb ul {
+    margin:0 5px;
+    padding: 0;
+    li { border-bottom:1px solid rgba(120,120,120,0.1);  max-width: 300px;    /* 길이를 명확히 지정! */
+    text-overflow: ellipsis;
+    white-space: nowrap; /* 줄바꿈방지 */
+    overflow: hidden;} 
+    li:hover, li:focus { background-color:rgba(120,120,120,0.1)}
+}
     
 /*############## contents  general elements #####################*/
-.dokuwiki .contents 
+.dokuwiki #dokuwiki__content
 {
-
-
+	padding:5px;
+    margin:0;
+    p,code {
+        font-size: 17px; line-height:1.6;
+    }
     a.wikilink2 { color:#aaa; border-bottom: 1px dashed; }
     a.wikilink2:hover{ color: #a22;}
 
     a.urlextern { background-repeat: no-repeat;  padding-left:18px; background-position: 0 center;
     background-image: url(images/external-link.png);}
     
+   
     .search_hit { background-color: #FF9;} 
-    margin:0 0.5em;
-    .breadcrumb { margin-bottom: 0;}
+   
+    .breadcrumb { margin-bottom: 0; padding:0; border:none;}
 
     img.media, img.mediacenter, img.medialeft, img.mediaright { .img-responsive; .img-rounded; margin-bottom:4px; }
     img.media {display:inline;}
@@ -31,9 +145,9 @@ body { margin-top: 51px; max-width: 980px; margin-left:auto; margin-right:auto;
     img.mediaright 	{ margin-left:  0.5em;}
     
 
-    
+    #tool__bar {.btn-group}
     .editBox textarea.edit {width:100%;}
-    .editBox .toolbutton {.btn; .btn-default; .btn-xs}
+
 
     .editButtons {
         margin:1em 0;
@@ -46,16 +160,57 @@ body { margin-top: 51px; max-width: 980px; margin-left:auto; margin-right:auto;
     }
      del { color:#7f7f7f;}
 
-     .btn_secedit input.button{  .btn-sm}
+
+	dl.file dt a  {
+
+	background-color: #bdc3c7;
+	border: 1px solid #CCC;
+	/* border-radius: 4px; */
+	padding: 0px 3px 3px 21px;
+	border-bottom: none;
+	margin-left: 10px;
+	border-radius: 6px 6px 0 0;
+	}
+
+    .page-header h1 {font-size:40px; ; /*text-shadow: 1px 1px 3px #777;*/}
+    h1 {margin-left: 0; border-bottom:1px #aaa dotted;}
+    h2 {margin-left: 0px;/**/}
+    h3 {margin-left: 10px;}
+    h4 {margin-left: 25px;}
+    h5 {margin-left: 40px;}
+    
+    h2:after {
+        background-color:#aaa;
+        content: "";
+        display: inline-block;
+        height: 1px;
+        position: relative;
+        vertical-align: middle;
+        
+        z-index:0;
+        left: 0.5em;
+        right: 0.5em;
+        min-width:20%;
+        margin-right: -50%;
+    }
+
+    
+    div.level1 {margin-left: 0;}
+    div.level2 {margin-left: 0;}
+    div.level3 {margin-left: 16px;}
+    div.level4 {margin-left: 32px;}
+    div.level5 {margin-left: 48px;}
+     .btn_secedit input.button{ .pull-right; .btn-xs; margin-top:20px;z-index:1;}
      .section_highlight { 
         background-color: rgba(50,122,200,0.1)!important;
         border-radius: 6px;
+      
     }
 
 }
 
     #size__ctl {float: right;}
-    #tool__bar {.btn-group;}
+
     
     
   /******************* breadcrumb ***********************/  
@@ -63,49 +218,66 @@ body { margin-top: 51px; max-width: 980px; margin-left:auto; margin-right:auto;
     background-color: transparent; border-bottom: 1px solid #e5e5e5;
     color: #e5e5e5;
     span {margin-right:5px;}
+    li { max-width: 100px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;}
 }
 /******************* Top navbar ***********************/
 .dokuwiki .navbar {
-    font-size:20px;background-color: #F5F5F5;border-bottom: 1px solid #E5E5E5; min-height: 48px;
+    background-color: #F5F5F5;border-bottom: 1px solid #E5E5E5; min-height: 48px; 
     .navbar-toggle {margin-top:7px; margin-bottom:7px;}
     .avatar {margin-top:-4px;}
     a.iw_user { padding: 1px 0px 1px 18px!important;background-position: 0 center;}
 }
 .dokuwiki .navbar-brand { 
-    height:48px;
-    padding:10px;
-	img { width:28px; height:28px; .img-circle;}
+    
+}
+.dokuwiki .logo { .pull-left;
+	max-width:100%;
+    background-color: #56595f;
 }
 
 #bs-navbar-collapse-main {
     font-size:14px;
     .nav  li  a {padding-left:10px;padding-right:10px;}
+
 }
 
 #nav-bottom {margin-bottom:0;}
-
-#qsearch {
-    @__searchformwidth: 200px;
-    margin:6px 0; padding:0;
-    .button {display:none; }
+#dw__toc {
+    bbnnorder-bottom:1px solid rgba(128,128,128,0.1);
+}
+#dw__search {
+    padding: 3px 5px 3px 50px;
+    background-color: #333;
+   
+    .button { btn; btn-default;  }
     form {margin:0;padding:4px 0;}
 
 
-    #qsearch__in  { .form-control; background: no-repeat center left url(images/search-icon-hi.png); 
+    #qsearch__in  { 
+        .form-control;
+        width:50%;
+        background: no-repeat center left  url(images/search-icon-hi.png); 
         height:28px;  padding-left: 28px;
-        min-width:@__searchformwidth;
+
         border: 1px solid #ccc;
 		border-radius: 3px;
 		outline: none;
 		box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
+        display:inline;
+        margin:5px;
+        background-color:#f0f0f0;
 	}
     #qsearch__in:focus  { border-color: #51a7e8;
 		box-shadow: inset 0 1px 2px rgba(0,0,0,0.075),0 0 5px rgba(81,167,232,0.5);
+        background-color:#fff;
 	}
       
     #qsearch__out { 
          font-size:14px;
-         width: @__searchformwidth; max-height:700px; overflow-y:auto;
+         width: 215px; max-height:700px; overflow-y:auto;
          padding: 9px;
          margin-bottom: 10px;
          border: 1px solid #e3e3e3;
@@ -117,16 +289,22 @@ body { margin-top: 51px; max-width: 980px; margin-left:auto; margin-right:auto;
 
 .visible-xs > .navbar-form { margin:0; }
  
- /* anchor location fix 위치 문제 해결 */
+ /* anchor location fix 위치 문제 해결 
 .dokuwiki .mode_show {
      h2, h3, h4, h5 { margin-top:-40px; padding-top:60px;} 
-     }
+     }*/
 
 
 .test {border:1px dashed red;}
 
+#mediamanager__uploader {
+	background-color: yellow; border:2px dashed red; border-radius:7px; padding:4px;
+   .qq-upload-success  .qq-upload-size {display:none!important;}
+}
 
-
+#dokuwiki__footer {
+  img { vertical-align:baseline; }
+}
      
 /* iconfig__manager fix */
 #config__manager  {
@@ -139,7 +317,7 @@ body { margin-top: 51px; max-width: 980px; margin-left:auto; margin-right:auto;
 }
 
 /* bootstrap hover fix */
-ul.nav li.dropdown:hover > ul.dropdown-menu {
+.navbar-header .dropdown:hover > .dropdown-menu,ul.nav li.dropdown:hover > ul.dropdown-menu {
     display: block;    
 }
 
@@ -160,12 +338,132 @@ input.edit { .form-control;}
 }
 
 
+li.dsq-widget-item {margin:5px 0!important;}
+
+/******************* link wiz ***********************/
+
+
+#link__wiz {width:300px;
+height: 300px;}
+#link__wiz_result {height:260px;overflow-y:auto;overflow-x:hidden;
+    .odd {background-color:#eef}
+    .even {background-color:#efe}
+    div a {display:block; color:#428bca;}
+    div span {font-size:12px;}
+}
+
+.ui-dialog .ui-dialog-titlebar {padding:0;}
+
 /******************* plugins ***********************/
 
 #plugin__backlinks {
-	ul li { display:inline-block; overflow: hidden; text-overflow:ellipsis; white-space:nowrap;width:10em;margin-right:15px;}
-	ul li div {.label; .label-default; ;background-color: #eee;}
-	 
+    ul  {margin:0;padding:0}
+	ul li { display:inline-block;  margin:2px; }
+	ul li a {  overflow: hidden; text-overflow:ellipsis; white-space:nowrap;width:10em;}
 }
 
-#dokuwiki__content .CodeMirror-lines { font-family: "나눔고딕코딩", monospace;}
+#dokuwiki__content .CodeMirror-lines,
+#wiki__text
+ { font-family: "나눔고딕코딩", Menlo, monospace;}
+
+.plugin_button { max-width:300px;}
+/******************* dark 절약모두 ***********************/
+.dark {color:#aaa;background-color:#111;}
+.dark .core,
+.dark  .table .table,
+.dark  pre,
+.dark  #link__wiz,
+.dark  #dw__search #qsearch__in
+    {color:inherit;background-color:inherit;}
+
+.dark  .core h1,.dark .core h2,.dark .core h3,.dark .core h4,.dark .core h5 {color:#ccc;}
+.dark .lightsaving { color:#000}
+.dark textarea.edit { color:#aaa; background-color:#222}
+.dark .summary { background-color:#255}
+ .dark  code {background-color:#333 }
+
+.dark  .JSpopup,
+.dark .lsb {background-color:#222;}
+
+ .dark table,
+ .dark table tr , 
+ .dark thead > tr > th,
+ .dark  .table > tbody > tr > th,
+.dark  .table > tfoot > tr > th,
+.dark   .table > thead > tr > td,
+.dark  .table > tbody > tr > td, 
+.dark .table > tfoot > tr > td 
+    {border-color:#333!important;}
+
+
+.btn-circle {
+    border-radius: 50%;
+    font-size: 19px;
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    display: inline-block!important;
+    margin: 2px 0!important;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    overflow:hidden; 
+    text-decoration:none;
+}
+
+.btn-square {
+    
+    font-size: 19px;
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    display: inline-block!important;
+     
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    overflow:hidden; 
+    text-decoration:none;
+}
+
+ .slideTextUp div:nth-child(2) {
+  top: 100%;
+  font-size:10px;
+}
+/*https://github.com/SaraSoueidan/windows8-animations/blob/master/css/demo-styles.css*/
+.slideTextUp:hover {  text-decoration:none;}
+.slideTextUp:hover div {
+   
+  -webkit-transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  -o-transform: translateY(-100%);
+  transform: translateY(-100%); transition: all .3s ease;
+
+}
+ 
+ .ie body {width:900px;margin:0 auto;}
+ .ie .dokuwiki {}
+ .ie .core {width:650px;float:left;}
+ .ie .lsb {position:inherit;float:left;}

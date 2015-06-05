@@ -1,13 +1,10 @@
-DokuHub
-=========
+Kajukkk
+=======
 
 Bootstrap template for dokuwiki.
 
-http://m.openwiki.kr
+Another DokuWiki responsive template using Twitter Bootstrap & font awesome. Support for togglable dark theme to save energy of mobile phone. Supports various plugins like disqus, shoturl, avatar and searchformgoto. 
 
-yet completed.
+   https://github.com/dryoo/kajukkk
 
-
-inspired by [github.com](https://github.com)
-
-* [Doogie's Template for DokuWiki](https://www.dokuwiki.org/template:doogiestpl)
+ 

@@ -1,0 +1,332 @@
+#navl{ position:fixed;left:0; top:0; z-index:10;display:inline-block;margin:0;padding:0}
+#navl ul{
+
+    width:128px;position:absolute;top:0px; z-index:11;margin:0;padding:0;
+    visibility:hidden;
+    opacity:0;
+    filter:alpha(opacity=0);
+    -webkit-transition:500ms ease;
+    -moz-transition:500ms ease;
+    -o-transition:500ms ease;
+    transition:500ms ease;
+
+height: 0
+}    
+#navl li{position:relative;list-style:none;margin:0;font-size:12px;}
+#navl> li > ul > li {width:44px;}
+#navl> li > ul { width:44px;}
+#navl  a {font-weight:700;text-decoration:none;display:block; margin:0; }
+#navl .current a,#navl li:hover > a  { }
+#navl ul li:hover a,#navl li:hover li a{ }
+#navl ul a:hover{color:__h over__; }
+
+#navl >li >ul>li >ul>li{height:36px;line-height: 35px; }
+#navl >li >ul>li >ul>li i {font-size:20px;}
+#navl >li >ul>li >ul>li a {border-bottom:1px solid rgba(9,9,9,0.1);}
+#navl >li >ul>li >ul>li img {height:36px;width:36px;}
+#navl ul li{float:none; margin:0;padding:0}
+#navl ul ul{position:fixed;left:44px;top:0px}
+#navl ul li:first-child > a{ }
+#navl ul li:last-child > a{ }
+#navl:after{content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0}
+* html #navl{height:1%}
+ #navl em{display:block;float:left;width:24px;height:24px;margin:6px 0;background-repeat:no-repeat}
+
+#navl li:hover > ul,html[xmlns] #navl{
+
+    visibility:visible;
+    opacity:1;
+    filter:alpha(opacity=100);
+height: auto
+}
+#navl li .main {font-size:24px;}
+
+ 
+
+#navl {
+.new-file-icon, .qna-icon, .rtype-icon, .sites-icon, .skin-icon, .skyrim-icon, .toxic-icon, .ultima-icon, .vl-icon, .wares-icon, .wiki-icon, .bb-icon, .blog-icon, .chat-icon, .coins-icon, .dk2-icon, .fallout-icon, .free-icon, .game-icon, .help-icon, .history-icon, .home-icon, .idioms-icon, .med-icon, .me-icon, .minecraft-icon, .brush-icon, .heart-icon, .tech-icon, .eveonline-icon, .skrik-icon, .close, .nick, .audio-off, .audio, .autoscroll-off, .dice, .who, .autoscroll, .color, .fallout, .fallout2, .fallout3, .fnv, .minecraft, .skyrim{
+    background: url(images/sprites.png) no-repeat;
+}
+
+.new-file-icon{
+    background-position: -190px -252px ;
+    width: 24px;
+    height: 24px;
+}
+
+.qna-icon{
+    background-position: -153px -252px ;
+    width: 24px;
+    height: 24px;
+}
+
+.rtype-icon{
+    background-position: -254px -203px ;
+    width: 24px;
+    height: 24px;
+}
+
+.sites-icon{
+    background-position: -206px -50px ;
+    width: 24px;
+    height: 24px;
+}
+
+.skin-icon{
+    background-position: -154px -54px ;
+    width: 24px;
+    height: 24px;
+}
+
+.skyrim-icon{
+    background-position: -204px -203px ;
+    width: 24px;
+    height: 24px;
+}
+
+.toxic-icon{
+    background-position: -151px -159px ;
+    width: 24px;
+    height: 24px;
+}
+
+.ultima-icon{
+    background-position: -148px -204px ;
+    width: 24px;
+    height: 24px;
+}
+
+.vl-icon{
+    background-position: -447px 0;
+    width: 24px;
+    height: 24px;
+}
+
+.wares-icon{
+    background-position: -398px -3px ;
+    width: 24px;
+    height: 24px;
+}
+
+.wiki-icon{
+    background-position: -350px -6px ;
+    width: 24px;
+    height: 24px;
+}
+
+.bb-icon{
+    background-position: -296px 0;
+    width: 24px;
+    height: 24px;
+}
+
+.blog-icon{
+    background-position: -251px -12px ;
+    width: 24px;
+    height: 24px;
+}
+
+.chat-icon{
+    background-position: -189px -10px ;
+    width: 24px;
+    height: 24px;
+}
+
+.coins-icon{
+    background-position: -104px -13px ;
+    width: 24px;
+    height: 24px;
+}
+
+.dk2-icon{
+    background-position: -98px -209px ;
+    width: 24px;
+    height: 24px;
+}
+
+.fallout-icon{
+    background-position: 0 -210px ;
+    width: 24px;
+    height: 24px;
+}
+
+.free-icon{
+    background-position: -4px -107px ;
+    width: 24px;
+    height: 24px;
+}
+
+.game-icon{
+    background-position: -53px -53px ;
+    width: 24px;
+    height: 24px;
+}
+
+.help-icon{
+    background-position: -152px -9px ;
+    width: 24px;
+    height: 24px;
+}
+
+.history-icon{
+    background-position: -98px -157px ;
+    width: 24px;
+    height: 24px;
+}
+
+.home-icon{
+    background-position: 0 -47px ;
+    width: 24px;
+    height: 24px;
+}
+
+.idioms-icon{
+    background-position: -53px -4px ;
+    width: 24px;
+    height: 24px;
+}
+
+.med-icon{
+    background-position: -9px -4px ;
+    width: 24px;
+    height: 24px;
+}
+
+.me-icon{
+    background-position: -56px -159px ;
+    width: 24px;
+    height: 24px;
+}
+
+.minecraft-icon{
+    background-position: -3px -153px ;
+    width: 24px;
+    height: 24px;
+}
+
+.brush-icon{
+    background-position: -251px -54px ;
+    width: 24px;
+    height: 24px;
+}
+
+.heart-icon{
+    background-position: -102px -55px ;
+    width: 24px;
+    height: 24px;
+}
+
+.tech-icon{
+    background-position: -298px -205px ;
+    width: 24px;
+    height: 24px;
+}
+
+.eveonline-icon{
+    background-position: -339px -203px ;
+    width: 24px;
+    height: 24px;
+}
+
+.skrik-icon{
+    background-position: -53px -103px ;
+    width: 24px;
+    height: 24px;
+}
+
+.close{
+    background-position: -1px -305px ;
+    width: 24px;
+    height: 24px;
+}
+
+.nick{
+    background-position: -31px -304px ;
+    width: 24px;
+    height: 24px;
+}
+
+.audio-off{
+    background-position: -227px -306px ;
+    width: 24px;
+    height: 24px;
+}
+
+.audio{
+    background-position: -261px -306px ;
+    width: 24px;
+    height: 24px;
+}
+
+.autoscroll-off{
+    background-position: -193px -306px ;
+    width: 24px;
+    height: 24px;
+}
+
+.dice{
+    background-position: -97px -305px ;
+    width: 24px;
+    height: 24px;
+}
+
+.who{
+    background-position: -63px -305px ;
+    width: 24px;
+    height: 24px;
+}
+
+.autoscroll{
+    background-position: -162px -306px ;
+    width: 24px;
+    height: 24px;
+}
+
+.color{
+    background-position: -133px -306px ;
+    width: 24px;
+    height: 24px;
+}
+
+.fallout{
+    background-position: -371px -282px ;
+    width: 48px;
+    height: 48px;
+}
+
+.fallout2{
+    background-position: -423px -179px ;
+    width: 48px;
+    height: 48px;
+}
+
+.fallout3{
+    background-position: -423px -125px ;
+    width: 48px;
+    height: 48px;
+}
+
+.fnv{
+    background-position: -423px -232px ;
+    width: 48px;
+    height: 48px;
+}
+
+.minecraft{
+    background-position: -423px -282px ;
+    width: 48px;
+    height: 36px;
+    margin:0;
+}
+
+.skyrim{
+    background-position: -423px -72px ;
+    width: 48px;
+    height: 36px;
+    margin:0;
+}
+
+
+
+}
+

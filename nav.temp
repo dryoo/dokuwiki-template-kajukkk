@@ -1,0 +1,119 @@
+   <!-- <div class="navbar navbar-default <?php // echo tpl_getConf('navbar-inverse')?"navbar-inverse":""; ?>  navbar-fixed-top" role="navigation">
+      <div id="nav-top" class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-main">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+          	<?php 
+              $logo = @tpl_getMediaFile(array(':logo.png','images/logo.gif', 'images/logo.png',':wiki:dokuwiki-128.png'), false);?>
+            <ul class="nav navbar-nav">
+            <li class="logo dropdown">
+               <a href="/" class="dropdown-toggle" data-toggle="dropdown"><img src="<?php echo $logo?>" alt="" class="logo-image" height="28" width="28" /> </a>
+               <ul class="dropdown-menu" role="menu">
+                 <?php tpl_bs_actionlink("index","indent-left","li");?>
+                 <?php _tpl_toc_to_twitter_bootstrap(); ?>
+               </ul>
+            </li>      
+            </ul>
+            <?php  tpl_link( wl(), 
+                  ''.$conf['title'].'',
+                  'accesskey="h" title="'.$conf['title'].'[H]" class="navbar-brand hidden-xs hidden-sm"'              );?>
+        
+            <div id="qsearch" class="navbar-form  pull-left navbar-left" role="search">
+            <?php if (!plugin_isdisabled('searchformgoto')) {
+                $searchformgoto = &plugin_load('helper','searchformgoto');
+                $searchformgoto->gotoform();
+                } else { tpl_searchform(); }
+            ?>
+          	</div>
+               
+			<?php if (tpl_getConf('tabsPage')): /*  tab menu */?>
+			<div class="tabspage navbar-left hidden-xs">
+			<?php tpl_include_page(tpl_getConf('tabsPage'), 1, 1) ?>
+			</div>
+			<?php endif; ?>
+		</div>   
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-navbar-collapse-main">  
+
+          <ul class="nav navbar-nav navbar-right hidden-xs">
+          <!-- Button trigger modal -->
+          	<li>
+			<a href="#" class="bstooltip" data-target="#myModal"  data-toggle="modal" data-toggle="tooltip"   title="Add new page"><span class="glyphicon glyphicon-plus"></span></a>
+            </li>
+
+
+            <li class="dropdown  ">
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-tasks"></span></a>
+               <ul class="dropdown-menu" role="menu">
+                 
+                
+                 <li role="presentation" class="dropdown-header"><?=$lang['page_tools']?></li>
+                 <?php tpl_bs_actionlink("history","adjust","li");?>
+                 <?php tpl_bs_actionlink("backlink","hand-right","li");?>
+                 <?php tpl_bs_actionlink("subscribe","send","li");?>
+                 <?php tpl_bs_actionlink("back","arrow-left","li");?>
+                 <li class="divider"></li>
+                 
+                 <li role="presentation" class="dropdown-header"><?=$lang['site_tools']?></li>
+                 <?php tpl_bs_actionlink("index","indent-left","li");?>
+                 <?php tpl_bs_actionlink("recent","flash","li");?>
+                 <?php tpl_bs_actionlink("admin","cog","li");?>
+
+               </ul>
+            </li>   
+            <?php if ($INFO['userinfo']!=null) {?>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <?php /* Avatar plugin support */  if(!plugin_isdisabled('avatar')) {
+                $avatar =& plugin_load('helper', 'avatar');
+                $entries = $avatar->getXHTML($INFO['userinfo']['mail'],'',' avatar img-circle',28);
+                echo $entries;
+                } else {?>
+                     <span class="glyphicon glyphicon-user"></span>
+                <?php }?>
+              </a>
+
+              <ul class="dropdown-menu">
+                  <li> <?php echo userlink() ?></li>
+                  <li class="divider"></li>
+                  <?php tpl_bs_actionlink("login","log-out","li");?>
+                  <?php tpl_bs_actionlink("profile","edit","li");?>
+                <!--<li class="divider"></li>
+                <li><a href="#">Separated link</a></li> -->
+              </ul>
+            </li>
+            <?php }?>
+            <?php if ($INFO['userinfo']==null) {?>
+            <?php //tpl_bs_actionlink("register","edit","li","visible-sm","");?>
+            <?php tpl_bs_actionlink("login","log-in","li","visible-sm"," ");?>
+            <li class=" hidden-sm"><div class="btn-group">
+            <?php tpl_bs_actionlink("register","edit",'',"btn navbar-btn btn-sm btn-primary");?>
+            <?php tpl_bs_actionlink("login","log-in",'',"btn navbar-btn btn-sm btn-success");?>
+            </div></li>
+            <?php }?>
+
+           </ul>
+           <ul class="nav navbar-nav navbar-right visible-xs"> 
+                 <?php tpl_bs_actionlink("edit","edit","li");?>
+                 <?php tpl_bs_actionlink("history","list","li");?>
+                 <?php tpl_bs_actionlink("backlink","hand-right","li");?>
+                 <?php tpl_bs_actionlink("subscribe","send","li");?>
+                 <?php tpl_bs_actionlink("back","arrow-left","li");?> 
+                 <?php tpl_bs_actionlink("index","th-list","li");?>
+                 <?php tpl_bs_actionlink("recent","fire","li");?>
+                 <?php tpl_bs_actionlink("profile","edit","li");?>
+                 <?php tpl_bs_actionlink("admin","cog","li");?>
+                 <?php tpl_bs_actionlink("login","user","li");?>       
+           </ul>
+           
+
+         </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </div>
+   -->
