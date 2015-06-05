@@ -80,7 +80,7 @@ function fetch_namu($title){
     
     if ( strlen ($result)<500)  return false;
 
-    $result="{{page>틀:펌글}}\n\n======$title======\n\n".$result."\n  * 출처: 나무위키- ".$title."(CC BY-NC-SA 2.0)\n\n{{tag>나무위키 펌 $title}}\n";  //페이지 제목 추가.
+    $result="{{page>틀:펌글}}\n\n======$title======\n\n".$result."\n  * 출처: 나무위키- ".$title."(CC BY-NC-SA 2.0)\n\n{{tag>$title}}\n";  //페이지 제목 추가.
     
     //echo $result; exit;
       

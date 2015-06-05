@@ -69,14 +69,17 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
       }
     }
     </script>
+    <?php if (tpl_getConf('debug')): ?>
     <script src="<?php echo tpl_getMediaFile(array("js/sendsns.js")); ?>" type="text/javascript"></script>
-    
+    <?php endif;?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- <script src="<?php echo tpl_getMediaFile(array("js/respond.min.js")); ?>" type="text/javascript"></script>-->
     <!--[if lt IE 9]>
       <script src="<?php echo tpl_getMediaFile(array("js/html5shiv.js")); ?>" type="text/javascript"></script>
           <![endif]-->
+    <?php if (tpl_getConf('debug')): ?>   
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <?php endif;?>
 </head>
 
 <body class="<?php echo (get_doku_pref('dark', 0)==1)?'dark':''?>" >
@@ -87,7 +90,7 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
  
         <?php tpl_flush(); ?>
         <nav>
-       	    <?php @include('shortcut.php') /* Shortcut */ ?> 
+       	    <?php if (tpl_getConf('debug')) @include('shortcut.php') /* Shortcut */ ?> 
         </nav>
         <div class="core">
             <div class="home-icon">
@@ -98,8 +101,10 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
 				} else { tpl_searchform(); }
 			?>         
             <?php ds_html_msgarea(); /* occasional error and info messages */ ?>       
-            <?php if  (!$noadsense) tpl_includeFile('adsense.html') /* google adsense RESPONSIVE */?>
+            <?php if  (!$noadsense) echo tpl_getConf('google_adsense') /* google adsense RESPONSIVE */?>
             
+ 
+
         <div id="dokuwiki__content">
             <?php tpl_bs_breadcrumbs() ?>
             <?php if ($ACT=="show"): ?>
@@ -126,12 +131,12 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
 
             <?php /*Backlinks 참조문서 출력*/  if  ((ft_backlinks($ID)!=null) && (strrchr(':'.$INFO['id'],":")!=":".$conf['start']) &&  (($ACT=='edit') or ($ACT=='preview') or ($ACT=="show") ) ) print '<h2>'.$lang['btn_backlink'].'</h2>'.p_render('xhtml',p_get_instructions('{{backlinks>.}}'),$info);?>     
 
-            
+            <?php if (tpl_getConf('debug')): ?>
                       <?php /************** SNS *************/
                         //$_url=rawurlencode(wl($ID,'',true));       
                         $_url=$sURL;       
                         $_title= p_get_metadata($ID,"title");
-                        $_tags=implode(' #',p_get_metadata($ID, 'subject', METADATA_DONT_RENDER));
+                        $_tags=@implode(' #',p_get_metadata($ID, 'subject', METADATA_DONT_RENDER));
                         $_tags=($_tags)?" #".$_tags:null;
                         
                         //$_txt= " $_title ".wl($ID,'',true)." #".strip_tags($conf['title']).$_tags;    
@@ -147,8 +152,8 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
                     <a href="#" class="btn-circle btn-success slideTextUp" onclick="sendsns('band','<?php //echo $_url; ?>','<?php echo $_txt;?>');return false;" title="밴드펌"><div>Band</div><div>밴드푸기</div></a>   
                     <i class="fa fa-hand-o-left"></i>
                     </div>
-
-            <?php /*미니문법설명*/ if  (($ACT=='edit')or ($ACT=='preview') ) print p_render('xhtml',p_get_instructions('
+            <?php endif; ?>
+            <?php /*미니문법설명*/ if (tpl_getConf('debug') && (($ACT=='edit')or ($ACT=='preview'))) print p_render('xhtml',p_get_instructions('
 ^  **초미니 문법 설명**  (혹은 [[:syntax]]참조하세요)  ||||
 ^강조| %%**굵게**%%| %%//기울임//%% | %%__밑줄__%%|
 ^제목| ======제목1단계|=====제목2단계|====제목3단계 (뒤는 자동)|
@@ -158,7 +163,8 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
 '),$info);?>
 
 
-            <?php if  (!$noadsense) tpl_includeFile('adsense.html') /* google adsense RESPONSIVE */ ?>
+        <?php if  (!$noadsense) echo tpl_getConf('google_adsense') /* google adsense RESPONSIVE */?>
+            
             <?php tpl_license('badge', false, false, true); // license button, no wrapper ?>   
             <div class="docInfo"><?php tpl_pageinfo() ?>
           <?php    $contributors =$INFO['meta']['contributor'];// p_get_metadata($ID, 'contributor' );
@@ -332,7 +338,7 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
           <div class="radio">
             <label>
               <input type="radio"  name="do" value="root"  <?php echo ($INFO['namespace']=="")?"checked":""?>   >
-              <b>최상위</b>에 새 문서를 만듭니다. (기본)
+              <b>최상위(루트)</b>에 새 문서를 만듭니다. 
               <?php //echo tpl_getLang('namespacedesc1') ?>
             </label>
           </div>
@@ -342,6 +348,7 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
               <?php printf (tpl_getLang('namespacedesc2'),$INFO['namespace'] ) ?>
             </label>
           </div>
+          <?php if (tpl_getConf('debug')):?>
              <div class="radio">
             <label>
               <input type="radio" name="do" value="namu"      >
@@ -356,6 +363,7 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
               <?php //printf (tpl_getLang('namespacedesc2'),$INFO['namespace'] ) ?>
             </label>
           </div>
+          <?php endif;?>
           <div class="btn-group pull-right ">
             <input type="submit" class="btn btn-primary " value="<?php echo $lang['btn_create'] ?>">
             <button type="button" class="btn btn-warning" data-dismiss="modal"><?php echo $lang['btn_cancel']?></button>
@@ -384,18 +392,15 @@ jQuery(document).ready(function()
         jQuery("#edbtn__preview").addClass( "btn-success");
     <?php endif ?>
     jQuery("#plugin__backlinks ul li div a").addClass( "btn btn-default" );
-    jQuery(".dokuwiki .secedit input.button").addClass("btn btn-info btn-sm");
+    jQuery(".dokuwiki .secedit input.button").addClass("btn btn-default btn-xs");
     jQuery(this).scroll(function () { 
     	jQuery(".lsb").scrollTop(jQuery(this).scrollTop());   	
     });
 }); 
 </script>
 
-
-
-<?php /* spot-im community widget */?>
 <div id="spot-im-root"></div>
-<script type="text/javascript">!function(t,o,p){function e(){var t=o.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"==o.location.protocol?"https":"http")+":"+p,o.body.appendChild(t)}t.spotId="1d4f3caa2a96cdc0419f2f9da7c95f6f",t.spotName="",t.allowDesktop=!0,t.allowMobile=!1,t.containerId="spot-im-root",e()}(window.SPOTIM={},document,"//www.spot.im/embed/scripts/launcher.js");</script>
+<?php /* spot-im community widget */ echo tpl_getConf('spot-im')?>
 
 <?php /* server processing time */?>
 <?php printf("<center  class='small text-muted'>%.3f seconds in processing this page.</center>",(microtime(get_as_float)-$pagestart));?>
