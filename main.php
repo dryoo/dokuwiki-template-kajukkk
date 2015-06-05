@@ -1,13 +1,22 @@
-<?php error_reporting(E_ERROR );
-$pagestart=microtime(get_as_float);
+<?php $pagestart=microtime(get_as_float);
 /*
 
+Kajukkk
+========
+Dokuwiki template Kajukk  
 
+Another DokuWiki responsive template using Twitter Bootstrap & font awesome. Supports for togglable dark theme to save energy of mobile phone. Supports various plugins like disqus, shoturl, avatar and searchformgoto.
+
+ * @link     https://github.com/dryoo/dokuwiki-template-kajukkk
+ * @author   S.C. Yoo <dryoo@live.com> 
+ * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
+ 
 Related/supported plugins
----------------  
-  * https://www.dokuwiki.org/plugin:avatar
-  * https://www.dokuwiki.org/plugin:disqus
-  * https://www.dokuwiki.org/plugin:shorturl
+-------------------------
+  * Avatar      https://www.dokuwiki.org/plugin:avatar
+  * Disqus      https://www.dokuwiki.org/plugin:disqus
+  * Shorturl    https://www.dokuwiki.org/plugin:shorturl
+  * Searchformgoto      https://www.dokuwiki.org/plugin:searchformgoto
 
 
 References
