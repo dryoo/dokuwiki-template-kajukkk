@@ -1,5 +1,6 @@
 <?php
 
+
  $do    = @$_GET['do'];
  $title = @$_GET['title'];
  $ns    = @$_GET['ns'];
@@ -7,7 +8,7 @@
 
  $wikidata="/home/www/wikidata/wiki/pages/";
 
- echo $title;
+ // echo $title;
 
  switch ($do) {
     case "enha":

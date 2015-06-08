@@ -174,10 +174,10 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
              if ( strtolower($userid)=="v_l" ||  strtolower($userid)=="vaslor" )
              {
                  //echo '<a href="https://plus.google.com/102990262307362184016?rel=author"  rel="publisher">'.$usernick.'</a> ';
-                  echo  '<a href="http://openwiki.kr/user/'.$userid.'">'.$usernick.'</a> ';
+                  echo  '<a href="/user/'.$userid.'">'.$usernick.'</a> ';
              } else
              {
-                 echo  '<a href="http://openwiki.kr/user/'.$userid.'">'.$usernick.'</a> ';
+                 echo  '<a href="/user/'.$userid.'">'.$usernick.'</a> ';
              }
                     
          
@@ -205,7 +205,6 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
              <a href="#" class="btn-circle btn-danger slideTextUp" data-target="#myModal"  data-toggle="modal" data-toggle="tooltip"   title="Add new page"><div><i class="fa fa-plus"></i></div><div>새문서</div></a>
 
              <?php tpl_button_a('login','unlock-alt','','btn-warning btn-circle slideTextUp');?>    
-             <?php tpl_button_a('history','history','','btn-primary btn-circle slideTextUp','이력');?>
              <?php tpl_button_a('media','image','','btn-primary btn-circle slideTextUp');?>
              <?php  if(!plugin_isdisabled('randompage')) {?>
                 <a href="?do=randompage" class="btn-circle btn-danger slideTextUp" title="Random page"><div><i class="fa fa-random"></i></div><div>랜덤페이</div></a>      
@@ -236,13 +235,13 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
         <div class="tools text-center">
          <?php tpl_flush() ?>
           
-            <a href="#" class="btn-circle btn-danger slideTextUp" data-target="#myModal"  data-toggle="modal" data-toggle="tooltip"   title="Add new page"><div><i class="fa fa-plus"></i></div><div>새문서</div></a>
+            <a href="#" class="btn-circle btn-danger slideTextUp" data-target="#myModal"  data-toggle="modal" data-toggle="tooltip"   title="Add new page"><div><i class="fa fa-plus"></i></div><div><?php echo tpl_getLang('newpage')?></div></a>
             <?php tpl_button_a('edit','pencil','','btn-info btn-circle slideTextUp');?>   
-            <?php tpl_button_a('history','history','','btn-primary btn-circle slideTextUp','변경점');?>
+            <?php tpl_button_a('history','history','','btn-primary btn-circle slideTextUp');?> 
             <?php  if(!plugin_isdisabled('randompage')) {?>
-                <a href="?do=randompage" class="btn-circle btn-success slideTextUp" title="Random page"><div><i class="fa fa-random"></i></div><div>랜덤페이</div></a>      
+                <a href="?do=randompage" class="btn-circle btn-success slideTextUp" title="<?php echo tpl_getLang('randompage')?>"><div><i class="fa fa-random"></i></div><div><?php echo tpl_getLang('randompage')?></div></a>      
             <?php    }?>
-            <a href="#" class="btn-circle btn-danger slideTextUp lightsaving" onclick="tpl_toggleLight();return false;" title="Random page"><div><i class="fa fa-lightbulb-o"></i></div><div>절약모드</div></a>   
+            <a href="#" class="btn-circle btn-danger slideTextUp lightsaving" onclick="tpl_toggleLight();return false;" title="<?php echo tpl_getLang('energysaving')?>"><div><i class="fa fa-lightbulb-o"></i></div><div><?php echo tpl_getLang('energysaving')?></div></a>   
             
             <?php tpl_button_a('login','sign-in','','btn-warning btn-circle slideTextUp');?>          
             <?php if ($INFO['userinfo']!=""): /* If logged-in */?>
@@ -253,7 +252,7 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
                  <?php tpl_button_a('admin','cog','','btn-default btn-circle slideTextUp');?>    
             <?php endif; ?>
     		<?php if (!plugin_isdisabled('move') && ($INFO['isadmin'])) {?>
-    				<a href="?do=admin&page=move" class="btn-circle btn-default slideTextUp" title="이름변경"><div><i class="fa fa-bolt"></i></div><div>이름변경</div></a>    
+    				<a href="?do=admin&page=move_main" class="btn-circle btn-default slideTextUp" title="이름변경"><div><i class="fa fa-bolt"></i></div><div>이름변경</div></a>    
             <?php  }         ?>         
             <a href="#" class="btn-circle btn-danger slideTextUp" data-target="#helpModal"  data-toggle="modal" data-toggle="tooltip"   title="도움말"><div><i class="fa fa-question"></i></div><div>도움</div></a>
          </div>                  
