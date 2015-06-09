@@ -9,6 +9,11 @@ $lang['createnewpage']='Create new page!';
 $lang['newpage']='New page';
 $lang['randompage']='Random page';
 $lang['energysaving']='Energy saving';
+$lang['help']='Help';
+$lang['movepage']='Move page';
+
+
+
 
 $lang['namespacedesc']='Use <code>wiki:example</code> format to make the page "example" in the namespace "wiki" or select one of the options below.';
 $lang['namespacedesc1']='Create the page in the <b>root</b> namespace.';

@@ -122,6 +122,7 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
                 <?php endif ?>
             </h1>
             <?php endif?> 
+            <?php if ($ACT=="show") tpl_include_page(tpl_getConf('nsheader'),true,true);   /* page header */ ?>
             <?php tpl_button_a('edit','pencil','','btn btn-danger pull-right   ');?>      
             <!-- wikipage start -->
             <?php tpl_content(true) ?>
@@ -234,7 +235,6 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
         <?php tpl_title();?>
         <div class="tools text-center">
          <?php tpl_flush() ?>
-          
             <a href="#" class="btn-circle btn-danger slideTextUp" data-target="#myModal"  data-toggle="modal" data-toggle="tooltip"   title="Add new page"><div><i class="fa fa-plus"></i></div><div><?php echo tpl_getLang('newpage')?></div></a>
             <?php tpl_button_a('edit','pencil','','btn-info btn-circle slideTextUp');?>   
             <?php tpl_button_a('history','history','','btn-primary btn-circle slideTextUp');?> 
@@ -252,15 +252,15 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
                  <?php tpl_button_a('admin','cog','','btn-default btn-circle slideTextUp');?>    
             <?php endif; ?>
     		<?php if (!plugin_isdisabled('move') && ($INFO['isadmin'])) {?>
-    				<a href="?do=admin&page=move_main" class="btn-circle btn-default slideTextUp" title="이름변경"><div><i class="fa fa-bolt"></i></div><div>이름변경</div></a>    
+    				<a href="?do=admin&page=move_main" class="btn-circle btn-default slideTextUp" title="<?php echo tpl_getLang('movepage') ?>"><div><i class="fa fa-bolt"></i></div><div><?php echo tpl_getLang('movepage') ?></div></a>    
             <?php  }         ?>         
-            <a href="#" class="btn-circle btn-danger slideTextUp" data-target="#helpModal"  data-toggle="modal" data-toggle="tooltip"   title="도움말"><div><i class="fa fa-question"></i></div><div>도움</div></a>
+            <a href="#" class="btn-circle btn-danger slideTextUp" data-target="#helpModal"  data-toggle="modal" data-toggle="tooltip"   title="<?php echo tpl_getLang('help')?>"><div><i class="fa fa-question"></i></div><div><?php echo tpl_getLang('help')?></div></a>
          </div>                  
 
         <div class="content">
             <?php tpl_includeFile('sidebarheader.html') ?>        
             <?php tpl_include_page($conf['sidebar'], 1, 1) /* Default Sidebar*/?>
-            <?php tpl_include_page(tpl_getConf('lsb')) /* Bottom Sidebar */ ?>
+            <?php tpl_include_page(tpl_getConf('lsb'),1,1) /* Bottom Sidebar */ ?>
             <?php tpl_includeFile('sidebarfooter.html') ?>
         </div>
     </div><!-- /aside -->
@@ -272,46 +272,16 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="helpModalLabel">오픈위키 도움말</h4>
+        <h4 class="modal-title" id="helpModalLabel"><?php echo tpl_getLang('help')?></h4>
+        
+        
       </div>
       <div class="modal-body">
-         <p>모니위키 비슷한 단축키를 넣었다.</p>
-
-<table style="width:885px">
-    <thead>
-        <tr>
-            <th style="vertical-align:bottom">키</th>
-            <th style="vertical-align:bottom">기능</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td style="vertical-align:top">A</td>
-            <td style="vertical-align:top">랜덤페이지</td>
-        </tr>
-        <tr>
-            <td style="vertical-align:top">N</td>
-            <td style="vertical-align:top">랜덤페이지. 다만 해당&nbsp;<a href="http://openwiki.kr/%EC%9D%B4%EB%A6%84%EA%B3%B5%EA%B0%84">이름공간</a>안에서 이동함.</td>
-        </tr>
-        <tr>
-            <td style="vertical-align:top">E</td>
-            <td style="vertical-align:top">문서 편집</td>
-        </tr>
-        <tr>
-            <td style="vertical-align:top">S</td>
-            <td style="vertical-align:top">검색. 최상단의 검색창으로 이동한다. 편하다<img alt=":!:" src="http://openwiki.kr/lib/images/smileys/icon_exclaim.gif" /></td>
-        </tr>
-        <tr>
-            <td style="vertical-align:top">T</td>
-            <td style="vertical-align:top">문서 처음으로 이동</td>
-        </tr>
-    </tbody>
-</table>
-
-<p>말고 더 있는데 설명이 귀찮이..</p>
+       <?php tpl_include_page(tpl_getConf('help'),true,true);   /* help page  */ ?>
+ 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $lang['js']['mediaclose'] ?></button>
       </div>
     </div>
   </div>

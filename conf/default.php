@@ -4,9 +4,9 @@
  *
  */
 
-$conf['navbar-inverse']   = 1;
 
-$conf['tabsPage']      = 'tabs';
-$conf['bg_ns']      = 'background';
+ 
+
 $conf['lsb']      = 'main';
-$conf['rsb']      = 'sidebar';
+$conf['nsheader']      = 'nsheader';
+$conf['help']      = ':wiki:syntax';
