@@ -283,7 +283,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: "나눔고딕", "맑은 고딕", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "나눔고딕", "Noto Sans CJK KR", "Noto Sans", "맑은 고딕", "Malgun Gothic","Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
@@ -382,7 +382,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "나눔명조", Georgia, "Times New Roman", Times, serif;
+  font-family: "Noto Sans CJK KR", "Noto Sans","맑은 고딕","나눔고딕", Georgia, "Times New Roman", Times, serif;
   font-weight: 500;
   line-height: 1.1;
   color: inherit;

@@ -1,6 +1,4 @@
 <?php
-
-
  $do    = @$_GET['do'];
  $title = @$_GET['title'];
  $ns    = @$_GET['ns'];
@@ -67,7 +65,7 @@ function fetch_namu($title){
 
     $uri="https://namu.wiki/raw/".str_replace('+', '%20',urlencode($title)); //공백을 %20으로 바꿈.
     //$uri="https://raw.enha.kr/wiki/".(str_replace(' ', '%20',$title)); //공백을 %20으로 바꿈.
-    //echo $uri;
+    echo $uri;
    # $uri="http://rigvedawiki.net/r1/wiki.php/".str_replace(' ', '%20',$title)."?action=raw"; //공백을 %20으로 바꿈.
     
  
@@ -217,7 +215,8 @@ function  e2d($raw) {
 
 
     $text=preg_replace('/==(.*)\*\*(.*)\*\*(.*)==/','==$1$2$3==',$text);  //제목의 **제거
-    $text=preg_replace('/==\[\[(.*)\]\]==/','==$1==',$text);  //제목의 [[ ]]제거  
+    $text=preg_replace('/==(.*)\[\[(.*)==/','==$1$2==',$text);  //제목의 [[ ]]제거  
+    $text=preg_replace('/==(.*)\]\](.*)==/','==$1$2==',$text);  //제목의 [[ ]]제거  
   
 
 

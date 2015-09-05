@@ -43,16 +43,31 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
 <html lang="<?php echo $conf['lang'] ?>" dir="<?php echo $lang['direction'] ?>" class="no-js"> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
-    <title><?php echo p_get_first_heading($ID); ?><?php if (strrchr(':'.$INFO['id'],":")!=":".$conf['start']) echo ' - '.p_get_first_heading(':'.$INFO['namespace'].':'.$conf['start']).' - '.strip_tags($conf['title']); else echo ' - '.strip_tags($conf['tagline']) ?></title>
+    <title><?php echo (p_get_first_heading($ID))?p_get_first_heading($ID):strrchr(':'.$INFO['id'],":"); ?><?php if (strrchr(':'.$INFO['id'],":")!=":".$conf['start']) echo ' - '.p_get_first_heading(':'.$INFO['namespace'].':'.$conf['start']).' - '.strip_tags($conf['title']); else echo ' - '.strip_tags($conf['tagline']) ?></title>
     <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
     <?php tpl_metaheaders() ?>
+    <meta name="description" content="<?php $_desc=p_get_metadata($ID,"description"); echo strip_tags($_desc['abstract']); ?>" >
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
     <?php tpl_includeFile('meta.html') ?>
     <?php echo tpl_getConf('google_analytics') ?>
-    
+   <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//io.vaslor.net/analytics/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//io.vaslor.net/analytics/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
     <script>
     function tpl_toggleLight() {
      if (DokuCookie.getValue('dark')==1)
@@ -94,7 +109,10 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
         </nav>
         <div class="core">
             <div class="home-icon">
-            <a href="/" ><i class="fa fa-home"></i></a></div>
+             <?php if (!tpl_getConf('debug')) { ?>
+            <a href="/" ><i class="fa fa-circle"></i></a>
+            <?php }?>
+            </div>
 			<?php if (!plugin_isdisabled('searchformgoto')) {
 				$searchformgoto = &plugin_load('helper','searchformgoto');
 				$searchformgoto->gotoform();
@@ -107,7 +125,7 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
 
         <div id="dokuwiki__content">
             <?php tpl_bs_breadcrumbs() ?>
-            <?php if ($ACT=="show"): ?>
+            <?php if ($ACT=="show" ||$ACT=="edit"): ?>
                 
             <h1>
                 <?php echo p_get_first_heading($ID) ?>      
@@ -123,7 +141,15 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
             </h1>
             <?php endif?> 
             <?php if ($ACT=="show") tpl_include_page(tpl_getConf('nsheader'),true,true);   /* page header */ ?>
-            <?php tpl_button_a('edit','pencil','','btn btn-danger pull-right   ');?>      
+           
+<?php if ((auth_quickaclcheck($ID) >= AUTH_EDIT)&&($ACT=="show")): ?>
+
+<div class="alert alert-info alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong><?php echo strip_tags($conf['tagline']) ?></strong><?php echo tpl_getLang('haspermeditpage');?>
+</div>
+<?php endif; ?>
+   <?php tpl_button_a('edit','pencil','','btn btn-danger pull-right   ');?>      
             <!-- wikipage start -->
             <?php tpl_content(true) ?>
             <!-- wikipage stop -->
@@ -200,38 +226,16 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
             <?php tpl_includeFile('pagefooter.html') ?> 
             <?php include('tpl_footer.php') ?> 
     
-         <!-- UGLY CODE to be removed. -->
-        <div style="float:right;">
-        <?php if ($INFO['ismobile']) :?>
-             <a href="#" class="btn-circle btn-danger slideTextUp" data-target="#myModal"  data-toggle="modal" data-toggle="tooltip"   title="Add new page"><div><i class="fa fa-plus"></i></div><div>새문서</div></a>
-
-             <?php tpl_button_a('login','unlock-alt','','btn-warning btn-circle slideTextUp');?>    
-             <?php tpl_button_a('media','image','','btn-primary btn-circle slideTextUp');?>
-             <?php  if(!plugin_isdisabled('randompage')) {?>
-                <a href="?do=randompage" class="btn-circle btn-danger slideTextUp" title="Random page"><div><i class="fa fa-random"></i></div><div>랜덤페이</div></a>      
-             <?php    }?>
-             <?php tpl_button_a('edit','pencil','','btn-success btn-circle slideTextUp');?>         
-               <?php tpl_button_a('admin','cog','','btn-default btn-circle slideTextUp');?>           
-             <?php tpl_button_a('backlink','link','','btn-primary btn-circle slideTextUp');?>
-           
-             <?php tpl_button_a('subscribe','envelope','','btn-primary btn-circle slideTextUp');?>
-             <?php tpl_button_a('recent','spinner','','btn-primary btn-circle slideTextUp');?>
-         <?php endif; ?>
-                 <a href="#" class="btn-circle btn-danger slideTextUp lightsaving" onclick="tpl_toggleLight();return false;" title="Random page"><div><i class="fa fa-lightbulb-o"></i></div><div>절약모드</div></a>   
-        
-            <?php tpl_button_a('top','eject','','btn-primary btn-circle slideTextUp');?>      </div>
- 
-        </div>
-        <!-- UGLY CODE to be removed. -->
+         
 
         <?php tpl_flush(); ?>
     </div> <!--core끝 -->
 
 
     <!-- ********** sidebar ********** -->
-    <div id="dokuwiki__aside" class="lsb ">
+      <asdie><div id="dokuwiki__aside" class="lsb ">
         <div class="sidebar-toggle"><i class="fa fa-forward"></i></div>
-        <?php tpl_logo();?>
+        <?php tpl_logo();?>     <div class="clearfix"></div>
         <?php tpl_title();?>
         <div class="tools text-center">
          <?php tpl_flush() ?>
@@ -263,7 +267,8 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
             <?php tpl_include_page(tpl_getConf('lsb'),1,1) /* Bottom Sidebar */ ?>
             <?php tpl_includeFile('sidebarfooter.html') ?>
         </div>
-    </div><!-- /aside -->
+    </div><!-- /aside -->  </asdie>
+                <?php tpl_button_a('top','eject','','btn-primary btn-circle slideTextUp');?>      </div>
 	</div></div><!-- /.dokuwiki -->
 
 <!-- Modal -->
@@ -355,21 +360,25 @@ jQuery(document).ready(function()
     <?php if ($ACT=="edit"): /* 편툴바 조작 */?>
         jQuery("#tool__bar").addClass( "btn-group" );
         jQuery(".dokuwiki .toolbutton").addClass( "btn btn-default btn-sm" );
-        jQuery(".dokuwiki .editButtons input.button").addClass( "btn btn-default" );
+        jQuery(".dokuwiki .editButtons button").addClass( "btn btn-default" );
 
         jQuery("#edbtn__save").addClass( "btn-primary");
         jQuery("#edbtn__preview").addClass( "btn-success");
     <?php endif ?>
     jQuery("#plugin__backlinks ul li div a").addClass( "btn btn-default" );
-    jQuery(".dokuwiki .secedit input.button").addClass("btn btn-default btn-xs");
+    jQuery(".dokuwiki .secedit button").addClass("btn btn-default btn-xs pull-right");
     jQuery(this).scroll(function () { 
     	jQuery(".lsb").scrollTop(jQuery(this).scrollTop());   	
     });
 }); 
 </script>
 
+
 <div id="spot-im-root"></div>
-<?php /* spot-im community widget */ echo tpl_getConf('spot-im')?>
+<?php /* spot-im community widget */ //echo tpl_getConf('spot-im')?>
+
+
+
 
 <?php /* server processing time */?>
 <?php printf("<center  class='small text-muted'>%.3f seconds in processing this page.</center>",(microtime(get_as_float)-$pagestart));?>

@@ -31,7 +31,7 @@ if (!defined('DOKU_INC')) die();
     <div id="dokuwiki__site"><div id="dokuwiki__top"
         class="dokuwiki site mode_<?php echo $ACT ?>">
 
-        <?php include('tpl_header.php') ?>
+        <?php //include('tpl_header.php') ?>
 
         <div class="wrapper group" id="dokuwiki__detail">
 

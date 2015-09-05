@@ -236,7 +236,7 @@ function tpl_logo ($return = false) {
 
             $logoSize = array();
             $logo = tpl_getMediaFile(array(':'.$INFO['namespace'].':logo.jpg',':'.$INFO['namespace'].':logo.png',':¿À´Ã:'.date("n¿ù_jÀÏ").'.png',':logo.png',':wiki:logo.png', 'images/logo.png'), false, $logoSize); 
-			$out='<img class="logo" src="'.$logo.'" alt="" >';
+			$out='<div><img class="logo" src="'.$logo.'" alt="" ></div>';
             $out=tpl_link(wl($INFO['namespace']),$out,'',1);
             if($return) return $out;
             echo $out;
@@ -267,7 +267,7 @@ function tpl_title ($return=false) {
  
      $return = '';
  
-     $look = array(':wiki:apple-touch-icon.png', ':apple-touch-icon.png', 'images/apple-touch-icon.png');
+     $look = array(':apple-touch-icon.svg', ':wiki:apple-touch-icon.png', ':apple-touch-icon.png', 'images/apple-touch-icon.png');
      $return .= tpl_getMediaFile($look);
  
      return $return;

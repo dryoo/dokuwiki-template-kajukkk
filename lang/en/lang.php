@@ -11,6 +11,7 @@ $lang['randompage']='Random page';
 $lang['energysaving']='Energy saving';
 $lang['help']='Help';
 $lang['movepage']='Move page';
+$lang['haspermeditpage']='You can edit this page. Press <strong>EDIT</strong> button.';
 
 
 

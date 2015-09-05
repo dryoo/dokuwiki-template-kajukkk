@@ -52,7 +52,7 @@ border:1px solid rgb(99, 150, 150,0.3)}
 
 .core {
    /* background-color: #bdc3c7; */
-        background-color:#f7f7f7;
+        background-color:#fff;
         min-height:1200px;
 }
 
@@ -74,8 +74,11 @@ border:1px solid rgb(99, 150, 150,0.3)}
  
 /* Smartphones (portrait) ----------- */
 @media (max-width: 480px) { 
-    .lsb {display: none;}
-    .rsb {display: none;}
+    .lsb {
+    position:relative; width:100%
+    
+    }
+     .lsb .content { display:none;}
 }
  
 /* both collapse  ----------- */
@@ -130,7 +133,8 @@ border:1px solid rgb(99, 150, 150,0.3)}
 
     a.urlextern { background-repeat: no-repeat;  padding-left:18px; background-position: 0 center;
     background-image: url(images/external-link.png);}
-    
+    em {color:#c37;}
+    em.u {color:#555;}
    
     .search_hit { background-color: #FF9;} 
    
