@@ -30,7 +30,7 @@ if (!defined('DOKU_INC')) die();
         <a href="http://openwiki.kr/tech/nginx" title="Powered by Nginx" <?php echo $target?>><img
             src="<?php echo tpl_basedir(); ?>images/button-nginx.png" width="80" height="15" alt="Powered by NginX" /></a>
 
-        <span  ><?php echo tpl_getConf('whosamungus')?></span>
+        <span  ><?php // echo tpl_getConf('whosamungus')?></span>
 
     </div>
 </div></div><!-- /footer -->

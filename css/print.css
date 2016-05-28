@@ -19,10 +19,14 @@ video,
 .dokuwiki .breadcrumbs,
 .dokuwiki .pageId,
 #dw__toc,
+#dw__search,#cse__search,
 h3.toggle,
 #dokuwiki__pagetools,
 #dokuwiki__footer,
-#navl,  {
+#navl,
+#disqus__thread,
+.modal,
+.noprint  {
     display: none;
 }
 

@@ -104,7 +104,7 @@
            );
 
            $out='<a href="'.$linktarget.'" ';
-           $out.='class="action '.$type.' '.$class.'" '.
+           $out.='class="action_'.$type.' '.$class.'" '.
                    $akey.$rel.
                    'title="'.hsc($caption).$addTitle.'"';
            $out.='>';

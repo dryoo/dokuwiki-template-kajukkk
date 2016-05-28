@@ -6,13 +6,28 @@
 <ul id="navl"> 
     <li class=""><a href="#" class="btn-square slideTextUp"><div><img style="vertical-align: baseline;" src="<?php echo tpl_apple_touch_icon() ?>" height="42" width="42"  alt=""></div><div><i class="fa fa-arrow-down" ></i></div></a>
     <ul>
-        <li><a  href="/" class="btn-square btn-danger slideTextUp" ><div><i class="fa fa-home"></i></div><div>오픈위키</div></a>
-    <ul>
-        <li><a class="btn-default" href="/about"><em class="help-icon"></em>오픈위키.kr???</a></li>
-        <li><a class="btn-default" href="http://chat.openwiki.kr/" onclick="openWindow(this.href);return false;"><em class="chat-icon"></em>채팅</a></li>
-        <li><a class="btn-default" href="http://bb.openwiki.kr/free"><em class="qna-icon"></em>문의</a></li>
-    </ul>                         
+
+    
+    <li><a  href="/game/home" class="btn-square btn-primary slideTextUp" ><div><i class="fa fa-gamepad" ></i></div><div>게임</div></a>
+    <ul >
+   		<li><a class="btn-primary" href="/game/home" >&nbsp;<i class="fa fa-gamepad"></i>&nbsp;게임 일반</a></li>
+   		<li><a class="btn-primary" href="/game/위쳐/home">위쳐</a></li>
+   		<li><a class="btn-primary" href="/game/gta/home">GTA</a></li>
+   		<li><a class="btn-primary" href="/game/xcom_enemy_unknown">XCOM</a></li>
+   		<li><a class="btn-primary" href="/game/metro_2033">Metro2033</a></li>
+   		<li><a class="btn-primary" href="/game/mc/home">Minecraft</a></li>
+		<li><a class="btn-primary" href="/game/tes5/home">TES5: SKYRIM</a></li>
+        <li><a class="btn-primary" href="/game/fallout/trilogy">폴아웃(구삼종)</a></li>
+        <li><a class="btn-primary" href="/game/f3/home">폴아웃 3</a></li>
+    	<li><a class="btn-primary" href="/game/fnv/home"> 폴아웃 뉴베가스</a></li>
+        <li><a class="btn-primary" href="/game/eve/home"> EVE online</a></li>
+        <li><a class="btn-primary" href="/me/home"> Mass Effect</a></li>
+        <li><a class="btn-primary" href="/game/r-type"> 알-타입 파이널</a></li>
+        <li><a class="btn-primary" href="/game/ultima"> 울티마</a></li>
+        <li><a class="btn-primary" href="/game/dungeon_keeper_2"> 던전키퍼 2</a></li>
+    </ul>
     </li>
+    
     <li><a  href="/tech" class="btn-square btn-default slideTextUp " ><div><i class="fa fa-laptop"></i></div><div>컴퓨터</div></a>
 	<ul >
 		<li><a class="btn-default" href="/tech/home"><em class="tech-icon"></em>Tech/IT</a></li>
@@ -35,24 +50,12 @@
     </ul>
     </li>
     
-    <li><a  href="/game/home" class="btn-square btn-primary slideTextUp" ><div><i class="fa fa-gamepad" ></i></div><div>게임</div></a>
-    <ul >
-   		<li><a class="btn-primary" href="/game/home" >&nbsp;<i class="fa fa-gamepad"></i>&nbsp;게임 일반</a></li>
-   		<li><a class="btn-primary" href="/game/위쳐/home"><em class="witcher"></em>위쳐</a></li>
-   		<li><a class="btn-primary" href="/game/gta/home"><em class="gta"></em>GTA</a></li>
-   		<li><a class="btn-primary" href="/game/xcom_enemy_unknown"><em class="xcom"></em>XCOM</a></li>
-   		<li><a class="btn-primary" href="/game/metro_2033"><em class="metro2033"></em>Metro2033</a></li>
-   		<li><a class="btn-primary" href="/game/mc/home"><em class="minecraft"></em>Minecraft</a></li>
-		<li><a class="btn-primary" href="/game/tes5/home"><em class="tes5"></em>TES5: SKYRIM</a></li>
-        <li><a class="btn-primary" href="/game/fallout/trilogy"><em class="f1"></em>폴아웃(구삼종)</a></li>
-        <li><a class="btn-primary" href="/game/f3/home"><em class="f3"></em>폴아웃 3</a></li>
-    	<li><a class="btn-primary" href="/game/fnv/home"><em class="fnv"></em>폴아웃 뉴베가스</a></li>
-        <li><a class="btn-primary" href="/game/eve/home"><em class="eveoline"></em>EVE online</a></li>
-        <li><a class="btn-primary" href="/me/home"><em class="me"></em>Mass Effect</a></li>
-        <li><a class="btn-primary" href="/game/r-type"><em class="rtyp"></em>알-타입 파이널</a></li>
-        <li><a class="btn-primary" href="/game/ultima"><em class="ultima"></em>울티마</a></li>
-        <li><a class="btn-primary" href="/game/dungeon_keeper_2"><em class="dk2"></em>던전키퍼 2</a></li>
-    </ul>
+    <li><a  href="/" class="btn-square btn-danger slideTextUp" ><div><i class="fa fa-home"></i></div><div>오픈위키</div></a>
+    <ul>
+        <li><a class="btn-default" href="/about"><em class="help-icon"></em>오픈위키.kr???</a></li>
+        <li><a class="btn-default" href="http://chat.openwiki.kr/" onclick="openWindow(this.href);return false;"><em class="chat-icon"></em>채팅</a></li>
+        <li><a class="btn-default" href="http://bb.openwiki.kr/free"><em class="qna-icon"></em>문의</a></li>
+    </ul>                         
     </li>
     
  </ul></li>

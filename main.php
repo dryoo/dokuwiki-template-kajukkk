@@ -47,7 +47,9 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
     <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
     <?php tpl_metaheaders() ?>
     <meta name="description" content="<?php $_desc=p_get_metadata($ID,"description"); echo strip_tags($_desc['abstract']); ?>" >
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<?php echo tpl_getMediaFile(array("bs/bootstrap.min.css")); ?>" rel="stylesheet">
+    <script src="<?php echo tpl_getMediaFile(array("bs/bootstrap.min.js")); ?>" type="text/javascript"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
@@ -98,31 +100,32 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
 </head>
 
 <body class="<?php echo (get_doku_pref('dark', 0)==1)?'dark':''?>" >
-<div class="dokuwiki ">
+<div class="dokuwiki clearfix ">
+    <div id="sidebar_bg"></div>
+    <div id="nav_bg"></div>
+  	<div id="dokuwiki__nav">
+       	    <?php //if (tpl_getConf('debug')) @include('shortcut.php') /* Shortcut */ ?> 
+             <?php tpl_include_page(":nav", 1, 1) ?>
+        </div>
     <div id="dokuwiki__top" class="mode_<?php echo $ACT ?> <?php echo ($showSidebar) ? 'showSidebar' : '';
         ?> <?php echo ($hasSidebar) ? 'hasSidebar' : ''; ?>"  >
 
- 
         <?php tpl_flush(); ?>
-        <nav>
-       	    <?php if (tpl_getConf('debug')) @include('shortcut.php') /* Shortcut */ ?> 
-        </nav>
-        <div class="core">
-            <div class="home-icon">
-             <?php if (!tpl_getConf('debug')) { ?>
-            <a href="/" ><i class="fa fa-circle"></i></a>
-            <?php }?>
-            </div>
+
+        <div class="clearfix" style="z-index:3;box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .82);top:0;position:fixed;width:100%;background-color:#333">    
+            <div class="btn_left" style=""><i class="fa fa-opera "></i></div>
+         
 			<?php if (!plugin_isdisabled('searchformgoto')) {
 				$searchformgoto = &plugin_load('helper','searchformgoto');
 				$searchformgoto->gotoform();
 				} else { tpl_searchform(); }
 			?>         
-            <?php ds_html_msgarea(); /* occasional error and info messages */ ?>       
-            <?php if  (!$noadsense) echo tpl_getConf('google_adsense') /* google adsense RESPONSIVE */?>
-            
- 
-
+            <div class="btn_right" style=""><i class="fa fa-pause"></i></div>
+        </div>  
+        <div class="core clearfix" style="margin-top:44px;">
+            <?php ds_html_msgarea(); /* occasional error and info messages */ ?>    
+            <?php /* google adsense RESPONSIVE 윗쪽 */
+               if  (!$noadsense) echo tpl_getConf('google_adsense') ?>
         <div id="dokuwiki__content">
             <?php tpl_bs_breadcrumbs() ?>
             <?php if ($ACT=="show" ||$ACT=="edit"): ?>
@@ -149,15 +152,46 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
   <strong><?php echo strip_tags($conf['tagline']) ?></strong><?php echo tpl_getLang('haspermeditpage');?>
 </div>
 <?php endif; ?>
-   <?php tpl_button_a('edit','pencil','','btn btn-danger pull-right   ');?>      
+   <?php if(($ACT!="search"))tpl_button_a('edit','pencil','','btn btn-danger pull-right  noprint ');?>      
             <!-- wikipage start -->
-            <?php tpl_content(true) ?>
+
+
+            <?php if ($ACT=="search" ) {?>
+            <h1><?php echo $ID; ?> 에 대한 검색 결과</h1>
+<script>
+  (function() {
+    var cx = '015553187907637026800:6qohwwzkdqo';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:searchresults-only></gcse:searchresults-only>
+
+            <?php }
+                else tpl_content(true); ?>
             <!-- wikipage stop -->
             <div class="clearer"></div>
             <!-- Usage as a class -->
 
             <?php /*Backlinks 참조문서 출력*/  if  ((ft_backlinks($ID)!=null) && (strrchr(':'.$INFO['id'],":")!=":".$conf['start']) &&  (($ACT=='edit') or ($ACT=='preview') or ($ACT=="show") ) ) print '<h2>'.$lang['btn_backlink'].'</h2>'.p_render('xhtml',p_get_instructions('{{backlinks>.}}'),$info);?>     
-
+<?php /*
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- 일치하는 컨텐츠 -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-2592234474265189"
+                 data-ad-slot="6886466908"
+                 data-ad-format="autorelaxed"></ins>
+            <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+    */?>        
+            
             <?php if (tpl_getConf('debug')): ?>
                       <?php /************** SNS *************/
                         //$_url=rawurlencode(wl($ID,'',true));       
@@ -170,7 +204,7 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
                         $_txt= " $_title ".$_url." #".strip_tags($conf['title']).$_tags;    
 
                       ?>
-                      <div class="text-center">
+            <!--          <div class="text-center noprint">
                       <i class="fa fa-hand-o-right"></i> 
                       <a href="#" class="btn-circle btn-primary slideTextUp" onclick="sendsns('facebook','<?php echo $_url; ?>','txt');return false;" title="페북펌"><div><i class="fa fa-facebook"></i></div><div>페북푸기</div></a>   
                       <a href="#" class="btn-circle btn-info slideTextUp" onclick="sendsns('twitter','<?php //echo $_url; ?>','<?php echo $_txt;?>');return false;" title="트윗펌"><div><i class="fa fa-twitter"></i></div><div>트윗푸기</div></a>  
@@ -178,7 +212,7 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
                       <a href="#" class="btn-circle btn-warning slideTextUp" onclick="sendsns('kakaotalk','<?php echo $_url; ?>','<?php echo $_txt;?>');return false;" title="카톡펌"><div>Kakao</div><div>카톡푸기</div></a>   
                     <a href="#" class="btn-circle btn-success slideTextUp" onclick="sendsns('band','<?php //echo $_url; ?>','<?php echo $_txt;?>');return false;" title="밴드펌"><div>Band</div><div>밴드푸기</div></a>   
                     <i class="fa fa-hand-o-left"></i>
-                    </div>
+                    </div> -->
             <?php endif; ?>
             <?php /*미니문법설명*/ if (tpl_getConf('debug') && (($ACT=='edit')or ($ACT=='preview'))) print p_render('xhtml',p_get_instructions('
 ^  **초미니 문법 설명**  (혹은 [[:syntax]]참조하세요)  ||||
@@ -190,7 +224,16 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
 '),$info);?>
 
 
-        <?php if  (!$noadsense) echo tpl_getConf('google_adsense') /* google adsense RESPONSIVE */?>
+
+        <?php if  (!$noadsense) echo tpl_getConf('google_adsense') /* google adsense RESPONSIVE 아래 */?>
+        
+            <?php  /* *************디스커즈 disqus************* */
+            if($ACT == 'show' &&  (strrchr(':'.$INFO['id'],":")!=":".$conf['start']) ){
+                $disqus = &plugin_load('syntax','disqus');
+                if($disqus) echo "<center>".$disqus->_disqus()."</center>";
+            }
+            ?>
+            
             
             <?php tpl_license('badge', false, false, true); // license button, no wrapper ?>   
             <div class="docInfo"><?php tpl_pageinfo() ?>
@@ -217,29 +260,30 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
 
             </div>
                  
-            <?php  /* *************디스커즈 disqus************* */
-            if($ACT == 'show' &&  (strrchr(':'.$INFO['id'],":")!=":".$conf['start']) ){
-                $disqus = &plugin_load('syntax','disqus');
-                if($disqus) echo $disqus->_disqus();
-            }
-            ?>
+
             <?php tpl_includeFile('pagefooter.html') ?> 
             <?php include('tpl_footer.php') ?> 
     
          
 
         <?php tpl_flush(); ?>
+
     </div> <!--core끝 -->
 
 
     <!-- ********** sidebar ********** -->
-      <asdie><div id="dokuwiki__aside" class="lsb ">
-        <div class="sidebar-toggle"><i class="fa fa-forward"></i></div>
-        <?php tpl_logo();?>     <div class="clearfix"></div>
+      <asdie><div id="dokuwiki__aside" class="lsb sidebar">
+                 <?php tpl_logo();?>     <div class="clearfix"></div>
         <?php tpl_title();?>
+		<?php $today=':오늘:'.date("n월_j일");  if (page_exists($today)) { 
+	print p_render('xhtml',p_get_instructions('^  오늘은 [['.$today.']]  ^'),$info);
+}
+?>
         <div class="tools text-center">
          <?php tpl_flush() ?>
+            <?php if ($INFO['userinfo']!=""): /* If logged-in */?>
             <a href="#" class="btn-circle btn-danger slideTextUp" data-target="#myModal"  data-toggle="modal" data-toggle="tooltip"   title="Add new page"><div><i class="fa fa-plus"></i></div><div><?php echo tpl_getLang('newpage')?></div></a>
+            <?php endif; ?>
             <?php tpl_button_a('edit','pencil','','btn-info btn-circle slideTextUp');?>   
             <?php tpl_button_a('history','history','','btn-primary btn-circle slideTextUp');?> 
             <?php  if(!plugin_isdisabled('randompage')) {?>
@@ -250,9 +294,9 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
             <?php tpl_button_a('login','sign-in','','btn-warning btn-circle slideTextUp');?>          
             <?php if ($INFO['userinfo']!=""): /* If logged-in */?>
                  <?php tpl_button_a('media','image','','btn-primary btn-circle slideTextUp');?>         
-                 <?php tpl_button_a('backlink','link','','btn-primary btn-circle slideTextUp');?>
-                 <?php tpl_button_a('subscribe','envelope','','btn-primary btn-circle slideTextUp');?>
-                 <?php tpl_button_a('recent','spinner','','btn-primary btn-circle slideTextUp');?>
+                 <?php //tpl_button_a('backlink','link','','btn-primary btn-circle slideTextUp');?>
+                 <?php //tpl_button_a('subscribe','envelope','','btn-primary btn-circle slideTextUp');?>
+                 <?php //tpl_button_a('recent','spinner','','btn-primary btn-circle slideTextUp');?>
                  <?php tpl_button_a('admin','cog','','btn-default btn-circle slideTextUp');?>    
             <?php endif; ?>
     		<?php if (!plugin_isdisabled('move') && ($INFO['isadmin'])) {?>
@@ -268,11 +312,12 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
             <?php tpl_includeFile('sidebarfooter.html') ?>
         </div>
     </div><!-- /aside -->  </asdie>
-                <?php tpl_button_a('top','eject','','btn-primary btn-circle slideTextUp');?>      </div>
+                <?php tpl_button_a('top','eject','','btn-primary btn-circle slideTextUp noprint');?>      </div>
 	</div></div><!-- /.dokuwiki -->
 
+<asdie>
 <!-- Modal -->
-<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
+<div class="modal fade noprint" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -292,8 +337,41 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
   </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade noprint" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="searchModalLabel"><?php echo tpl_getLang('help')?></h4>
+      </div>
+      <div class="modal-body">
+         <script>
+  (function() {
+    var cx = '015553187907637026800:6qohwwzkdqo';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:searchresults-only></gcse:searchresults-only>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $lang['js']['mediaclose'] ?></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 <!-- NEW page Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade noprint" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog ">
     <div class="modal-content">
       <div class="modal-header ">
@@ -329,14 +407,14 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
               <b>나무위키</b>의 문서를 변환한 뒤 편집합니다. (CC BY-NC-SA 2.0 Kr)
               <?php //printf (tpl_getLang('namespacedesc2'),$INFO['namespace'] ) ?>
             </label>
-          </div>        
+          </div>        <!--
            <div class="radio">
             <label>
               <input type="radio" name="do" value="enha"      >
               <b>엔하위키미러</b>의 문서를 변환한 뒤 편집합니다. (CC BY-NC-SA 2.0 Kr)
               <?php //printf (tpl_getLang('namespacedesc2'),$INFO['namespace'] ) ?>
             </label>
-          </div>
+          </div>-->
           <?php endif;?>
           <div class="btn-group pull-right ">
             <input type="submit" class="btn btn-primary " value="<?php echo $lang['btn_create'] ?>">
@@ -352,12 +430,13 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
   </div>
 </div> <!--NEW page  Modal -->
 
- 
+</asdie> 
+
 <script>
 jQuery(".dokuwiki table").addClass( "table" );
 jQuery(document).ready(function()
 {
-    <?php if ($ACT=="edit"): /* 편툴바 조작 */?>
+    <?php if (($ACT=="edit")||($ACT=="preview")): /* 편툴바 조작 */?>
         jQuery("#tool__bar").addClass( "btn-group" );
         jQuery(".dokuwiki .toolbutton").addClass( "btn btn-default btn-sm" );
         jQuery(".dokuwiki .editButtons button").addClass( "btn btn-default" );
@@ -365,23 +444,19 @@ jQuery(document).ready(function()
         jQuery("#edbtn__save").addClass( "btn-primary");
         jQuery("#edbtn__preview").addClass( "btn-success");
     <?php endif ?>
-    jQuery("#plugin__backlinks ul li div a").addClass( "btn btn-default" );
+       jQuery(".tags span a").addClass( "badge" );
     jQuery(".dokuwiki .secedit button").addClass("btn btn-default btn-xs pull-right");
-    jQuery(this).scroll(function () { 
+   /* jQuery(this).scroll(function () { 
     	jQuery(".lsb").scrollTop(jQuery(this).scrollTop());   	
-    });
+    }); */
 }); 
 </script>
-
 
 <div id="spot-im-root"></div>
 <?php /* spot-im community widget */ //echo tpl_getConf('spot-im')?>
 
-
-
-
-<?php /* server processing time */?>
-<?php printf("<center  class='small text-muted'>%.3f seconds in processing this page.</center>",(microtime(get_as_float)-$pagestart));?>
+<?php /* server processing time */ ?>
+<?php printf("<center  class='small text-muted noprint'>%.3f seconds in processing this page.</center>",(microtime(get_as_float)-$pagestart));?>
 <div class="no"><?php tpl_indexerWebBug() /* provide DokuWiki housekeeping, required in all templates */ ?></div>
 <div id="screen__mode" class="no"></div><?php /* helper to detect CSS media query in script.js */ ?>
 </body>

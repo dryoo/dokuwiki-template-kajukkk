@@ -3,22 +3,8 @@
 
     width:128px;position:absolute;top:0px; z-index:11;margin:0;padding:0;
     visibility:hidden;
+    height: 0
  
-    -webkit-transition:200ms ease;
-    -moz-transition:200ms ease;
-    -o-transition:200ms ease;
-    transition:200ms ease;
-
-height: 0
-
-    /* width:128px;position:absolute;top:0px; z-index:11;margin:0;padding:0;
-    visibility:hidden;
-    opacity:0;
-    filter:alpha(opacity=0);
-    -webkit-transition:200ms ease;
-    -moz-transition:200ms ease;
-    -o-transition:200ms ease;
-    transition:200ms ease; */
 
 
 }    
