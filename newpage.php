@@ -46,9 +46,9 @@
 }
 
 if ($id){
-   header("Location: $url?id=$id&do=edit" ); exit();
+   header("Location: ".$url."doku.php?id=$id&do=edit" ); exit();
 } else  {
-   header("Location: $url?id=$back" ); exit(); 
+   header("Location: ".$url."doku.php?id=$back" ); exit(); 
 }
 
 function clearID($id) {
