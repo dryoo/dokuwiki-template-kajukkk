@@ -3,6 +3,7 @@
  $title = @$_GET['title'];
  $ns    = @$_GET['ns'];
  $back  = @$_GET['back'];
+ $url   = @$_GET['DOKU_URL'];
 
  $wikidata="/home/www/wikidata/wiki/pages/";
 
@@ -12,7 +13,6 @@
  switch ($do) {
     case "enha":
         $result=fetch_enha($title);
- //       if ($result==null) { header("Location: http://openwiki.kr/?id=$ns:$title&do=edit" ); exit(); }
         $id=$ns.":".clearID($title);
 
         if ($result!=null  ) : 
@@ -27,7 +27,6 @@
         break;
     case "namu":
         $result=fetch_namu($title);
- //       if ($result==null) { header("Location: http://openwiki.kr/?id=$ns:$title&do=edit" ); exit(); }
         $id=$ns.":".clearID($title);
         // echo $result;  
         if ($result!=null  ) : 
@@ -37,7 +36,6 @@
             if (!file_exists($file))  file_put_contents($file, $result);
         endif;   
        // echo $result;
-
         break;
         case "root":
         $id=$title; 
@@ -48,11 +46,10 @@
 }
 
 if ($id){
-   header("Location: http://openwiki.kr/?id=$id&do=edit" ); exit();
+   header("Location: $url?id=$id&do=edit" ); exit();
 } else  {
-    header("Location: http://openwiki.kr/?id=$back" ); exit(); 
+   header("Location: $url?id=$back" ); exit(); 
 }
-
 
 function clearID($id) {
     $id=trim($id);

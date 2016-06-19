@@ -1,0 +1,576 @@
+.test {border:1px solid red;}
+/* body & design  */
+body { 
+    position:static;
+    color:__text__;
+    overflow-x:hidden;
+}
+.container-fluid {max-width: 980px;}
+.navbar  .dropdown-toggle {height:34px;}
+.dokuwiki  .insitu-footnote { background-color:rgba(199, 250, 250,0.9); padding:5px; border-radius:6px;
+border:1px solid rgb(99, 150, 150,0.3)}
+
+
+.license img {float:right }
+    
+#dokuwiki__content
+{	 
+    margin:0;}   
+.core {
+   /* background-color: #bdc3c7; */
+        background-color:#fff;
+        min-height:1200px;
+}
+
+.dokuwiki .lsb .title {text-align:center;  }
+
+.rsb {
+ 
+    float:right;
+    right:0;
+}
+
+.lsb .tools {margin:3px;}
+.rsb .sidebar-toggle {background-color:#82B965;}
+.lsb .content, .rsb .content {width:100%; padding: 5px;
+    border-top:1px solid rgba(120,120,120,0.1);
+    border-bottom:1px solid rgba(120,120,120,0.1);
+}
+
+.test {border: 1px dashed red;}
+
+.lsb ul {
+    margin:0 5px;
+    padding: 0;
+    li { border-bottom:1px solid rgba(120,120,120,0.1);  max-width: 300px;    /* 길이를 명확히 지정! */
+    text-overflow: ellipsis;
+    white-space: nowrap; /* 줄바꿈방지 */
+    overflow: hidden;} 
+    li:hover, li:focus { background-color:rgba(120,120,120,0.1)}
+}
+    
+/*############## contents  general elements #####################*/
+
+    .summary { 
+        .well; .well-sm; .bg-warning;
+        .nowrap {margin-bottom:0;} 
+    }
+ 
+.dokuwiki  
+{
+
+    p,code {
+        font-size: __font_size__; line-height:1.6;
+    }
+    a.wikilink2 { color:#aaa; border-bottom: 1px dashed; }
+    a.wikilink2:hover{ color: #a22;}
+
+    a.urlextern { background-repeat: no-repeat;  padding-left:18px; background-position: 0 center;
+    background-image: url(images/external-link.png);}
+    em {color:#c37;}
+    em.u {color:#555;}
+   
+    .search_hit { background-color: #FF9;} 
+   
+    .breadcrumb { margin-bottom: 0; padding:0; border:none;}
+
+    img.media, img.mediacenter, img.medialeft, img.mediaright { .img-responsive; .img-rounded; margin-bottom:4px; max-width:100%;}
+    img.media {display:inline;}
+    img.medialeft 	{ margin-right: 0.5em;}
+    img.mediaright 	{ margin-left:  0.5em;}
+    .table img.media {  max-width: none;        }
+
+    #tool__bar {.btn-group}
+    .editBox textarea.edit {width:100%;}
+
+    .editButtons {
+        margin:1em 0;
+    /*    #edbtn__save { .btn-primary;}
+      #edbtn__preview {.btn-success;}
+*/    }
+
+     del { color:#7f7f7f;}
+
+
+	dl.file dt a  {
+
+	background-color: #bdc3c7;
+	border: 1px solid #CCC;
+	/* border-radius: 4px; */
+	padding: 0px 3px 3px 21px;
+	border-bottom: none;
+	margin-left: 10px;
+	border-radius: __border_radius__ __border_radius__ 0 0;
+	}
+
+    .page-header h1 {font-size:40px;font-weight:bold ; /*text-shadow: 1px 1px 3px #777;*/}
+    h1 {margin-left: 0; border-bottom:1px #aaa dotted;}
+    h2 {margin-left: 0px;/**/}
+    h3 {margin-left: 10px;}
+    h4 {margin-left: 25px;font-size:20px;}
+    h5 {margin-left: 40px;}
+    h2,h3,h4,h5 {font-weight:bold}
+     
+    h2:after {
+        background-color:#aaa;
+        content: "";
+        display: inline-block;
+        height: 1px;
+        position: relative;
+        vertical-align: middle;
+        
+        z-index:0;
+        left: 0.5em;
+        right: 0.5em;
+        min-width:20%;
+        margin-right: -50%;
+    }
+
+    
+    div.level1 {margin-left: 0;}
+    div.level2 {margin-left: 0;}
+    div.level3 {margin-left: 16px;}
+    div.level4 {margin-left: 32px;}
+    div.level5 {margin-left: 48px;}
+     .btn_secedit input.button{ .pull-right; .btn-xs; margin-top:20px;z-index:1;}
+     .section_highlight { 
+        background-color: rgba(50,122,200,0.1)!important;
+        border-radius: __border_radius__;
+      
+    }
+    .footnotes {
+        border-top: 1px solid rgba(200, 200, 200, 0.5);
+    }
+}
+
+.dokuwiki div.editbutton_table {margin-top:none;}
+
+    #size__ctl {float: right;}
+
+/******************* breadcrumb ***********************/  
+.dokuwiki .breadcrumb { 
+    background-color: transparent;  
+    color: #e5e5e5;
+    span {margin-right:5px;}
+    li { max-width: 130px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;}
+}
+/******************* Top navbar ***********************/
+.dokuwiki .navbar {
+    background-color: #F5F5F5;border-bottom: 1px solid #E5E5E5; min-height: 48px; 
+    .navbar-toggle {margin-top:7px; margin-bottom:7px;}
+    .avatar {margin-top:-4px;}
+    a.iw_user { padding: 1px 0px 1px 18px!important;background-position: 0 center;}
+}
+.dokuwiki .navbar-brand { 
+    
+}
+.dokuwiki .logo { .pull-left;
+	max-width:100%;
+    background-color: #56595f;
+}
+
+#bs-navbar-collapse-main {
+    font-size:14px;
+    .nav  li  a {padding-left:10px;padding-right:10px;}
+}
+
+#nav-bottom {margin-bottom:0;}
+#dw__toc {
+    bbnnorder-bottom:1px solid rgba(128,128,128,0.1);
+}
+
+#cse__search {
+   float:left;
+   width:60%; min-width:300px;
+   padding-left:44px;
+   overflow: hidden;
+}
+#___gcse_0 {float:left; 
+    .gsc-control-cse {padding: 3px 5px!important;}
+    .gsc-input-box  {.form-control; height:28px;
+         border: 1px solid #ccc;
+		border-radius: 3px;
+		outline: none;
+		box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
+        padding:0; 
+    }
+    .gsc-input-box input  {font-size:14px;line-height:1;  background-color:#f0f0f0;}
+    .gsc-input-box:hover ,  .gsc-input-box:focus {   border-color: #51a7e8;
+		box-shadow: inset 0 1px 2px rgba(0,0,0,0.075),0 0 5px rgba(81,167,232,0.5);
+        background-color:#fff;
+	}
+    input.gsc-search-button {background: transparent;}
+    input.gsc-search-button-v2 {width:auto;height:auto;padding:6px;}
+    .gsc-results-wrapper-overlay    {width:90%;left:5%}
+}
+
+#dw__search {
+    padding: 3px 5px;
+    /*background-color: #333;*/
+ 	float:left;
+    .button { btn; btn-default;  }
+    form {margin:0;padding:4px 0;}
+    /*width:40%;  */
+    .btn-group {margin-top:-4px;}
+}
+#qsearch__in  { 
+    .form-control;    
+    background: no-repeat center left  url(images/search-icon-hi.png); 
+    height:28px;  padding-left: 28px;
+    border: 1px solid #ccc;
+	border-radius: 3px;
+	outline: none;
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
+    display:inline;
+    margin:5px;
+    background-color:#f0f0f0;
+}
+#qsearch__in:focus  { border-color: #51a7e8;
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.075),0 0 5px rgba(81,167,232,0.5);
+    background-color:#fff;
+}
+  
+#qsearch__out { 
+     font-size:14px;
+     width: 215px; max-height:700px; overflow-y:auto;
+     padding: 9px;
+     margin-bottom: 10px;
+     border: 1px solid #e3e3e3;
+     border-radius: 4px;
+     display:none;
+     ul {PADDING:0; }
+ }
+	 
+.visible-xs > .navbar-form { margin:0; }
+ 
+ /* anchor location fix 위치 문제 해결 
+.dokuwiki .mode_show {
+     h2, h3, h4, h5 { margin-top:-40px; padding-top:60px;} 
+     }*/
+
+
+.test {border:1px dashed red;}
+
+#mediamanager__uploader {
+	background-color: yellow; border:2px dashed red; border-radius:__border_radius__; padding:4px;
+   .qq-upload-success  .qq-upload-size {display:none!important;}
+}
+
+#dokuwiki__footer {
+  img { vertical-align:baseline; }
+}
+     
+/* iconfig__manager fix */
+#config__manager  {
+    .label {display:block; color:#333;    line-height:1;
+    white-space:normal;}
+    label {line-height:130%;font-weight:normal;}
+     tr.default .input, tr.default input,  tr.default textarea, tr.default select, 
+    .selectiondefault { background-color: #E4E4E4;}
+    td.value .checkbox {margin-right:1em;}
+}
+
+/* bootstrap hover fix */
+.navbar-header .dropdown:hover > .dropdown-menu,ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;    
+}
+
+input.edit { .form-control;}
+.dokuwiki .footer {  background-color:#e4e4e4;}
+.alert-notify {.alert-warning;}
+.alert-error {.alert-danger;}
+.tabspage  ul { 
+    .navbar-nav; list-style-type: none; float:left; margin:10px;padding:0;      
+    li {
+        float:left; font-size: 13px;padding: 4px 8px;
+        line-height: 20px; 
+        a {color: #333;font-weight: bold;} 
+        a:hover{color: #4183c4;text-decoration: none;}
+    }
+}
+
+
+li.dsq-widget-item {margin:5px 0!important;}
+
+/******************* link wiz ***********************/
+
+
+#link__wiz {width:300px;
+height: 360px;}
+#link__wiz_result {height:260px;overflow-y:auto;overflow-x:hidden;
+    .odd {background-color:#eef}
+    .even {background-color:#efe}
+    div a {display:block; color:#428bca;}
+    div span {font-size:12px;}
+}
+
+.ui-dialog .ui-dialog-titlebar {padding:0;}
+
+.ui-dialog-titlebar-close {
+      background-color:red;
+ 
+}
+
+
+/******************* plugins ***********************/
+
+/*
+#plugin__backlinks {
+    ul  {margin:0;padding:0}
+	ul li { display:inline-block;  margin:2px; }
+	ul li a {  overflow: hidden; text-overflow:ellipsis; white-space:nowrap;width:10em;}
+}
+*/
+
+div.dokuwiki div#disqus__thread {
+    width: 99%;
+    margin: 0;
+    padding: 0;
+}
+
+div.tags {
+   border-top:none!important;
+}
+
+#dokuwiki__content .CodeMirror-lines,
+#wiki__text
+ { font-family:  Menlo,"나눔고딕코딩", monospace;}
+
+.plugin_button { max-width:300px;}
+
+form.plugin_move_form {padding: 0 40px;}
+
+/******************* dark 절약모두 ***********************/
+.dark {
+   color:#aaa; background-color:#111; border-color:rgba(200, 200, 200, 0.5);
+  
+   
+   .wrap_box,
+   .summary ,     .alert,  .JSpopup,   .lsb,     code , input.edit
+   {background-color:#222; border-color:rgba(200, 200, 200, 0.5); }
+   
+   .core,pre, .table, .table .table, #link__wiz, #dw__search #qsearch__in {color:inherit;background-color:inherit;}
+   
+   .lightsaving { color:#000}
+   textarea.edit { color:#aaa; background-color:#222}
+    .core h1, .core h2,.core h3,.core h4, .core h5 {color:#ccc;}
+
+ table,
+ table tr , 
+ thead > tr > th,
+ .table > tbody > tr > th,
+ .table > tfoot > tr > th,
+ .table > thead > tr > td,
+ .table > tbody > tr > td, 
+ .table > tfoot > tr > td 
+    {border-color:#333!important;}
+    
+    .btn-default {color:#999; background-color:#333; border-color:#222;}
+ }
+ 
+.btn-circle {
+    border-radius: 50%;
+    font-size: 19px;
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    display: inline-block!important;
+    margin: 2px 0!important;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    overflow:hidden; 
+    text-decoration:none;
+}
+
+.btn-square { 
+    font-size: 19px;
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    display: inline-block!important;
+     
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    overflow:hidden; 
+    text-decoration:none;
+}
+
+.slideTextUp div:nth-child(2) {
+  top: 100%;
+  font-size:10px;
+}
+/*https://github.com/SaraSoueidan/windows8-animations/blob/master/css/demo-styles.css*/
+.slideTextUp:hover {  text-decoration:none;}
+.slideTextUp:hover div {
+  -webkit-transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  -o-transform: translateY(-100%);
+  transform: translateY(-100%); transition: all .3s ease;
+}
+ 
+ .ie body {width:900px;margin:0 auto;}
+ .ie .dokuwiki {}
+ .ie .core {width:650px;float:left;}
+ .ie .lsb {position:inherit;float:left;}
+ 
+ 
+ .btn_left { float:left;
+ z-index:12;display:inline; color:#33ccff;line-height:43px;font-size:2em;width:44px;text-align: center;
+ }
+ .btn_right {
+  position:fixed;right:0;z-index:12;float:right;color:white;line-height:43px;font-size:2em;width:44px;text-align: center;
+ }
+
+
+#dokuwiki__nav,  #dokuwiki__aside {
+    width:__sidebar_width__;
+    position:fixed;
+    top:0;bottom:0;    
+    background-color: #35373c;
+	box-shadow: 0 0 10px rgba(34, 34, 34, 0.5) inset;
+}
+
+#dokuwiki__nav {
+	z-index:15;
+   left:0;
+   display:none;
+ }
+
+ /* column control  */
+#dokuwiki__aside {
+	z-index:13;
+    bottom:0; top:0;
+    /*overflow-y:hidden;*/ overflow-x:hidden;
+}
+.lsb::-webkit-scrollbar, .rsb::-webkit-scrollbar {
+    display: none;
+}
+
+ #dokuwiki__aside {
+    color:#aaa;
+    right:0;    
+    h1,h2,h3,h4,h5 {color:#00b8be;}
+    a {transition: color .2s linear; }
+    li {position: relative;}
+    div.li:hover a:after {
+          content: '';
+          position: absolute;
+          height: 20px;
+          width: 3px;
+          background: #00B8BE;
+          left:-2px;
+          top: 0;
+    }
+}
+
+#sidebar_bg { z-index: 12;}
+#nav_bg { z-index: 14;}
+
+#sidebar_bg,#nav_bg {
+    display: none;
+    background-color: rgba(0,0,0,0.75);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+ /* for detecting media queries in JavaScript (see script.js): */
+#screen__mode {
+    position: relative;
+    z-index: 0;
+}
+
+/* Smartphones (portrait) ----------- */
+@media (max-width: @ini_phone_width) { 
+
+#screen__mode {
+    z-index: 1; /* for detecting media queries in JavaScript (see script.js) */
+}
+
+    .btn_right {display:block;}   
+    #dokuwiki__aside {
+        position:absolute;
+        right:0;
+        display:none;
+        z-index:13;	
+    }
+	#dw__search .btn-group {display:none!important}
+}
+ 
+/* tablet  ----------- */
+@media (min-width: @ini_phone_width+1) and (max-width: @ini_tablet_width) {
+
+#screen__mode {
+    z-index: 2; /* for detecting media queries in JavaScript (see script.js) */
+}
+
+    .btn_right {display:block;}
+    #dokuwiki__aside {
+         
+        right:0;
+        display:none;
+        z-index:13;
+    }
+    .core { margin-right:0px; }
+}
+
+/* desktop  ----------- */
+@media (min-width: @ini_tablet_width+1) and (max-width: @ini_desktop_width) {
+
+#screen__mode {
+    z-index: 3; /* for detecting media queries in JavaScript (see script.js) */
+}
+
+	.btn_right {display:none;}
+    #dokuwiki__aside {display:block;  }
+    .core { margin-right:250px; }
+     .dokuwiki  #dokuwiki__content { padding: 5px;}
+}
+
+/* ----- wide  ----------- */
+@media (min-width: @ini_desktop_width+1) {
+
+#screen__mode {
+    z-index: 4; /* for detecting media queries in JavaScript (see script.js) */
+}
+
+    .btn_right {display:none;}
+    #dokuwiki__aside {display:block;  }
+    .core { margin-right:250px;}
+    .dokuwiki  #dokuwiki__content { padding: 25px;}
+}
+
+/* iPhone 4 ----------- */
+@media only screen and (-webkit-min-pixel-ratio : 1.5), only screen and (min-pixel-ratio : 1.5) {
+/* Styles */
+}
+

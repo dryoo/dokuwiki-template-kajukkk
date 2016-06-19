@@ -1,0 +1,406 @@
+.new-file-icon, .qna-icon, .rtype-icon, .sites-icon, .skin-icon, .skyrim-icon, .toxic-icon, .ultima-icon, .vl-icon, .wares-icon, .wiki-icon, .bb-icon, .blog-icon, .chat-icon, .coins-icon, .dk2-icon, .fallout-icon, .free-icon, .game-icon, .help-icon, .history-icon, .home-icon, .idioms-icon, .med-icon, .me-icon, .minecraft-icon, .brush-icon, .heart-icon, .tech-icon, .eveonline-icon, .skrik-icon, .close, .nick, .audio-off, .audio, .autoscroll-off, .dice, .who, .autoscroll, .color, .images, .witcher, .xcom, .bg2e, .borderlands, .bsi, .crysis, .darksouls, .divinity2, .eveoline, .f1, .f2, .f3, .fnv, .ft, .gta, .hw, .iwd, .jericho, .l4d, .metro2033, .nwn, .pe, .portal, .shadowrun, .tes5, .wasteland{
+	background: url(sprites.png) no-repeat;
+}
+
+.new-file-icon{
+	background-position: -190px -252px ;
+	width: 24px;
+	height: 24px;
+}
+
+.qna-icon{
+	background-position: -153px -252px ;
+	width: 24px;
+	height: 24px;
+}
+
+.rtype-icon{
+	background-position: -254px -203px ;
+	width: 24px;
+	height: 24px;
+}
+
+.sites-icon{
+	background-position: -206px -50px ;
+	width: 24px;
+	height: 24px;
+}
+
+.skin-icon{
+	background-position: -154px -54px ;
+	width: 24px;
+	height: 24px;
+}
+
+.skyrim-icon{
+	background-position: -204px -203px ;
+	width: 24px;
+	height: 24px;
+}
+
+.toxic-icon{
+	background-position: -151px -159px ;
+	width: 24px;
+	height: 24px;
+}
+
+.ultima-icon{
+	background-position: -148px -204px ;
+	width: 24px;
+	height: 24px;
+}
+
+.vl-icon{
+	background-position: -203px -124px ;
+	width: 24px;
+	height: 24px;
+}
+
+.wares-icon{
+	background-position: -124px -109px ;
+	width: 24px;
+	height: 24px;
+}
+
+.wiki-icon{
+	background-position: -350px -6px ;
+	width: 24px;
+	height: 24px;
+}
+
+.bb-icon{
+	background-position: -296px 0;
+	width: 24px;
+	height: 24px;
+}
+
+.blog-icon{
+	background-position: -251px -12px ;
+	width: 24px;
+	height: 24px;
+}
+
+.chat-icon{
+	background-position: -189px -10px ;
+	width: 24px;
+	height: 24px;
+}
+
+.coins-icon{
+	background-position: -104px -13px ;
+	width: 24px;
+	height: 24px;
+}
+
+.dk2-icon{
+	background-position: -98px -209px ;
+	width: 24px;
+	height: 24px;
+}
+
+.fallout-icon{
+	background-position: 0 -210px ;
+	width: 24px;
+	height: 24px;
+}
+
+.free-icon{
+	background-position: -4px -107px ;
+	width: 24px;
+	height: 24px;
+}
+
+.game-icon{
+	background-position: -53px -53px ;
+	width: 24px;
+	height: 24px;
+}
+
+.help-icon{
+	background-position: -152px -9px ;
+	width: 24px;
+	height: 24px;
+}
+
+.history-icon{
+	background-position: -98px -157px ;
+	width: 24px;
+	height: 24px;
+}
+
+.home-icon{
+	background-position: 0 -47px ;
+	width: 24px;
+	height: 24px;
+}
+
+.idioms-icon{
+	background-position: -53px -4px ;
+	width: 24px;
+	height: 24px;
+}
+
+.med-icon{
+	background-position: -9px -4px ;
+	width: 24px;
+	height: 24px;
+}
+
+.me-icon{
+	background-position: -56px -159px ;
+	width: 24px;
+	height: 24px;
+}
+
+.minecraft-icon{
+	background-position: -3px -153px ;
+	width: 24px;
+	height: 24px;
+}
+
+.brush-icon{
+	background-position: -251px -54px ;
+	width: 24px;
+	height: 24px;
+}
+
+.heart-icon{
+	background-position: -102px -55px ;
+	width: 24px;
+	height: 24px;
+}
+
+.tech-icon{
+	background-position: -298px -205px ;
+	width: 24px;
+	height: 24px;
+}
+
+.eveonline-icon{
+	background-position: -339px -203px ;
+	width: 24px;
+	height: 24px;
+}
+
+.skrik-icon{
+	background-position: -53px -103px ;
+	width: 24px;
+	height: 24px;
+}
+
+.close{
+	background-position: -1px -305px ;
+	width: 24px;
+	height: 24px;
+}
+
+.nick{
+	background-position: -31px -304px ;
+	width: 24px;
+	height: 24px;
+}
+
+.audio-off{
+	background-position: -227px -306px ;
+	width: 24px;
+	height: 24px;
+}
+
+.audio{
+	background-position: -261px -306px ;
+	width: 24px;
+	height: 24px;
+}
+
+.autoscroll-off{
+	background-position: -193px -306px ;
+	width: 24px;
+	height: 24px;
+}
+
+.dice{
+	background-position: -97px -305px ;
+	width: 24px;
+	height: 24px;
+}
+
+.who{
+	background-position: -63px -305px ;
+	width: 24px;
+	height: 24px;
+}
+
+.autoscroll{
+	background-position: -162px -306px ;
+	width: 24px;
+	height: 24px;
+}
+
+.color{
+	background-position: -133px -306px ;
+	width: 24px;
+	height: 24px;
+}
+
+.images{
+	background-position: -301px -116px ;
+	width: 48px;
+	height: 48px;
+}
+
+.witcher{
+	background-position: -462px -206px ;
+	width: 93px;
+	height: 35px;
+}
+
+.xcom{
+	background-position: -466px -252px ;
+	width: 93px;
+	height: 35px;
+}
+
+.bg2e{
+	background-position: -464px -288px ;
+	width: 93px;
+	height: 35px;
+}
+
+.borderlands{
+	background-position: -474px -562px ;
+	width: 93px;
+	height: 35px;
+}
+
+.bsi{
+	background-position: -480px -524px ;
+	width: 93px;
+	height: 35px;
+}
+
+.crysis{
+	background-position: -448px -476px ;
+	width: 93px;
+	height: 35px;
+}
+
+.darksouls{
+	background-position: -460px -424px ;
+	width: 93px;
+	height: 35px;
+}
+
+.divinity2{
+	background-position: -470px -376px ;
+	width: 93px;
+	height: 35px;
+}
+
+.eveoline{
+	background-position: -472px -330px ;
+	width: 93px;
+	height: 35px;
+}
+
+.f1{
+	background-position: -574px -594px ;
+	width: 93px;
+	height: 35px;
+}
+
+.f2{
+	background-position: -574px -558px ;
+	width: 93px;
+	height: 35px;
+}
+
+.f3{
+	background-position: -574px -520px ;
+	width: 93px;
+	height: 35px;
+}
+
+.fnv{
+	background-position: -574px -482px ;
+	width: 93px;
+	height: 35px;
+}
+
+.ft{
+	background-position: -574px -446px ;
+	width: 93px;
+	height: 35px;
+}
+
+.gta{
+	background-position: -574px -408px ;
+	width: 93px;
+	height: 35px;
+}
+
+.hw{
+	background-position: -574px -370px ;
+	width: 93px;
+	height: 35px;
+}
+
+.iwd{
+	background-position: -574px -334px ;
+	width: 93px;
+	height: 35px;
+}
+
+.jericho{
+	background-position: -574px -296px ;
+	width: 93px;
+	height: 35px;
+}
+
+.l4d{
+	background-position: -574px -256px ;
+	width: 93px;
+	height: 35px;
+}
+
+.metro2033{
+	background-position: -574px -218px ;
+	width: 93px;
+	height: 35px;
+}
+
+.nwn{
+	background-position: -574px -182px ;
+	width: 93px;
+	height: 35px;
+}
+
+.pe{
+	background-position: -574px -144px ;
+	width: 93px;
+	height: 35px;
+}
+
+.portal{
+	background-position: -574px -108px ;
+	width: 93px;
+	height: 35px;
+}
+
+.shadowrun{
+	background-position: -574px -72px ;
+	width: 93px;
+	height: 35px;
+}
+
+.tes5{
+	background-position: -574px -36px ;
+	width: 93px;
+	height: 35px;
+}
+
+.wasteland{
+	background-position: -574px 0;
+	width: 93px;
+	height: 35px;
+}
+

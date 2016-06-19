@@ -55,21 +55,9 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
     <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
     <?php tpl_includeFile('meta.html') ?>
     <?php echo tpl_getConf('google_analytics') ?>
-   <!-- Piwik -->
-<script type="text/javascript">
-  var _paq = _paq || [];
-  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
-  (function() {
-    var u="//io.vaslor.net/analytics/";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', 1]);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-  })();
-</script>
-<noscript><p><img src="//io.vaslor.net/analytics/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
-<!-- End Piwik Code -->
+
+
+
     <script>
     function tpl_toggleLight() {
      if (DokuCookie.getValue('dark')==1)
@@ -87,6 +75,21 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
     }
     </script>
     <?php if (tpl_getConf('debug')): ?>
+        <!-- Piwik -->
+        <script type="text/javascript">
+          var _paq = _paq || [];
+          _paq.push(['trackPageView']);
+          _paq.push(['enableLinkTracking']);
+          (function() {
+            var u="//io.vaslor.net/analytics/";
+            _paq.push(['setTrackerUrl', u+'piwik.php']);
+            _paq.push(['setSiteId', 1]);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+          })();
+        </script>
+        <noscript><p><img src="//io.vaslor.net/analytics/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+        <!-- End Piwik Code -->
     <script src="<?php echo tpl_getMediaFile(array("js/sendsns.js")); ?>" type="text/javascript"></script>
     <?php endif;?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -156,21 +159,21 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
             <!-- wikipage start -->
 
 
-            <?php if ($ACT=="search" ) {?>
+            <?php if ($ACT=="search"&&tpl_getConf('debug')  ) {?>
             <h1><?php echo $ID; ?> 에 대한 검색 결과</h1>
-<script>
-  (function() {
-    var cx = '015553187907637026800:6qohwwzkdqo';
-    var gcse = document.createElement('script');
-    gcse.type = 'text/javascript';
-    gcse.async = true;
-    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-        '//cse.google.com/cse.js?cx=' + cx;
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(gcse, s);
-  })();
-</script>
-<gcse:searchresults-only></gcse:searchresults-only>
+                    <script>
+                      (function() {
+                        var cx = '015553187907637026800:6qohwwzkdqo';
+                        var gcse = document.createElement('script');
+                        gcse.type = 'text/javascript';
+                        gcse.async = true;
+                        gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                            '//cse.google.com/cse.js?cx=' + cx;
+                        var s = document.getElementsByTagName('script')[0];
+                        s.parentNode.insertBefore(gcse, s);
+                      })();
+                    </script>
+                    <gcse:searchresults-only></gcse:searchresults-only>
 
             <?php }
                 else tpl_content(true); ?>
@@ -380,6 +383,7 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
       </div>
       <div class="modal-body">
         <form class="uk-form-horizontal" action="<?php echo  tpl_basedir()?>newpage.php">
+          <input type="text" hidden name="DOKU_URL" value="<?php echo DOKU_URL?>">
           <input type="text" hidden name="ns" value="<?php echo $INFO['namespace']?>">
           <label class="label-control text-capitalize"><?php echo tpl_getLang('pagename')?></label><br>
           <input class="form-control" id="newpageid" name="title" type="text" required placeholder="<?php echo tpl_getLang('pagename')?>">      <br>
