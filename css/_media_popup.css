@@ -107,6 +107,10 @@ html.popup {
 #media__tree ul li li {
     margin-left: 1.5em;
 }
+#media__tree li.media {
+  margin-top:0;
+}
+
 [dir=rtl] #media__tree ul li li {
     margin-left: 0;
     margin-right: 1.5em;
@@ -121,6 +125,10 @@ html.popup {
 #media__content div.upload {
     font-size: .9em;
     margin-bottom: .5em;
+}
+
+#media__content div.qq-upload-drop-area {
+   background-color:#fff;
 }
 
 #mediamanager__uploader {
@@ -252,7 +260,23 @@ html.popup {
     clear: left;
     margin: .2em 0 0 25%;
 }
+
 [dir=rtl] #media__content form.meta div.buttons {
     clear: right;
     margin: .2em 25% 0 0;
+}
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-track {
+    background-color: #eaeaea;
+    border-left: 1px solid #ccc;
+
+}
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+        border-radius:6px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa;
 }

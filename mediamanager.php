@@ -22,10 +22,11 @@ header('X-UA-Compatible: IE=edge,chrome=1');
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
     <?php tpl_includeFile('meta.html') ?>
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<?php echo tpl_getMediaFile(array("bs/bootstrap.min.css")); ?>" rel="stylesheet">
+    <script src="<?php echo tpl_getMediaFile(array("bs/bootstrap.min.js")); ?>" type="text/javascript"></script>
 </head>
-
-<body>
-<a class="btn uk-button-primary"></a>
+<body> 
     <!--[if lte IE 7 ]><div id="IE7"><![endif]--><!--[if IE 8 ]><div id="IE8"><![endif]-->
     <div id="media__manager" class="dokuwiki">
         <?php html_msgarea() ?>
@@ -43,5 +44,14 @@ header('X-UA-Compatible: IE=edge,chrome=1');
         </div></div>
     </div>
     <!--[if ( lte IE 7 | IE 8 ) ]></div><![endif]-->
+<script>
+jQuery(document).ready(function()
+{
+
+        jQuery("button, #media__manager  .qq-upload-button,#media__manager .qq-upload-action").addClass( "btn btn-default" );
+  //    jQuery(".dokuwiki .secedit button").addClass("btn btn-default btn-xs pull-right");
+
+}); 
+</script>    
 </body>
 </html>
