@@ -259,6 +259,23 @@ border:1px solid rgb(99, 150, 150,0.3)}
    .qq-upload-success  .qq-upload-size {display:none!important;}
 }
 
+#mediamgr__aside::-webkit-scrollbar {
+    width: 12px;
+}
+#mediamgr__aside::-webkit-scrollbar-track {
+    background-color: #eaeaea;
+    border-left: 1px solid #ccc;
+
+}
+#mediamgr__aside::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+        border-radius:6px;
+}
+#mediamgr__aside::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa;
+}
+
+
 #dokuwiki__footer {
   img { vertical-align:baseline; }
 }
@@ -450,34 +467,41 @@ form.plugin_move_form {padding: 0 40px;}
 
 
 #dokuwiki__nav,  #dokuwiki__aside {
-    width:__sidebar_width__;
+    
     position:fixed;
     top:0;bottom:0;    
     background-color: #35373c;
 	box-shadow: 0 0 10px rgba(34, 34, 34, 0.5) inset;
+    overflow-x:hidden;
+    -ms-overflow-style: none;
+     
+}
+#dokuwiki__nav::-webkit-scrollbar,  #dokuwiki__aside::-webkit-scrollbar {
+    display: none;
 }
 
 #dokuwiki__nav {
-	z-index:15;
+   Z-index:15;
    left:0;
    display:none;
+   padding:5px;
  }
 
  /* column control  */
 #dokuwiki__aside {
 	z-index:13;
     bottom:0; top:0;
-    /*overflow-y:hidden;*/ overflow-x:hidden;
+width:__sidebar_width__;
+   
 }
-.lsb::-webkit-scrollbar, .rsb::-webkit-scrollbar {
-    display: none;
-}
+
+
 
  #dokuwiki__aside {
     color:#aaa;
     right:0;    
     h1,h2,h3,h4,h5 {color:#00b8be;}
-    a {transition: color .2s linear; }
+   /* a {transition: color .2s linear; */
     li {position: relative;}
     div.li:hover a:after {
           content: '';
@@ -574,3 +598,31 @@ form.plugin_move_form {padding: 0 40px;}
 /* Styles */
 }
 
+/* http://blog.readiz.com/134  간단한 Back to top 버튼 넣기 */
+#toTop {
+    z-index:1030;
+	width: 84px;
+	border: 2px solid #f7f7f7;
+	background: #f7f7f7;
+	text-align: center;
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	cursor: pointer;
+	display: none;
+	color: #333;
+	opacity: 0.6;
+	filter: alpha(opacity=60);
+	border-radius: 50%;
+	-webkit-transition: all .25s linear;
+	-moz-transition: all .25s linear;
+	-o-transition: all .25s linear;
+	transition: all .25s linear;
+	padding: 5px;
+}
+#toTop:hover
+{
+	background: #b3b3b3;
+	border: 2px solid #b3b3b3;
+} 
+	

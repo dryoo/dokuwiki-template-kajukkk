@@ -58,21 +58,8 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
 
 
 
-    <script>
-    function tpl_toggleLight() {
-     if (DokuCookie.getValue('dark')==1)
-     {
-          DokuCookie.setValue('dark','0');
-        jQuery('body').toggleClass('dark');
-        return false;
-     }
-     else
-     {
-        DokuCookie.setValue('dark','1');
-        jQuery('body').toggleClass('dark');
-        return false;
-      }
-    }
+    <script> 
+
     </script>
     <?php if (tpl_getConf('debug')): ?>
         <!-- Piwik -->
@@ -90,7 +77,7 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
         </script>
         <noscript><p><img src="//io.vaslor.net/analytics/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
         <!-- End Piwik Code -->
-    <script src="<?php echo tpl_getMediaFile(array("js/sendsns.js")); ?>" type="text/javascript"></script>
+    <script src="<?php echo tpl_getMediaFile(array("js/sendsns.js")); ?>" type="text/javascript"></script>    
     <?php endif;?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- <script src="<?php echo tpl_getMediaFile(array("js/respond.min.js")); ?>" type="text/javascript"></script>-->
@@ -109,21 +96,21 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
   	<div id="dokuwiki__nav">
        	    <?php //if (tpl_getConf('debug')) @include('shortcut.php') /* Shortcut */ ?> 
              <?php tpl_include_page(":nav", 1, 1) ?>
-        </div>
+    </div>
     <div id="dokuwiki__top" class="mode_<?php echo $ACT ?> <?php echo ($showSidebar) ? 'showSidebar' : '';
         ?> <?php echo ($hasSidebar) ? 'hasSidebar' : ''; ?>"  >
 
         <?php tpl_flush(); ?>
 
         <div class="clearfix" style="z-index:3;box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .82);top:0;position:fixed;width:100%;background-color:#333">    
-            <div class="btn_left" style=""><i class="fa fa-opera "></i></div>
+            <a class="btn_left" href="#dokuwiki__top"><i class="fa fa-bars"></i></a>
          
 			<?php if (!plugin_isdisabled('searchformgoto')) {
 				$searchformgoto = &plugin_load('helper','searchformgoto');
 				$searchformgoto->gotoform();
 				} else { tpl_searchform(); }
 			?>         
-            <div class="btn_right" style=""><i class="fa fa-pause"></i></div>
+            <a class="btn_right" href="#dokuwiki__top" style=""><i class="fa fa-pause"></i></a>
         </div>  
         <div class="core clearfix" style="margin-top:44px;">
             <?php ds_html_msgarea(); /* occasional error and info messages */ ?>    
@@ -132,7 +119,6 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
         <div id="dokuwiki__content">
             <?php tpl_bs_breadcrumbs() ?>
             <?php if ($ACT=="show" ||$ACT=="edit"): ?>
-                
             <h1>
                 <?php echo p_get_first_heading($ID) ?>      
                 <?php   /* Short URL*/
@@ -143,7 +129,7 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
                 <small>
                 <a href="<?php echo $sURL ?>" style="font-size:16px;color:rgba(111,111,111,0.5)"><?php echo $sURL ?></a> 
                 </small>
-                <?php endif ?>
+                <?php endif  /* Short URL*/?>
             </h1>
             <?php endif?> 
             <?php if ($ACT=="show") tpl_include_page(tpl_getConf('nsheader'),true,true);   /* page header */ ?>
@@ -159,8 +145,9 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
             <!-- wikipage start -->
 
 
-            <?php if ($ACT=="search"&&tpl_getConf('debug')  ) {?>
-            <h1><?php echo $ID; ?> 에 대한 검색 결과</h1>
+            <?php  // 구글 CSE 
+            if ($ACT=="search"&&tpl_getConf('debug')  ) {?>
+            <h1>"<?php echo noNS($ID); ?>"에 대한 검색 결과</h1>
                     <script>
                       (function() {
                         var cx = '015553187907637026800:6qohwwzkdqo';
@@ -173,10 +160,12 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
                         s.parentNode.insertBefore(gcse, s);
                       })();
                     </script>
-                    <gcse:searchresults-only></gcse:searchresults-only>
+                       <gcse:searchresults-only></gcse:searchresults-only>
 
             <?php }
-                else tpl_content(true); ?>
+                else 
+                tpl_content(true); ?>
+             
             <!-- wikipage stop -->
             <div class="clearer"></div>
             <!-- Usage as a class -->
@@ -236,7 +225,8 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
                 if($disqus) echo "<center>".$disqus->_disqus()."</center>";
             }
             ?>
-            
+ 
+
             
             <?php tpl_license('badge', false, false, true); // license button, no wrapper ?>   
             <div class="docInfo"><?php tpl_pageinfo() ?>
@@ -315,7 +305,7 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
             <?php tpl_includeFile('sidebarfooter.html') ?>
         </div>
     </div><!-- /aside -->  </asdie>
-                <?php tpl_button_a('top','eject','','btn-primary btn-circle slideTextUp noprint');?>      </div>
+                   </div>
 	</div></div><!-- /.dokuwiki -->
 
 <asdie>
@@ -332,36 +322,6 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
       <div class="modal-body">
        <?php tpl_include_page(tpl_getConf('help'),true,true);   /* help page  */ ?>
  
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $lang['js']['mediaclose'] ?></button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade noprint" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="searchModalLabel"><?php echo tpl_getLang('help')?></h4>
-      </div>
-      <div class="modal-body">
-         <script>
-  (function() {
-    var cx = '015553187907637026800:6qohwwzkdqo';
-    var gcse = document.createElement('script');
-    gcse.type = 'text/javascript';
-    gcse.async = true;
-    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-        '//cse.google.com/cse.js?cx=' + cx;
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(gcse, s);
-  })();
-</script>
-<gcse:searchresults-only></gcse:searchresults-only>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $lang['js']['mediaclose'] ?></button>
@@ -433,7 +393,6 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
     </div>
   </div>
 </div> <!--NEW page  Modal -->
-
 </asdie> 
 
 <script>
@@ -453,6 +412,17 @@ jQuery(document).ready(function()
    /* jQuery(this).scroll(function () { 
     	jQuery(".lsb").scrollTop(jQuery(this).scrollTop());   	
     }); */
+    
+     /*   [CSS+Javascript] 간단한 Back to top 버튼 넣기   */ 
+     jQuery('body').append('<div id="toTop"><i class="fa fa-angle-double-up fa-5x"></i></div>');
+     jQuery("#toTop").bind("click", function () {jQuery("body").animate({ scrollTop: 0 }, 200);});
+     jQuery(window).scroll(function () {
+		if (jQuery(this).scrollTop() > 100) {
+				jQuery('#toTop').fadeIn();
+			} else {
+				jQuery('#toTop').fadeOut();
+			}
+		});    /*   http://blog.readiz.com/134  */
 }); 
 </script>
 
@@ -460,8 +430,9 @@ jQuery(document).ready(function()
 <?php /* spot-im community widget */ //echo tpl_getConf('spot-im')?>
 
 <?php /* server processing time */ ?>
-<?php printf("<center  class='small text-muted noprint'>%.3f seconds in processing this page.</center>",(microtime(get_as_float)-$pagestart));?>
+
 <div class="no"><?php tpl_indexerWebBug() /* provide DokuWiki housekeeping, required in all templates */ ?></div>
 <div id="screen__mode" class="no"></div><?php /* helper to detect CSS media query in script.js */ ?>
+  <?php printf("<center  class='small text-muted noprint'>%.3f seconds in processing this page on this powerful server.</center>",(microtime(get_as_float)-$pagestart));?>
 </body>
 </html>

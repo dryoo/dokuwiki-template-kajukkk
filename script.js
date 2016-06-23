@@ -1,8 +1,22 @@
-
+  /* day/night toggle  */
+  function tpl_toggleLight() {
+     if (DokuCookie.getValue('dark')==1)
+     {
+          DokuCookie.setValue('dark','0');
+        jQuery('body').toggleClass('dark');
+        return false;
+     }
+     else
+     {
+        DokuCookie.setValue('dark','1');
+        jQuery('body').toggleClass('dark');
+        return false;
+      }
+   }
 
 
 (function($) {
-    var fadeOption = {duration: 150};
+    var fadeOption = {duration: 0};
     var device_class = ''; // not yet known
     var device_classes = 'mobile wide desktop tablet phone';
     var resizeTimer;
