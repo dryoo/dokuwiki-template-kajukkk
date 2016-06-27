@@ -161,7 +161,7 @@
      if ($last==1) return false;
      $i    = 0;
      print '<ol class="breadcrumb text-capitalize hidden-xs">';
-     print '<span class="glyphicon glyphicon-book"></span>';
+     print '<li><i class="fa fa-book" aria-hidden="true"></i></li>';
      foreach($crumbs as $id => $name) {
          $i++;
          print '<'.$tag.'>';

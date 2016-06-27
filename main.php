@@ -47,7 +47,7 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
     <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
     <?php tpl_metaheaders() ?>
     <meta name="description" content="<?php $_desc=p_get_metadata($ID,"description"); echo strip_tags($_desc['abstract']); ?>" >
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     <link href="<?php echo tpl_getMediaFile(array("bs/bootstrap.min.css")); ?>" rel="stylesheet">
     <script src="<?php echo tpl_getMediaFile(array("bs/bootstrap.min.js")); ?>" type="text/javascript"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -55,12 +55,6 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
     <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
     <?php tpl_includeFile('meta.html') ?>
     <?php echo tpl_getConf('google_analytics') ?>
-
-
-
-    <script> 
-
-    </script>
     <?php if (tpl_getConf('debug')): ?>
         <!-- Piwik -->
         <script type="text/javascript">
@@ -102,15 +96,25 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
 
         <?php tpl_flush(); ?>
 
-        <div class="clearfix" style="z-index:3;box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .82);top:0;position:fixed;width:100%;background-color:#333">    
+        <div class="titlebar clearfix" style="">    
             <a class="btn_left" href="#dokuwiki__top"><i class="fa fa-bars"></i></a>
-         
+            <a class="btn_titlebar  pull-left hidden-phone hidden-tablet"   href="<?php echo DOKU_URL?>"><?php echo strip_tags($conf['title'])?></a>
+
 			<?php if (!plugin_isdisabled('searchformgoto')) {
 				$searchformgoto = &plugin_load('helper','searchformgoto');
 				$searchformgoto->gotoform();
 				} else { tpl_searchform(); }
-			?>         
-            <a class="btn_right" href="#dokuwiki__top" style=""><i class="fa fa-pause"></i></a>
+			?>      
+ 
+            <a class="btn_right" href="#dokuwiki__top" style=""><i class="fa fa-caret-square-o-right"></i></a>
+
+         
+            <?php if (tpl_getConf('debug')): ?>
+            <a class="btn_titlebar pull-right hidden-phone" href="/tech/" style=""><i class="fa fa-laptop"></i></a>     
+            <a class="btn_titlebar pull-right hidden-phone" href="/med/" style=""><i class="fa fa-medkit"></i></a>           
+            <a class="btn_titlebar pull-right hidden-phone" href="/game/" style=""><i class="fa fa-gamepad"></i></a> 
+            <?php endif ?>
+
         </div>  
         <div class="core clearfix" style="margin-top:44px;">
             <?php ds_html_msgarea(); /* occasional error and info messages */ ?>    
@@ -143,8 +147,6 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
 <?php endif; ?>
    <?php if(($ACT!="search"))tpl_button_a('edit','pencil','','btn btn-danger pull-right  noprint ');?>      
             <!-- wikipage start -->
-
-
             <?php  // 구글 CSE 
             if ($ACT=="search"&&tpl_getConf('debug')  ) {?>
             <h1>"<?php echo noNS($ID); ?>"에 대한 검색 결과</h1>
@@ -164,8 +166,7 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
 
             <?php }
                 else 
-                tpl_content(true); ?>
-             
+                tpl_content(true); ?>            
             <!-- wikipage stop -->
             <div class="clearer"></div>
             <!-- Usage as a class -->
@@ -228,7 +229,7 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
  
 
             
-            <?php tpl_license('badge', false, false, true); // license button, no wrapper ?>   
+            <?php   if (($ACT=="show")||($ACT=="edit")||($ACT=="preview")) tpl_license('badge', false, false, true); // license button, no wrapper ?>   
             <div class="docInfo"><?php tpl_pageinfo() ?>
           <?php    $contributors =$INFO['meta']['contributor'];// p_get_metadata($ID, 'contributor' );
       if ($contributors!=null)    { 
@@ -269,7 +270,9 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
                  <?php tpl_logo();?>     <div class="clearfix"></div>
         <?php tpl_title();?>
 		<?php $today=':오늘:'.date("n월_j일");  if (page_exists($today)) { 
-	print p_render('xhtml',p_get_instructions('^  오늘은 [['.$today.']]  ^'),$info);
+            echo "<div class='text-center'>";
+	       print p_render('xhtml',p_get_instructions('오늘은 [['.$today.']]'),$info);
+            echo "</div>";
 }
 ?>
         <div class="tools text-center">
@@ -399,15 +402,20 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
 jQuery(".dokuwiki table").addClass( "table" );
 jQuery(document).ready(function()
 {
-    <?php if (($ACT=="edit")||($ACT=="preview")): /* 편툴바 조작 */?>
+    <?php  if (($ACT=="edit")||($ACT=="preview")): /* 편집툴바 조작 */?>
         jQuery("#tool__bar").addClass( "btn-group" );
         jQuery(".dokuwiki .toolbutton").addClass( "btn btn-default btn-sm" );
         jQuery(".dokuwiki .editButtons button").addClass( "btn btn-default" );
-
         jQuery("#edbtn__save").addClass( "btn-primary");
         jQuery("#edbtn__preview").addClass( "btn-success");
     <?php endif ?>
-       jQuery(".tags span a").addClass( "badge" );
+    <?php  if (($ACT=="login")): /* 로그인 조작 */?>
+        
+        jQuery("#dw__login").addClass( "form-group" );
+        jQuery("#dw__login input.edit").addClass( "form-control" );
+        jQuery("#dw__login button").addClass( "btn btn-default btn-primary" );
+    <?php endif ?>
+    jQuery(".tags span a").addClass( "badge" );
     jQuery(".dokuwiki .secedit button").addClass("btn btn-default btn-xs pull-right");
    /* jQuery(this).scroll(function () { 
     	jQuery(".lsb").scrollTop(jQuery(this).scrollTop());   	
