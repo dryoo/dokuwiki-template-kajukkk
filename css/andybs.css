@@ -282,12 +282,10 @@ height: 360px;}
 }
 
 .ui-dialog .ui-dialog-titlebar {padding:0;}
-
-.ui-dialog-titlebar-close {
-      background-color:red;
- 
+.ui-dialog-titlebar-close {line-height: 1}
+.ui-dialog-titlebar-close::before {
+      content: "×";   /* https://en.wikipedia.org/wiki/X_mark */
 }
-
 
 /******************* plugins ***********************/
 
@@ -308,6 +306,8 @@ div.dokuwiki div#disqus__thread {
 div.tags {
    border-top:none!important;
 }
+
+.plugin__shorturl { font-size: 50%; color:rgba(128,127,129,0.5); }
 
 #dokuwiki__content .CodeMirror-lines,
 #wiki__text
@@ -423,6 +423,7 @@ form.plugin_move_form {padding: 0 40px;}
  .btn_right:hover i { -ms-transform: rotate(90deg);  transform: rotate(180deg); transition-duration: 0.8s; }
 
  .btn_titlebar {z-index:12;color:#bbb;line-height:43px;font-size:1.5em; padding: 0 3px 0 3px;text-align: center;}
+ .btn_titlebar:hover {color:#fff;text-decoration: none;}
 
 #dokuwiki__nav,  #dokuwiki__aside {
     
@@ -532,6 +533,7 @@ form.plugin_move_form {padding: 0 40px;}
     #dokuwiki__aside {display:block;  }
     .core{ margin-right:250px; }
 	.titlebar {padding-right:250px;}
+    .btn_titlebar {margin-right:3px;margin-left:3px;}
     #dokuwiki__content { padding-left:5px; padding-right: 5px;}
 	.desktop {display:block}
 }
@@ -543,6 +545,7 @@ form.plugin_move_form {padding: 0 40px;}
     #dokuwiki__aside {display:block;  }
     .core { margin-right:250px;}
 	.titlebar {padding-right:250px;}
+    .btn_titlebar {margin-right:7px;margin-left:7px;}
     .dokuwiki  #dokuwiki__content { padding-left:25px; padding-right: 25px;}
 	.wide {display:block}
 }
@@ -579,3 +582,25 @@ form.plugin_move_form {padding: 0 40px;}
 	border: 2px solid #b3b3b3;
 } 
 	
+
+a.btn_titlebar:hover {
+  animation: shake 0.42s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+} /* https://css-tricks.com/snippets/css/shake-css-keyframe-animation/ */
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-3px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(3px, 0, 0);
+  }
+}

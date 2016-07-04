@@ -128,11 +128,9 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
                 <?php   /* Short URL*/
                     if (!plugin_isdisabled("shorturl") && (auth_quickaclcheck($ID) >= AUTH_READ) && ($INFO['exists'])):
                         $shorturl = plugin_load('helper', 'shorturl');
-                        $sURL= DOKU_URL.$shorturl->autoGenerateShortUrl($ID);
+                        //$sURL= DOKU_URL.$shorturl->autoGenerateShortUrl($ID);
+                        print $shorturl->shorturlPrintLink($ID);
                         ?>
-                <small>
-                <a href="<?php echo $sURL ?>" style="font-size:16px;color:rgba(111,111,111,0.5)"><?php echo $sURL ?></a> 
-                </small>
                 <?php endif  /* Short URL*/?>
             </h1>
             <?php endif?> 
