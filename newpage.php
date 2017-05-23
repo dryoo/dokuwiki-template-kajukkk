@@ -10,6 +10,13 @@
  // @include('Snoopy.class.php');
  // echo $title;
 
+$log=true;
+if ($log) $logfile = fopen("logs.txt", "a") or die("Unable to open file!");
+
+if ($log) fwrite($logfile, "\n제목: ". $title);
+
+
+
  switch ($do) {
     case "enha":
         $result=fetch_enha($title);
@@ -45,6 +52,9 @@
         break;
 }
 
+
+if ($log) fclose($logfile);
+
 if ($id){
    header("Location: ".$url."doku.php?id=$id&do=edit" ); exit();
 } else  {
@@ -60,23 +70,28 @@ function clearID($id) {
     return strtolower($id);
 }
 function fetch_namu($title){
-    $title=str_replace('%20',' ',$title);
-    //$title=str_replace('+', ' ',$title);
-
+    global $log;
+    global $logfile;
+    $title=str_replace(' ','%20',$title);
+    $title=str_replace('+','%20',$title);
+    
     //$uri="https://namu.wiki/raw/".rawurlencode($title); 
     
- 
+    if ($log) fwrite($logfile, "\npatch> ". $title);
     $uri="https://namu.wiki/raw/".(myUrlEncode($title));  
    // echo $uri; exit;
   //  $raw= file_get_contents($uri); 
-    
+     if ($log) fwrite($logfile, "\n". $uri);
+
     $raw=get_content($uri);
 
     //echo $raw; exit;
     $result=e2d($raw);
 
     if ( strlen ($result)<500)  return false;
-    $result="======$title======\n\n".$result."\n  * 출처: 나무위키- ".$title."([[https://creativecommons.org/licenses/by-nc-sa/2.0/kr/|CC BY-NC-SA 2.0 KR]])\n\n{{tag>$title}}\n";  //페이지 제목 추가.
+    $title=str_replace('%20',' ',$title);
+
+    $result="{{tag>$title}}\n======$title======\n\n$title([[$uri|출처]])$result\n  * 출처: 나무위키- $title([[https://creativecommons.org/licenses/by-nc-sa/2.0/kr/|CC BY-NC-SA 2.0 KR]])\n\n";  //페이지 제목 추가.
     //echo $result; exit;     
     return $result;
 }
@@ -218,14 +233,16 @@ http://php.net/manual/en/reference.pcre.pattern.modifiers.php
     $text= preg_replace('/&{0,1}align=right|left|middle/i','',$text); // align 처리
 
     //구문강조 처리   
-    $text= preg_replace('/\'\'\'([^\'\'\']+)\'\'\'/','**$1**',$text); //굵게''' 처리
+    //$text= preg_replace('/\'\'\'([^\'{3}]+)\'\'\'/','**$1**',$text); //굵게''' 처리
+    $text= preg_replace("/'''/",'궭',$text); //굵게''' 처리
+    $text= preg_replace("/궭([^궭]*)궭/",'**$1**',$text); //굵게''' 처리
     $text= preg_replace('/\'\'([^\'\']+)\'\'/','**$1**',$text); //기울이기'' 처리
     $text= preg_replace('/~~([^~~]+)~~/','<del>$1</del>',$text); // 취소선  처리  
+    $text= preg_replace('/--([^--]+)--/','<del>$1</del>',$text); // 취소선  처리  
     //$text=preg_replace("~.+a","ㅁ",$text);
     //$text=preg_replace("(\=+)","$0=",$text);
     //$text=preg_replace("(\=+)","$0=",$text); //제목줄처리.
     
-     
     //링크처리
     //도쿠위키는 링크[[]]안의 ""를 무시하기 때문에 건드릴 필요가 없다. 
     $text= preg_replace('/(\[[^\[|^\*][^\]]+\])([^\]])/','[$1]$2',$text); //  홀대괄호 링크처리

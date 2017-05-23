@@ -30,13 +30,13 @@ References
 if (!defined('DOKU_INC')) die(); /* must be run from within DokuWiki */
 @require_once(dirname(__FILE__).'/tpl_functions.php'); /* include hook for template functions */
 
-header('X-UA-Compatible: IE=edge,chrome=1');
+header('X-UA-Compatible: IE=edge');
 
 // 애드센스처리
 if (($ACT=="show")||($ACT=="showtag")) $noadsense=false; else $noadsense=true; 
 if (p_get_metadata($ID,"adult")) $noadsense=true;
 ?>
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <!--[if lt IE 9]>  <html class="ie"> <![endif]-->
 <!--[if gte IE 9]>  <html> <![endif]-->
 <!--[if !IE]><!-->        
@@ -46,43 +46,23 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
     <title><?php echo (p_get_first_heading($ID))?p_get_first_heading($ID):strrchr(':'.$INFO['id'],":"); ?><?php if (strrchr(':'.$INFO['id'],":")!=":".$conf['start']) echo ' - '.p_get_first_heading(':'.$INFO['namespace'].':'.$conf['start']).' - '.strip_tags($conf['title']); else echo ' - '.strip_tags($conf['tagline']) ?></title>
     <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
     <?php tpl_metaheaders() ?>
-    <meta name="description" content="<?php $_desc=p_get_metadata($ID,"description"); echo strip_tags($_desc['abstract']); ?>" >
+    <meta name="description" content="<?php $_desc=p_get_metadata($ID,"description"); if ($_desc !=null) echo htmlspecialchars(strip_tags($_desc['abstract'])); ?>" >
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     <link href="<?php echo tpl_getMediaFile(array("bs/bootstrap.min.css")); ?>" rel="stylesheet">
-    <script src="<?php echo tpl_getMediaFile(array("bs/bootstrap.min.js")); ?>" type="text/javascript"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
     <?php tpl_includeFile('meta.html') ?>
     <?php echo tpl_getConf('google_analytics') ?>
-    <?php if (tpl_getConf('debug')): ?>
-        <!-- Piwik -->
-        <script type="text/javascript">
-          var _paq = _paq || [];
-          _paq.push(['trackPageView']);
-          _paq.push(['enableLinkTracking']);
-          (function() {
-            var u="//io.vaslor.net/analytics/";
-            _paq.push(['setTrackerUrl', u+'piwik.php']);
-            _paq.push(['setSiteId', 1]);
-            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-            g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-          })();
-        </script>
-        <noscript><p><img src="//io.vaslor.net/analytics/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
-        <!-- End Piwik Code -->
-    <script src="<?php echo tpl_getMediaFile(array("js/sendsns.js")); ?>" type="text/javascript"></script>    
-    <?php endif;?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- <script src="<?php echo tpl_getMediaFile(array("js/respond.min.js")); ?>" type="text/javascript"></script>-->
     <!--[if lt IE 9]>
       <script src="<?php echo tpl_getMediaFile(array("js/html5shiv.js")); ?>" type="text/javascript"></script>
           <![endif]-->
     <?php if (tpl_getConf('debug')): ?>   
-    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<!-- <script async src="//developers.kakao.com/sdk/js/kakao.min.js"></script> -->
     <?php endif;?>
 </head>
-
 <body class="<?php echo (get_doku_pref('dark', 0)==1)?'dark':''?>" >
 <div class="dokuwiki clearfix ">
     <div id="sidebar_bg"></div>
@@ -97,7 +77,7 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
         <?php tpl_flush(); ?>
 
         <div class="titlebar clearfix" style="">    
-            <a class="btn_left" href="#dokuwiki__top"><i class="fa fa-bars"></i></a>
+            <div class="btn_left" href=""><i class="fa fa-bars"></i></div>
             <a class="btn_titlebar  pull-left hidden-phone hidden-tablet"   href="<?php echo DOKU_URL?>"><?php echo strip_tags($conf['title'])?></a>
 
 			<?php if (!plugin_isdisabled('searchformgoto')) {
@@ -106,7 +86,7 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
 				} else { tpl_searchform(); }
 			?>      
  
-            <a class="btn_right" href="#dokuwiki__top" style=""><i class="fa fa-caret-square-o-right"></i></a>
+            <div class="btn_right" href="" style=""><i class="fa fa-caret-square-o-right"></i></div>
 
          
             <?php if (tpl_getConf('debug')): ?>
@@ -122,18 +102,6 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
                if  (!$noadsense) echo tpl_getConf('google_adsense') ?>
         <div id="dokuwiki__content">
             <?php tpl_bs_breadcrumbs() ?>
-            <?php if ($ACT=="show" ||$ACT=="edit"): ?>
-            <h1>
-                <?php echo p_get_first_heading($ID) ?>      
-                <?php   /* Short URL*/
-                    if (!plugin_isdisabled("shorturl") && (auth_quickaclcheck($ID) >= AUTH_READ) && ($INFO['exists'])):
-                        $shorturl = plugin_load('helper', 'shorturl');
-                        //$sURL= DOKU_URL.$shorturl->autoGenerateShortUrl($ID);
-                        print $shorturl->shorturlPrintLink($ID);
-                        ?>
-                <?php endif  /* Short URL*/?>
-            </h1>
-            <?php endif?> 
             <?php if ($ACT=="show") tpl_include_page(tpl_getConf('nsheader'),true,true);   /* page header */ ?>
            
 <?php if ((auth_quickaclcheck($ID) >= AUTH_EDIT)&&($ACT=="show")): ?>
@@ -143,9 +111,9 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
   <strong><?php echo strip_tags($conf['tagline']) ?></strong><?php echo tpl_getLang('haspermeditpage');?>
 </div>
 <?php endif; ?>
-   <?php if(($ACT!="search"))tpl_button_a('edit','pencil','','btn btn-danger pull-right  noprint ');?>      
+   <?php if(($ACT!="search"))tpl_button_a('edit','pencil','','editmain btn btn-danger pull-right  noprint ');?>      
             <!-- wikipage start -->
-            <?php  // 구글 CSE 
+            <?php  //  도쿠위키의 검색결과를 가로채서 구글 CSE ...출력
             if ($ACT=="search"&&tpl_getConf('debug')  ) {?>
             <h1>"<?php echo noNS($ID); ?>"에 대한 검색 결과</h1>
                     <script>
@@ -218,17 +186,23 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
 
         <?php if  (!$noadsense) echo tpl_getConf('google_adsense') /* google adsense RESPONSIVE 아래 */?>
         
-            <?php  /* *************디스커즈 disqus************* */
-            if($ACT == 'show' &&  (strrchr(':'.$INFO['id'],":")!=":".$conf['start']) ){
-                $disqus = &plugin_load('syntax','disqus');
-                if($disqus) echo "<center>".$disqus->_disqus()."</center>";
-            }
-            ?>
- 
+            <?php if ($ACT=="show" ||$ACT=="edit"): ?>
+            <div class="noprint">
+                <?php   /* Short URL*/
+                    if (!plugin_isdisabled("shorturl") && (auth_quickaclcheck($ID) >= AUTH_READ) && ($INFO['exists'])):
+                        $shorturl = plugin_load('helper', 'shorturl');
+                        //$sURL= DOKU_URL.$shorturl->autoGenerateShortUrl($ID);
+                        print $shorturl->shorturlPrintLink($ID);
+                        ?>
+                <?php endif  /* Short URL*/?>
+            </div>
+            <?php endif?> 
 
             
             <?php   if (($ACT=="show")||($ACT=="edit")||($ACT=="preview")) tpl_license('badge', false, false, true); // license button, no wrapper ?>   
-            <div class="docInfo"><?php tpl_pageinfo() ?>
+            <div class="docInfo text-muted">
+            <?php echo tpl_pagesize($ID) ?>
+            <?php tpl_pageinfo() ?>
           <?php    $contributors =$INFO['meta']['contributor'];// p_get_metadata($ID, 'contributor' );
       if ($contributors!=null)    { 
          //$contributors=array_unique(array_diff_assoc($contributors,array_unique($contributors)));  
@@ -252,7 +226,13 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
 
             </div>
                  
-
+            <?php  /* *************디스커즈 disqus************* */
+            if($ACT == 'show' &&  (strrchr(':'.$INFO['id'],":")!=":".$conf['start']) ){
+                $disqus = &plugin_load('syntax','disqus');
+                if($disqus) echo $disqus->_disqus();
+            }
+            ?>
+ 
             <?php tpl_includeFile('pagefooter.html') ?> 
             <?php include('tpl_footer.php') ?> 
     
@@ -264,8 +244,8 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
 
 
     <!-- ********** sidebar ********** -->
-      <asdie><div id="dokuwiki__aside" class="lsb sidebar">
-                 <?php tpl_logo();?>     <div class="clearfix"></div>
+      <aside><div id="dokuwiki__aside" class="lsb sidebar">
+        <?php tpl_logo();?>     <div class="clearfix"></div>
         <?php tpl_title();?>
 		<?php $today=':오늘:'.date("n월_j일");  if (page_exists($today)) { 
             echo "<div class='text-center'>";
@@ -276,9 +256,10 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
         <div class="tools text-center">
          <?php tpl_flush() ?>
             <?php if ($INFO['userinfo']!=""): /* If logged-in */?>
-            <a href="#" class="btn-circle btn-danger slideTextUp" data-target="#myModal"  data-toggle="modal" data-toggle="tooltip"   title="Add new page"><div><i class="fa fa-plus"></i></div><div><?php echo tpl_getLang('newpage')?></div></a>
+            <?php tpl_button_a('edit','pencil','','btn-info btn-circle slideTextUp');?>               
+            <a href="#" class="btn-circle btn-danger slideTextUp" data-target="#myModal"  data-toggle="modal"     title="Add new page"><div><i class="fa fa-plus"></i></div><div><?php echo tpl_getLang('newpage')?></div></a>
             <?php endif; ?>
-            <?php tpl_button_a('edit','pencil','','btn-info btn-circle slideTextUp');?>   
+
             <?php tpl_button_a('history','history','','btn-primary btn-circle slideTextUp');?> 
             <?php  if(!plugin_isdisabled('randompage')) {?>
                 <a href="?do=randompage" class="btn-circle btn-success slideTextUp" title="<?php echo tpl_getLang('randompage')?>"><div><i class="fa fa-random"></i></div><div><?php echo tpl_getLang('randompage')?></div></a>      
@@ -296,7 +277,7 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
     		<?php if (!plugin_isdisabled('move') && ($INFO['isadmin'])) {?>
     				<a href="?do=admin&page=move_main" class="btn-circle btn-default slideTextUp" title="<?php echo tpl_getLang('movepage') ?>"><div><i class="fa fa-bolt"></i></div><div><?php echo tpl_getLang('movepage') ?></div></a>    
             <?php  }         ?>         
-            <a href="#" class="btn-circle btn-danger slideTextUp" data-target="#helpModal"  data-toggle="modal" data-toggle="tooltip"   title="<?php echo tpl_getLang('help')?>"><div><i class="fa fa-question"></i></div><div><?php echo tpl_getLang('help')?></div></a>
+            <a href="#" class="btn-circle btn-danger slideTextUp" data-target="#helpModal"  data-toggle="modal" title="<?php echo tpl_getLang('help')?>"><div><i class="fa fa-question"></i></div><div><?php echo tpl_getLang('help')?></div></a>
          </div>                  
 
         <div class="content">
@@ -305,11 +286,11 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
             <?php tpl_include_page(tpl_getConf('lsb'),1,1) /* Bottom Sidebar */ ?>
             <?php tpl_includeFile('sidebarfooter.html') ?>
         </div>
-    </div><!-- /aside -->  </asdie>
+    </div> </aside>
                    </div>
 	</div></div><!-- /.dokuwiki -->
 
-<asdie>
+<aside>
 <!-- Modal -->
 <div class="modal fade noprint" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -394,12 +375,13 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
     </div>
   </div>
 </div> <!--NEW page  Modal -->
-</asdie> 
-
+</aside> 
+    <script  src="<?php echo tpl_getMediaFile(array("bs/bootstrap.min.js")); ?>" type="text/javascript"></script>
 <script>
-jQuery(".dokuwiki table").addClass( "table" );
+
 jQuery(document).ready(function()
 {
+	jQuery(".dokuwiki table").addClass( "table" );
     <?php  if (($ACT=="edit")||($ACT=="preview")): /* 편집툴바 조작 */?>
         jQuery("#tool__bar").addClass( "btn-group" );
         jQuery(".dokuwiki .toolbutton").addClass( "btn btn-default btn-sm" );
@@ -408,19 +390,14 @@ jQuery(document).ready(function()
         jQuery("#edbtn__preview").addClass( "btn-success");
     <?php endif ?>
     <?php  if (($ACT=="login")): /* 로그인 조작 */?>
-        
         jQuery("#dw__login").addClass( "form-group" );
         jQuery("#dw__login input.edit").addClass( "form-control" );
         jQuery("#dw__login button").addClass( "btn btn-default btn-primary" );
     <?php endif ?>
-    jQuery(".tags span a").addClass( "badge" );
+    //jQuery(".tags span a").addClass( "badge" );
     jQuery(".dokuwiki .secedit button").addClass("btn btn-default btn-xs pull-right");
-   /* jQuery(this).scroll(function () { 
-    	jQuery(".lsb").scrollTop(jQuery(this).scrollTop());   	
-    }); */
-    
      /*   [CSS+Javascript] 간단한 Back to top 버튼 넣기   */ 
-     jQuery('body').append('<div id="toTop"><i class="fa fa-angle-double-up fa-5x"></i></div>');
+     jQuery('body').append('<div id="toTop"><i class="fa fa-angle-double-up fa-2x"></i></div>');
      jQuery("#toTop").bind("click", function () {jQuery("body").animate({ scrollTop: 0 }, 200);});
      jQuery(window).scroll(function () {
 		if (jQuery(this).scrollTop() > 100) {
@@ -431,7 +408,9 @@ jQuery(document).ready(function()
 		});    /*   http://blog.readiz.com/134  */
 }); 
 </script>
-
+ <?php if (tpl_getConf('debug')): ?>
+<!--<script async src="<?php echo tpl_getMediaFile(array("js/sendsns.js")); ?>" type="text/javascript"></script>    -->
+    <?php endif;?>
 <div id="spot-im-root"></div>
 <?php /* spot-im community widget */ //echo tpl_getConf('spot-im')?>
 
@@ -439,6 +418,6 @@ jQuery(document).ready(function()
 
 <div class="no"><?php tpl_indexerWebBug() /* provide DokuWiki housekeeping, required in all templates */ ?></div>
 <div id="screen__mode" class="no"></div><?php /* helper to detect CSS media query in script.js */ ?>
-  <?php printf("<center  class='small text-muted noprint'>%.3f seconds in processing this page on this powerful server.</center>",(microtime(get_as_float)-$pagestart));?>
+  <?php printf("<p class='text-center small text-muted noprint'>%.3f seconds in processing this page on this powerful server.</p>",(microtime(get_as_float)-$pagestart));?>
 </body>
 </html>

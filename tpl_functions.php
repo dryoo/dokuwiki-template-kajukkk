@@ -188,8 +188,6 @@ function _tpl_toc_to_twitter_bootstrap_event_hander_dump_level($data, $header=''
         return '';
     }
 
- 
-
     $ret = '';
     $ret .= '<li class="divider"></li>';
    // $ret .= '<ul class="nav list-group">';
@@ -233,11 +231,13 @@ function _tpl_toc_to_twitter_bootstrap()
 
 function tpl_logo ($return = false) {
     global $INFO;
+    global $conf;
 
             $logoSize = array();
             $logo = tpl_getMediaFile(array(':'.$INFO['namespace'].':logo.jpg',':'.$INFO['namespace'].':logo.png',':¿À´Ã:'.date("n¿ù_jÀÏ").'.png',':logo.png',':wiki:logo.png', 'images/logo.png'), false, $logoSize); 
 			$out='<div><img class="logo" src="'.$logo.'" alt="" ></div>';
-            $out=tpl_link(wl($INFO['namespace']),$out,'',1);
+          //  $out=tpl_link(wl('..:'),$out,'',1);
+            $out=tpl_link(wl($INFO['namespace'].':'.$conf['start'],'',true),$out,'',1);
             if($return) return $out;
             echo $out;
             return true;
@@ -257,10 +257,10 @@ function tpl_title ($return=false) {
     global $INFO;
     global $conf;
     //strip_tags($conf['title'])
-    $out='<div class="title" >'.tpl_link(  wl($INFO['namespace']),p_get_first_heading(':'.$INFO['namespace'].':home'),'accesskey="h" title="[H]"',1).'</div>';
-             if($return) return $out;
-            echo $out;
-            return true;   
+    $out='<div class="text-center" >'.tpl_link(  wl($INFO['namespace'].':'.$conf['start']),p_get_first_heading(':'.$INFO['namespace'].':'.$conf['start']),'accesskey="h" title="[H]"',1).'</div>';
+    if($return) return $out;
+    echo $out;
+    return true;   
 }
 
   function tpl_apple_touch_icon() {
@@ -273,5 +273,9 @@ function tpl_title ($return=false) {
      return $return;
  }
 
-
+  function tpl_pagesize($ID) {
+    $page = wikiFN($ID);
+    if(file_exists($page)) 
+          return  filesize_h(filesize($page)); 
+   }
 ?>

@@ -1,3 +1,5 @@
+
+
   /* day/night toggle  */
   function tpl_toggleLight() {
      if (DokuCookie.getValue('dark')==1)
@@ -80,9 +82,6 @@
         $('.sidebar').on('wheel scroll', preventParentWheel);
         $('.btn_left').click(function() {
             toggleLeft();
-        });
-        $('.btn_left').mouseover(function() {
-            jQuery('.btn_left i').addClass('fa-spin'); 
         });
         $('.btn_right').click(function() {
             toggleRight();

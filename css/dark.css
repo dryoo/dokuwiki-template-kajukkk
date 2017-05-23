@@ -1,0 +1,52 @@
+
+ /*******************energy saving dark theme ***********************/
+ 
+ .dark {
+     color: #aaa;
+     background-color: #111;
+     .wrap_box, .summary, .alert, .JSpopup, code, input.edit, #qsearch__in {
+         background-color: #222;
+         border-color: rgba(200, 200, 200, 0.5);
+     }
+     .core,
+     pre,
+     .table,
+     .table .table,
+     #link__wiz {
+         color: inherit;
+         background-color: inherit;
+     }
+     .lightsaving {
+         color: #000
+     }
+     textarea.edit {
+         color: #aaa;
+         background-color: #222
+     }
+     .core h1,
+     .core h2,
+     .core h3,
+     .core h4,
+     .core h5 {
+         color: #ccc;
+     }
+     table,
+     table tr,
+     thead > tr > th,
+     .table > tbody > tr > th,
+     .table > tfoot > tr > th,
+     .table > thead > tr > td,
+     .table > tbody > tr > td,
+     .table > tfoot > tr > td {
+         border-color: #333!important;
+     }
+     .btn-default {
+         color: #999;
+         background-color: #333;
+         border-color: #222;
+     }
+     border-color:rgba(200,
+     200,
+     200,
+     0.5);
+ }

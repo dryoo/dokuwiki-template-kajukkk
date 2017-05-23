@@ -15,8 +15,11 @@ body {
 audio,
 video,
 #dokuwiki__header .tools,
+.titlebar,
+#dokuwiki__nav,
 #dokuwiki__aside,
-.dokuwiki .breadcrumbs,
+#toTop,
+.dokuwiki .breadcrumb,
 .dokuwiki .pageId,
 #dw__toc,
 #dw__search,#cse__search,
@@ -25,12 +28,11 @@ h3.toggle,
 #dokuwiki__footer,
 #navl,
 #disqus__thread,
-.modal,
-.noprint  {
-    display: none;
-}
-
-.adsbygoogle {display:none!important;}
+.modal,.alert,
+.noprint,.tags,
+.adsbygoogle,
+.plugin__shorturl
+ {display:none!important;}
 
 h1,
 h2,
@@ -75,6 +77,10 @@ a.mail:after {
    content: " [" attr(href) "]";
    font-size: 90%;
 }
+
+ a.media[href]:after {
+    content: none !important;
+  }
 
 /* code blocks */
 pre {
