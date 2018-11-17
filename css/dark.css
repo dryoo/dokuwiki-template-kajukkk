@@ -9,13 +9,16 @@
          border-color: rgba(200, 200, 200, 0.5);
      }
      .core,
-     pre,
      .table,
      .table .table,
      #link__wiz {
          color: inherit;
          background-color: inherit;
      }
+     pre{
+            color: inherit;
+     }
+
      .lightsaving {
          color: #000
      }

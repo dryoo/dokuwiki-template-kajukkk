@@ -1,18 +1,35 @@
+@charset "utf-8";
+ 
  body {
      position: static;
      color: __text__;
      overflow-x: hidden;
-/*      font-family: "Nanum Gothic", arial!important; */
-	 -webkit-text-size-adjust:none
+     
+	 -webkit-text-size-adjust:none;
+     font-size: __font_size__;
  }
+ 
+ body,
  h1,
  h2,
  h3,
  h4,
  h5 {
-     font-family: "NanumGothic", "Nanum Gothic", arial!important; clear: left;
-      
+    clear: left;
+    font-family: /*'Roboto',*/'Noto Sans KR',"나눔고딕","Nanum Gothic","맑은 고딕",   'Malgun Gothic', arial!important;   
  }
+ 
+ blockquote {
+ border-left: 5px solid #e6c700!important;
+    background: -webkit-gradient(linear, left top, right top, from(rgba(100,100,100,0.1)), to(rgba(100,100,100,0.01)));
+    background: linear-gradient(to right, rgba(100,100,100,0.1), rgba(100,100,100,0.01));
+margin:0;
+  }
+ 
+  blockquote blockquote {
+ border-left: 5px solid #c700e6!important;
+ margin-left:-25px; }
+ 
  
 svg:not(:root){vertical-align: middle;}
 .ui-admin svg:not(:root) {    fill: currentColor;}
@@ -89,7 +106,7 @@ textarea {
          text-overflow: ellipsis;
          white-space: nowrap;
          /* 줄바꿈방지 */
-         
+         display: inline;
          overflow: hidden;
      }
      li:hover,
@@ -100,9 +117,9 @@ textarea {
  /*############## contents  general elements #####################*/
  
  .summary {
-     .well;
-     .well-sm;
-     .bg-warning;
+     /* .well; */
+     /* .well-sm; */
+     /* .bg-warning; */
      .nowrap {
          margin-bottom: 0;
      }
@@ -143,8 +160,8 @@ textarea {
      img.mediacenter,
      img.medialeft,
      img.mediaright {
-         .img-responsive;
-         .img-rounded;
+         /* .img-responsive; */
+         /* .img-rounded; */
          margin-bottom: 4px;
          max-width: 100%;
      }
@@ -161,10 +178,10 @@ textarea {
          max-width: none;
      }
      #tool__bar {
-         .btn-group
+         /* .btn-group */
      }
-     .editBox textarea.edit {
-         width: 100%;
+     .editBox textarea.edit, #edit__summary {
+         max-width: 100%;
      }
      .editButtons {
          margin: 1em 0;
@@ -238,8 +255,8 @@ textarea {
          margin-left: 48px;
      }
      .btn_secedit input.button {
-         .pull-right;
-         .btn-xs;
+         /* .pull-right; */
+         /* .btn-xs; */
          margin-top: 20px;
          z-index: 1;
      }
@@ -254,6 +271,7 @@ textarea {
      pre {
          background-color: __background_neu__;
          border:none;
+         border-left: 4px #808080 solid;
          border-radius:0;
      }
  }
@@ -263,11 +281,7 @@ textarea {
  #size__ctl {
      float: right;
  }
- /******************* toc ***********************/
- 
- #dw__toc {
-     border: none!important;
- }
+  
  /******************* breadcrumb ***********************/
  
  .dokuwiki .breadcrumb {
@@ -302,7 +316,7 @@ textarea {
      }
  }
  .dokuwiki .navbar-brand {} .dokuwiki .logo {
-     .pull-left;
+     /* .pull-left; */
      max-width: 100%;
      background-color: #56595f;
  }
@@ -325,21 +339,21 @@ textarea {
      
      float: left;
      .button {
-         btn;
-         btn-default;
+         /* btn; */
+         /* btn-default; */
      }
      form {
          margin: 0;
          padding: 4px 0;
      }
-     /*width:40%;  */
+     width:70%;  
      
      .btn-group {
          margin-top: -4px;
      }
  }
  #qsearch__in {
-     .form-control;
+     /* .form-control; */
      background: no-repeat center left url(images/search-icon-hi.png);
      height: 28px;
      padding-left: 5px;
@@ -350,6 +364,7 @@ textarea {
      display: inline;
      margin: 5px;
      background-color: #f0f0f0;
+	  width:70%
  }
  #qsearch__in:focus {
      border-color: #51a7e8;
@@ -444,19 +459,20 @@ textarea {
      display: block;
  }
  input.edit {
-     .form-control;
+     /* .form-control; */
  }
  .dokuwiki .footer {
      background-color: #e4e4e4;
  }
  .alert-notify {
-     .alert-warning;
+     /* .alert-warning; */
  }
  .alert-error {
-     .alert-danger;
+     /* .alert-danger; */
+     background-color: #fd5c5cab;
  }
  .tabspage ul {
-     .navbar-nav;
+     /* .navbar-nav; */
      list-style-type: none;
      float: left;
      margin: 10px;
@@ -521,6 +537,10 @@ textarea {
 	ul li a {  overflow: hidden; text-overflow:ellipsis; white-space:nowrap;width:10em;}
 }
 */
+ #plugin__backlinks {margin-left:1em}
+ #inlinetoc2 {border:none;border-radius:0;}
+ #inlinetoc2 > ul.inlinetoc2 { background-color:rgba(100,100,100,0.1); border-left: 5px solid rgba(100,200,100,0.5);}
+ 
  
  div.dokuwiki div#disqus__thread {
      width: 99%;
@@ -641,8 +661,7 @@ textarea {
  }
  .btn_left {
      float: left;
-     background-color: #000;
-     z-index: 12;
+    z-index: 12;
      display: inline;
      color: #33ccff;
      line-height: 43px;
@@ -651,7 +670,6 @@ textarea {
      text-align: center;
  }
  .btn_right {
-     background-color: #000;
      z-index: 12;
      float: right;
      color: #3cf;
@@ -768,8 +786,10 @@ textarea {
      position: relative;
      z-index: 0;
  }
- /*  phone (portrait) ----------- */
  
+/* ----------- --------------------- */
+/* ---  phone (portrait) ----------- */
+/* ----------- --------------------- */
  @media (max-width: @ini_phone_width) {
      #screen__mode {
          z-index: 1;
@@ -785,21 +805,35 @@ textarea {
          display: none;
          z-index: 13;
      }
+	    .core {
+          margin-top:88px; 
+     }
+	 .titlebar {background-color:#334;}
      #dw__search .btn-group {
          display: none!important
      }
+	 	 #dw__search button {display:none}
+	 #qsearch__in {width:100%}
      #dokuwiki__content {
          padding: 1px;
      }
-     .phone {
-         display: block
-     }
+     .phone {display: block}
+	 .tablet {display:none!important}
+	 .desktop {display:none!important}
+	 .wide {display:none!important}
+	 
      .hidden-phone {
          display: none
      }
+
+     .editButtons {
+        position: fixed; bottom:0;
+        z-index: 10000;
+     }
  }
+   /* ----------- --------------------- */
  /* tablet  ----------- */
- 
+   /* ----------- --------------------- */
  @media (min-width: @ini_phone_width+1) and (max-width: @ini_tablet_width) {
      #screen__mode {
          z-index: 2;
@@ -815,11 +849,21 @@ textarea {
          z-index: 13;
      }
      .core {
-         margin-right: 0px;
+         margin-right: 0px;margin-top:44px; 
      }
+	 
+	 .titlebar {background-color:#343;}
+	 #dw__search {width:40%}
+	 #dw__search button {display:none}
+	 #qsearch__in {width:100%}
+	 .phone {display: none!important}
+	 .desktop {display:none!important}
+	 .wide {display:none!important}
+	 
      .tablet {
          display: block
      }
+
      .hidden-tablet {
          display: none
      }
@@ -828,8 +872,9 @@ textarea {
          padding-right: 2px;
      }
  }
- /* desktop  ----------- */
- 
+   /* ----------- --------------------- */
+ /* ----------- desktop  ----------- */
+  /* ----------- --------------------- */
  @media (min-width: @ini_tablet_width+1) and (max-width: @ini_desktop_width) {
      #screen__mode {
          z-index: 3;
@@ -843,25 +888,39 @@ textarea {
          display: block;
      }
      .core {
-         margin-right: 250px;
+         margin-right: 250px;margin-top:44px; 
      }
      .titlebar {
          padding-right: 250px;
+		 
+		 
      }
      .btn_titlebar {
          margin-right: 3px;
          margin-left: 3px;
      }
+	 #dw__search {width:40%}	 
      #dokuwiki__content {
          padding-left: 5px;
          padding-right: 5px;
      }
+	 .phone {display: none!important}
+	 .tablet {display:none!important}
+	 .wide {display:none!important}
+	 
      .desktop {
          display: block
      }
  }
- /* ----- wide  ----------- */
- 
+   
+   
+   
+   
+   /* ----------- --------------------- */
+   /* ----- wide  ----------- */
+   /* ----------- --------------------- */
+   
+   
  @media (min-width: @ini_desktop_width+1) {
      #screen__mode {
          z-index: 4;
@@ -876,10 +935,12 @@ textarea {
      }
      .core {
          margin-right: 250px;
+		  margin-top:44px; 
      }
      .titlebar {
-         padding-right: 250px;
+         padding-right: 250px;background-color:#433;
      }
+	 #dw__search {width:60%}	 
      .btn_titlebar {
          margin-right: 7px;
          margin-left: 7px;
@@ -888,16 +949,32 @@ textarea {
          padding-left: 25px;
          padding-right: 25px;
      }
+	 
+	 .phone {display: none!important}
+	 .tablet {display:none!important}
+	 .desktop {display:none!important}
+  
      .wide {
          display: block
      }
  }
- /* iPhone 4 ----------- */
  
+   /* ----------- --------------------- */
+ /* iPhone 4 ----------- */
+   /* ----------- --------------------- */
+   
+   
+   
  @media only screen and (-webkit-min-pixel-ratio: 1.5),
  only screen and (min-pixel-ratio: 1.5) {
      /* Styles */
  }
+ 
+ 
+/* ----------- --------------------- */
+   
+     /* ----------- --------------------- */
+	 
  /* http://blog.readiz.com/134  간단한 Back to top 버튼 넣기 */
  
  #toTop {
@@ -951,3 +1028,22 @@ textarea {
          transform: translate3d(3px, 0, 0);
      }
  }
+
+.mode_media  .core {
+
+margin-right: 0;
+}
+.mode_media aside {
+    display:none;
+    }
+
+    .nav-up {
+    top: -43px;
+}
+
+header {transition: top 0.02s ease-in-out;}
+
+
+/* for google custom search */
+.google-auto-placed, .gsc-adBlock, .ap_container { border-left: 5px green solid; }
+.adsbygoogle { border-left: 2.5px green solid; }

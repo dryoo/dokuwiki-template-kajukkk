@@ -45,15 +45,20 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
     <meta charset="utf-8">
     <title><?php echo (p_get_first_heading($ID))?p_get_first_heading($ID):strrchr(':'.$INFO['id'],":"); ?><?php if (strrchr(':'.$INFO['id'],":")!=":".$conf['start']) echo ' - '.p_get_first_heading(':'.$INFO['namespace'].':'.$conf['start']).' - '.strip_tags($conf['title']); else echo ' - '.strip_tags($conf['tagline']) ?></title>
     <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
-    <?php tpl_metaheaders() ?>
-    <meta name="description" content="<?php $_desc=p_get_metadata($ID,"description"); if ($_desc !=null) echo htmlspecialchars(strip_tags($_desc['abstract'])); ?>" >
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     <link href="<?php echo tpl_getMediaFile(array("bs/bootstrap.min.css")); ?>" rel="stylesheet">
+    
+    <?php tpl_metaheaders() ?>
+    <meta name="description" content="<?php $_desc=p_get_metadata($ID,"description"); if ($_desc !=null) echo preg_replace( "/\r|\n/", "", mb_substr(htmlspecialchars(strip_tags($_desc['abstract'])),0,60,"utf-8")); ?>" >
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">-->
+	
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/v4-shims.css">
+
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
     <?php tpl_includeFile('meta.html') ?>
-    <?php echo tpl_getConf('google_analytics') ?>
+    <?php echo preg_replace( "/\r|\n/", "",tpl_getConf('google_analytics')); ?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- <script src="<?php echo tpl_getMediaFile(array("js/respond.min.js")); ?>" type="text/javascript"></script>-->
     <!--[if lt IE 9]>
@@ -61,45 +66,74 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
           <![endif]-->
     <?php if (tpl_getConf('debug')): ?>   
 <!-- <script async src="//developers.kakao.com/sdk/js/kakao.min.js"></script> -->
+
+     
     <?php endif;?>
+
+<?php if (($ACT!="edit")): ?>  
+    <!-------------------------------자동 광고 -------------------------------->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-2592234474265189",
+          enable_page_level_ads: true
+     });
+</script>
+<!-------------------------------/자동 광고 --------------------------------> 
+<?php endif;?>
 </head>
 <body class="<?php echo (get_doku_pref('dark', 0)==1)?'dark':''?>" >
 <div class="dokuwiki clearfix ">
     <div id="sidebar_bg"></div>
     <div id="nav_bg"></div>
-  	<div id="dokuwiki__nav">
+  	<nav id="dokuwiki__nav">
+    <!-- Nav page start-->
        	    <?php //if (tpl_getConf('debug')) @include('shortcut.php') /* Shortcut */ ?> 
              <?php tpl_include_page(":nav", 1, 1) ?>
-    </div>
+    <!-- Nav page end-->
+    </nav>
     <div id="dokuwiki__top" class="mode_<?php echo $ACT ?> <?php echo ($showSidebar) ? 'showSidebar' : '';
         ?> <?php echo ($hasSidebar) ? 'hasSidebar' : ''; ?>"  >
 
         <?php tpl_flush(); ?>
 
-        <div class="titlebar clearfix" style="">    
+        <header class="titlebar nav-down clearfix">    
             <div class="btn_left" href=""><i class="fa fa-bars"></i></div>
-            <a class="btn_titlebar  pull-left hidden-phone hidden-tablet"   href="<?php echo DOKU_URL?>"><?php echo strip_tags($conf['title'])?></a>
+			 
+            <div class="btn_right" href="" style=""><i class="fa fa-info-circle"></i></div>
+            <a class="btn_titlebar  pull-left"   href="<?php echo DOKU_URL?>"><?php echo strip_tags($conf['title'])?></a>
 
-			<?php if (!plugin_isdisabled('searchformgoto')) {
+   
+
+			
+
+
+            <?php // mobile-alt tablet-alt laptop desktop ?>
+            <?php if (tpl_getConf('debug')): ?>
+            <a class="btn_titlebar pull-right" href="/tech/" style="">
+				<i class="fa fa-mobile-alt phone"></i>
+				<i class="fa fa-tablet-alt tablet"></i>
+				<i class="fa fa-laptop desktop"></i>
+				<i class="fa fa-desktop wide"></i>
+			 </a>     
+            <a class="btn_titlebar pull-right" href="/med/" style=""><i class="fa fa-medkit"></i></a>           
+            <a class="btn_titlebar pull-right" href="/game/" style=""><i class="fa fa-gamepad"></i></a> 
+            <?php endif ?>
+						<?php if (!plugin_isdisabled('searchformgoto')) {
 				$searchformgoto = &plugin_load('helper','searchformgoto');
 				$searchformgoto->gotoform();
 				} else { tpl_searchform(); }
-			?>      
- 
-            <div class="btn_right" href="" style=""><i class="fa fa-caret-square-o-right"></i></div>
+			?>   
+						 <?php  if(!plugin_isdisabled('randompage')) {?>
+                <a href="?do=randompage" class=" btn_titlebar " title="<?php echo tpl_getLang('randompage')?>"><i class="fa fa-random"></i></a>      
+            <?php    }?>
+        </header>  
 
-         
-            <?php if (tpl_getConf('debug')): ?>
-            <a class="btn_titlebar pull-right hidden-phone" href="/tech/" style=""><i class="fa fa-laptop"></i></a>     
-            <a class="btn_titlebar pull-right hidden-phone" href="/med/" style=""><i class="fa fa-medkit"></i></a>           
-            <a class="btn_titlebar pull-right hidden-phone" href="/game/" style=""><i class="fa fa-gamepad"></i></a> 
-            <?php endif ?>
-
-        </div>  
-        <div class="core clearfix" style="margin-top:44px;">
+        <div class="core clearfix" >
             <?php ds_html_msgarea(); /* occasional error and info messages */ ?>    
             <?php /* google adsense RESPONSIVE 윗쪽 */
-               if  (!$noadsense) echo tpl_getConf('google_adsense') ?>
+               if  (!$noadsense) echo preg_replace( "/\r|\n/", "",tpl_getConf('google_adsense')); ?>
+
         <div id="dokuwiki__content">
             <?php tpl_bs_breadcrumbs() ?>
             <?php if ($ACT=="show") tpl_include_page(tpl_getConf('nsheader'),true,true);   /* page header */ ?>
@@ -114,6 +148,7 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
    <?php if(($ACT!="search"))tpl_button_a('edit','pencil','','editmain btn btn-danger pull-right  noprint ');?>      
             <!-- wikipage start -->
             <?php  //  도쿠위키의 검색결과를 가로채서 구글 CSE ...출력
+                    // hijack dokuwiki search 
             if ($ACT=="search"&&tpl_getConf('debug')  ) {?>
             <h1>"<?php echo noNS($ID); ?>"에 대한 검색 결과</h1>
                     <script>
@@ -184,7 +219,8 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
 
 
 
-        <?php if  (!$noadsense) echo tpl_getConf('google_adsense') /* google adsense RESPONSIVE 아래 */?>
+        <?php /* google adsense RESPONSIVE 아래 */
+          if  (!$noadsense) echo preg_replace( "/\r|\n/", "",tpl_getConf('google_adsense')); ?>
         
             <?php if ($ACT=="show" ||$ACT=="edit"): ?>
             <div class="noprint">
@@ -226,22 +262,20 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
 
             </div>
                  
-            <?php  /* *************디스커즈 disqus************* */
-            if($ACT == 'show' &&  (strrchr(':'.$INFO['id'],":")!=":".$conf['start']) ){
-                $disqus = &plugin_load('syntax','disqus');
-                if($disqus) echo $disqus->_disqus();
-            }
-            ?>
- 
+
             <?php tpl_includeFile('pagefooter.html') ?> 
             <?php include('tpl_footer.php') ?> 
-    
-         
 
         <?php tpl_flush(); ?>
 
-    </div> <!--core끝 -->
-
+    </div> <!-- dokuwiki__content -->
+            <?php  /* *************디스커즈 disqus************* */
+            if($ACT == 'show' &&  (strrchr(':'.$INFO['id'],":")!=":".$conf['start']) ){
+                $disqus = &plugin_load('syntax','disqus');
+                if($disqus) echo $disqus->_disqus('vln');
+            }
+            ?>
+     <script id="dsq-count-scr" src="//vln.disqus.com/count.js" async></script>
 
     <!-- ********** sidebar ********** -->
       <aside><div id="dokuwiki__aside" class="lsb sidebar">
@@ -287,7 +321,7 @@ if (p_get_metadata($ID,"adult")) $noadsense=true;
             <?php tpl_includeFile('sidebarfooter.html') ?>
         </div>
     </div> </aside>
-                   </div>
+                   </div> <!-- core -->
 	</div></div><!-- /.dokuwiki -->
 
 <aside>
@@ -398,7 +432,9 @@ jQuery(document).ready(function()
     jQuery(".dokuwiki .secedit button").addClass("btn btn-default btn-xs pull-right");
      /*   [CSS+Javascript] 간단한 Back to top 버튼 넣기   */ 
      jQuery('body').append('<div id="toTop"><i class="fa fa-angle-double-up fa-2x"></i></div>');
-     jQuery("#toTop").bind("click", function () {jQuery("body").animate({ scrollTop: 0 }, 200);});
+     jQuery("#toTop").bind("click", function () {window.open('#dokuwiki__top','_self',false);});
+     //jQuery("#toTop").bind("click", function () {jQuery("body").animate({ scrollTop: 0 }, 200);});
+
      jQuery(window).scroll(function () {
 		if (jQuery(this).scrollTop() > 100) {
 				jQuery('#toTop').fadeIn();
@@ -407,6 +443,47 @@ jQuery(document).ready(function()
 			}
 		});    /*   http://blog.readiz.com/134  */
 }); 
+
+
+// Hide Header on on scroll down
+// http://jsfiddle.net/s6mLJ/9063/
+var didScroll;
+var lastScrollTop = 0;
+var delta = 5;
+var navbarHeight = jQuery('header').outerHeight();
+
+jQuery(window).scroll(function(event){
+    didScroll = true;
+});
+
+setInterval(function() {
+    if (didScroll) {
+        hasScrolled();
+        didScroll = false;
+    }
+}, 250);
+
+function hasScrolled() {
+    var st = jQuery(this).scrollTop();
+    
+    // Make sure they scroll more than delta
+    if(Math.abs(lastScrollTop - st) <= delta)
+        return;
+    
+    // If they scrolled down and are past the navbar, add class .nav-up.
+    // This is necessary so you never see what is "behind" the navbar.
+    if (st > lastScrollTop && st > navbarHeight){
+        // Scroll Down
+        jQuery('header').removeClass('nav-down').addClass('nav-up');
+    } else {
+        // Scroll Up
+        if(st + jQuery(window).height() < jQuery(document).height()) {
+            jQuery('header').removeClass('nav-up').addClass('nav-down');
+        }
+    }
+    
+    lastScrollTop = st;
+}
 </script>
  <?php if (tpl_getConf('debug')): ?>
 <!--<script async src="<?php echo tpl_getMediaFile(array("js/sendsns.js")); ?>" type="text/javascript"></script>    -->

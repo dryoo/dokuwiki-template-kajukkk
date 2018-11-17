@@ -18,7 +18,7 @@
 
 
 (function($) {
-    var fadeOption = {duration: 0};
+    var fadeOption = {duration: 1};
     var device_class = ''; // not yet known
     var device_classes = 'mobile wide desktop tablet phone';
     var resizeTimer;
@@ -109,10 +109,10 @@
 
     function initUI() {
         // Move TOC
-        if ($('.page h2').length > 0) {
-            $('#dw__toc').insertBefore($('.page h2:first'));
+        if ($('#dokuwiki__content h2').length > 0) {
+            $('#dw__toc').insertBefore($('#dokuwiki__content h2:first'));
         } else {
-            $('#dw__toc').insertAfter($('.page h1:first').next('.level1'));
+            $('#dw__toc').insertAfter($('#dokuwiki__content h1:first').next('.level1'));
         }
         // Anchor link should be shifted by header pixel
         $(window).on("hashchange", function () {
@@ -126,3 +126,5 @@
         bindEvents();
     });
 })(jQuery);
+
+
